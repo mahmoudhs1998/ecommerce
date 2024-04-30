@@ -23,6 +23,7 @@ class TAppTheme {
     chipTheme: TChipTheme.lightChipTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
+    fontFamily: 'Popins',
   );
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
@@ -37,6 +38,7 @@ class TAppTheme {
     chipTheme: TChipTheme.darkChipTheme,
     outlinedButtonTheme: TOutlinedButtonTheme.dorkOutlinedButtonTheme,
     inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
+    fontFamily: 'Popins',
   );
 }
 
