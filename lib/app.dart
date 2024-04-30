@@ -11,6 +11,17 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
+      home: const Scaffold(
+        body: Center(
+          child: Text(
+            'Welcome to Ecommerce!',
+            style: TextStyle(
+              fontSize: 24,
+              fontFamily: 'Popins',
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
