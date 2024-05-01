@@ -16,4 +16,26 @@ static const String onBoardingSubTitle3 = "From Our Doorstep to Yours - Swift, S
 static const String homeAppbarTitle = "Good day for shopping";
 static const String homeAppbarSubTitle = "Mahmoud & Abdo";
 
+
+// -- Login
+  static const String loginTitle = "Welcome Back,";
+  static const String loginSubTitle = "Mahmoud & Abdo etc.....etc";
+
+// -- Email
+  static const String email = "Enter Your Email";
+  static const String password = "Enter Your Password";
+
+  // remember me & forget password
+  static const String rememberMe = "Remember Me";
+  static const String forgetPassword = "Forget PassWord";
+
+  // -- Email
+  static const String signIn = "Sign In";
+  static const String createAccount = "Create an Account";
+
+  
+
+
+
+
 }
