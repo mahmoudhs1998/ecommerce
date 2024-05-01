@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 class FormDivider extends StatelessWidget {
   const FormDivider({
     super.key,
-    required this.isThemeMode,
+    required this.isThemeMode, required this.dividerText,
   });
 
   final bool isThemeMode;
+  final String dividerText;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class FormDivider extends StatelessWidget {
             endIndent: 5,
           ),
         ),
-        const Text(" Or Sign in With  "),
+         Text(dividerText , style: Theme.of(context). textTheme. labelMedium),
         Flexible(
           child: Divider(
             color: isThemeMode ? TColors.darkGrey : TColors.grey,

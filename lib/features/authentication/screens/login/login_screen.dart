@@ -4,6 +4,7 @@ import 'package:ecommerce/features/authentication/screens/login/widgets/login_fo
 import 'package:ecommerce/features/authentication/screens/login/widgets/login_header.dart';
 import 'package:ecommerce/features/authentication/screens/login/widgets/social_buttons.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class LoginScreen extends StatelessWidget {
               const LoginFormWidget(),
 
               // Divider
-              FormDivider(isThemeMode: isThemeMode),
+              FormDivider( dividerText: TTexts.loginDivider , isThemeMode: isThemeMode),
               const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),

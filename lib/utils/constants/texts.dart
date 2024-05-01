@@ -1,5 +1,6 @@
 /// This class contains all the App Text in String formats.
 class TTexts {
+
 TTexts._();
 // -- GLOBAL Texts
 
@@ -20,6 +21,8 @@ static const String homeAppbarSubTitle = "Mahmoud & Abdo";
 // -- Login
   static const String loginTitle = "Welcome Back,";
   static const String loginSubTitle = "Mahmoud & Abdo etc.....etc";
+  static const String loginDivider = "Or Sign In With";
+
 
 // -- Email
   static const String email = "Enter Your Email";
