@@ -31,6 +31,7 @@ dependencies:
   url_launcher: ^6.2.6
   get_storage: ^2.1.1
   flutter_native_splash: ^2.4.0
+  smooth_page_indicator: ^1.1.0
 
 
 dev_dependencies:
@@ -52,6 +53,7 @@ flutter:
      - assets/icons/
      #- assets/fonts/
      - assets/logos/
+     - assets/images/on_boarding_images/
   fonts:
     - family: Popins
       fonts:
