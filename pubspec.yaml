@@ -54,6 +54,7 @@ flutter:
      #- assets/fonts/
      - assets/logos/
      - assets/images/on_boarding_images/
+     - assets/images/email_images/
   fonts:
     - family: Popins
       fonts:
