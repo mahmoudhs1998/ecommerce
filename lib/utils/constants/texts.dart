@@ -74,6 +74,11 @@ static const String done = "Done";
   static const String successEmailSubTitle =
       "Welcome to Your Ultimate Shopping Destination: Your Account is Created, Unleash the Joy of Seamless Online Shopping!";
 
+    // -- Home 
+
+  static const String homeAppBarTitle = "Good day for shopping";
+  static const String homeAppBarSubTitle = "Mahmoud & Abdo";
+
 }
 
 
