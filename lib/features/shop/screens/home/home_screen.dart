@@ -3,15 +3,16 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
-        child:  Column(
+        child: Column(
           children: [
             TPrimaryHeaderContainer(
               child: Column(children: [
@@ -30,6 +31,36 @@ class HomeScreen extends StatelessWidget {
                                 .headlineSmall!
                                 .apply(color: TColors.grey)),
                       ]),
+                  actions: [
+                    Stack(children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Iconsax.shopping_bag,
+                            color: TColors.white),
+                      ),
+                      Positioned(
+                        child: Container(
+                          width: 18,
+                          height: 18,
+                          decoration: BoxDecoration(
+                            color: TColors.black,
+                            borderRadius: BorderRadius.circular(100),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '2',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall!
+                                  .apply(
+                                      color: TColors.white,
+                                      fontSizeFactor: 0.8),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ],
                 ),
               ]),
             ), // Container
@@ -39,4 +70,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
