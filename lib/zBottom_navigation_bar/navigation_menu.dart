@@ -19,7 +19,8 @@ class NavigationMenu extends StatelessWidget {
           indicatorShape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(24)),
           ),
-          height: 56,
+          height: 80,
+          
           elevation: 0,
           backgroundColor: isDark ? TColors.black : TColors.white,
           indicatorColor: isDark
