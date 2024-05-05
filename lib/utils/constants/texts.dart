@@ -2,6 +2,7 @@
 class TTexts {
 
 
+
   
 
   TTexts._();
@@ -10,6 +11,8 @@ static const String and = "and ";
 static const String continues = "Continue";
 static const String submit = "Submit";
 static const String done = "Done";
+  static String searchBarHint = "Search In Store";
+
 // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Choose your product";
   static const String onBoardingTitle2 = "Select Payment Method";
