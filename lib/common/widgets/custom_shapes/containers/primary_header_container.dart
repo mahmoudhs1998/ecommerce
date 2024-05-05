@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class TPrimaryHeaderContainer extends StatelessWidget {
   final Widget child;
   const TPrimaryHeaderContainer({
-    super.key, required this.child,
+    super.key,
+    required this.child,
   });
-
   @override
   Widget build(BuildContext context) {
     return TCustomCurvedEdgesWidget(
@@ -29,6 +29,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
                   right: -300,
                   child: TCircularContainer(
                       backgroundColor: TColors.textWhite.withOpacity(0.1))),
+                      child,
             ],
           ), // Stack
         ), // SizedBox
