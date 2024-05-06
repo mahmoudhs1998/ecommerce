@@ -19,6 +19,14 @@ class TImages {
       "assets/images/email_images/verify_email.png";
   static const String verifyEmail2 = "assets/images/email_images/mail.jpg";
   static const String verifyEmail3 = "assets/images/email_images/mail2.png";
-   static const String success = "assets/images/email_images/success1.png";
-  
+  static const String success = "assets/images/email_images/success1.png";
+
+  // -- Categories
+  static const String category1 = "assets/icons/categories/shop.png";
+  // -- Banners
+  static const String banner1 = "assets/images/banners/shoe.jpg";
+  static const String banner2 = "assets/images/banners/shoe2.jpg";
+  static const String banner3 = "assets/images/banners/banner3.jpg";
+   static const String banner4 = "assets/images/banners/banner.jpg";
+  static const String banner5 = "assets/images/banners/banner4.jpg";
 }
