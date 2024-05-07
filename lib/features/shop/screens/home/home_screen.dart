@@ -1,3 +1,5 @@
+import 'package:ecommerce/common/layouts/grid_layout.dart';
+import 'package:ecommerce/common/widgets/cart/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:ecommerce/common/widgets/search%20bar/search_bar.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
@@ -67,6 +69,15 @@ class HomeScreen extends StatelessWidget {
                   TImages.banner5,
                 ],
               ),
+              
+            ),
+            const SizedBox(
+              height: TSizes.spaceBtwSections,
+            ),
+            // Popular Products
+            TGridLayout(
+              itemCount: 4,
+              itemBuilder: (_, index) => const TProductCardVertical(),
             ),
           ],
         ),
