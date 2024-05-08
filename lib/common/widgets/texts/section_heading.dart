@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class TCategoriesSection extends StatelessWidget {
+class TCategoriesSectionHeading extends StatelessWidget {
   final String title, buttonTitle;
   final Color? textColor;
   final bool showActionButton;
   final VoidCallback? onPressed;
-  const TCategoriesSection(
+  const TCategoriesSectionHeading(
       {super.key,
       required this.title,
       this.buttonTitle = "View all",
