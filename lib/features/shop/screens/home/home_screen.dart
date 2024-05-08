@@ -37,20 +37,21 @@ class HomeScreen extends StatelessWidget {
                 ),
 
                 // Categories Heading
-                const Padding(
-                  padding: EdgeInsets.only(left: TSizes.defaultSpace),
+                Padding(
+                  padding: const EdgeInsets.only(left: TSizes.defaultSpace),
                   child: Column(
                     children: [
                       TCategoriesSection(
                         title: "Popular Categories",
                         showActionButton: false,
+                        onPressed: () {},
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: TSizes.spaceBtwSections,
                       ),
                       // Categories
-                      HomeCategories(),
+                      const HomeCategories(),
                     ],
                   ),
                 ),
@@ -60,7 +61,7 @@ class HomeScreen extends StatelessWidget {
             // Body --
             const Padding(
               padding: EdgeInsets.all(TSizes.defaultSpace),
-              child:  TPromoSlider(
+              child: TPromoSlider(
                 banners: [
                   TImages.banner1,
                   TImages.banner2,
@@ -69,10 +70,15 @@ class HomeScreen extends StatelessWidget {
                   TImages.banner5,
                 ],
               ),
-              
             ),
             const SizedBox(
               height: TSizes.spaceBtwSections,
+            ),
+            //heading
+            TCategoriesSection(
+              title: "Popular Products",
+              showActionButton: true,
+              onPressed: () {},
             ),
             // Popular Products
             TGridLayout(
@@ -85,4 +91,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
