@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: TSizes.defaultSpace),
                   child: Column(
                     children: [
-                      TCategoriesSection(
+                      TCategoriesSectionHeading(
                         title: "Popular Categories",
                         showActionButton: false,
                         onPressed: () {},
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
               height: TSizes.spaceBtwSections,
             ),
             //heading
-            TCategoriesSection(
+            TCategoriesSectionHeading(
               title: "Popular Products",
               showActionButton: true,
               onPressed: () {},
