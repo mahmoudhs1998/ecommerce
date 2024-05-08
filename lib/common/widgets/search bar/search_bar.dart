@@ -10,6 +10,7 @@ class TSearchBar extends StatelessWidget {
   final String searchBarHint;
   final IconData? searchBarIcon;
   final bool showBackGround, showBorder;
+  final EdgeInsetsGeometry padding;
   final VoidCallback? onTap;
   const TSearchBar({
     super.key,
@@ -17,6 +18,7 @@ class TSearchBar extends StatelessWidget {
     this.searchBarIcon = Iconsax.search_normal,
     this.showBackGround = true,
     this.showBorder = true,
+    this.padding = const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
     this.onTap,
   });
 
@@ -26,7 +28,7 @@ class TSearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+        padding: padding,
         child: Container(
           width: TDeviceUtils.getScreenWidth(context),
           padding: const EdgeInsets.all(TSizes.md),

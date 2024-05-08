@@ -25,6 +25,7 @@ class THomeAppBar extends StatelessWidget {
                 .apply(color: TColors.grey)),
       ]),
       actions: [
+        // Todo : Replace with TCartCounterIcon
         Stack(children: [
           IconButton(
             onPressed: () {},

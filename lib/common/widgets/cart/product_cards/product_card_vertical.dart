@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/styles/shadows.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
+import 'package:ecommerce/common/widgets/icons/brand_title_verify_icon.dart';
 import 'package:ecommerce/common/widgets/icons/custom_circular_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
 import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
@@ -74,58 +75,48 @@ class TProductCardVertical extends StatelessWidget {
             ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             // -- Details
-            Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
+            const Padding(
+              padding: EdgeInsets.only(left: TSizes.sm),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TProductTitleText(
+                    TProductTitleText(
                         title: 'Green Nike Air Shoes', smallSize: true),
-                    const SizedBox(height: TSizes.spaceBtwItems / 2),
-                    Row(children: [
-                      Text(
-                        'Nike',
-                        style: Theme.of(context).textTheme.labelMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(
-                        width: TSizes.xs,
-                      ),
-                      const Icon(
-                        Iconsax.verify,
-                        color: TColors.primaryColor,
-                        size: TSizes.iconXs,
-                      ),
-                    ]),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        /// Price
-                        const TProductPriceText(price: '35'),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: TColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(TSizes.cardRadiusMd),
-                              bottomRight:
-                                  Radius.circular(TSizes.productImageRadius),
-                            ), // BorderRadius.only
-                          ), // BoxDecoration
-                          child: const SizedBox(
-                            width: TSizes.iconLg * 1.2,
-                            height: TSizes.iconLg * 1.2,
-                            child: Center(
-                                child: Icon(Icons.add, color: TColors.white)),
-                          ), // SizedBox
-                        ), // Container
-                      ],
-                    ) // Row;
+                    SizedBox(height: TSizes.spaceBtwItems / 2),
+                    TBrandTitleWithVerifiedIcon(
+                      title: 'Nike',
+                    ),
                   ]),
             ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// Price
+                const Padding(
+                  padding: EdgeInsets.only(left: TSizes.sm),
+                  child: TProductPriceText(price: '35'),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: TColors.dark,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(TSizes.cardRadiusMd),
+                      bottomRight: Radius.circular(TSizes.productImageRadius),
+                    ), // BorderRadius.only
+                  ), // BoxDecoration
+                  child: const SizedBox(
+                    width: TSizes.iconLg * 1.2,
+                    height: TSizes.iconLg * 1.2,
+                    child: Center(child: Icon(Icons.add, color: TColors.white)),
+                  ), // SizedBox
+                ), // Container
+              ],
+            ), // Row;
           ],
         ),
       ),
     );
   }
 }
+
