@@ -19,11 +19,11 @@ class ResetPassword extends StatelessWidget {
       ]),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(TSizes.defaultSpace),
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(children: [
             /// Image
             Image(
-              image: AssetImage(TImages.verifyEmail3),
+              image: const AssetImage(TImages.verifyEmail3),
               width: THelperFunctions.screenWidth(context) * 0.6,
             ),
             const SizedBox(

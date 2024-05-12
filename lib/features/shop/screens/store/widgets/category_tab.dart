@@ -39,7 +39,7 @@ class TCategoryTab extends StatelessWidget {
 
             // -- Products
             TCategoriesSectionHeading(
-              title: "Featured Brands",
+              title: "You Might Also Like",
               onPressed: () {},
             ),
             const SizedBox(
@@ -48,9 +48,7 @@ class TCategoryTab extends StatelessWidget {
             TGridLayout(
                 itemCount: 4,
                 itemBuilder: (_, index) => const TProductCardVertical()),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
+       
           ]),
         ),
       ],
