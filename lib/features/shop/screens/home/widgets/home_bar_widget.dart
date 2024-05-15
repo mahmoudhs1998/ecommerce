@@ -1,7 +1,9 @@
 import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
+import 'package:ecommerce/features/shop/screens/cart/cart.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class THomeAppBar extends StatelessWidget {
@@ -28,7 +30,7 @@ class THomeAppBar extends StatelessWidget {
         // Todo : Replace with TCartCounterIcon
         Stack(children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => Get.to(() => const CartScreen()),
             icon: const Icon(Iconsax.shopping_bag, color: TColors.white),
           ),
           Positioned(
