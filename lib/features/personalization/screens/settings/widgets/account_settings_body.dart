@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../order/order.dart';
+
 class AccountSettingsBodyWidget extends StatelessWidget {
   const AccountSettingsBodyWidget({
     super.key,
@@ -34,10 +36,11 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           title: 'My Cart',
           subTitle: 'Add , remove Products and move to checkout',
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.bag_tick,
           title: 'My Orders',
           subTitle: 'In-Progress and completed Orders',
+          onTap: () => Get.to(() => const OrderScreen()),
         ),
         const TSettingsMenuTile(
           icon: Iconsax.bank,
