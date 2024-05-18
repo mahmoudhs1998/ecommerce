@@ -29,4 +29,8 @@ class TImages {
   static const String banner3 = "assets/images/banners/banner3.jpg";
    static const String banner4 = "assets/images/banners/banner.jpg";
   static const String banner5 = "assets/images/banners/banner4.jpg";
+
+  // -- Payment 
+
+  static const String payPal = "assets/icons/categories/paypal.png";
 }
