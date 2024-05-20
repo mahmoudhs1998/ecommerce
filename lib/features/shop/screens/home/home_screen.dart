@@ -10,6 +10,9 @@ import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../all_products/all_products.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -81,7 +84,7 @@ class HomeScreen extends StatelessWidget {
             TCategoriesSectionHeading(
               title: "Popular Products",
               showActionButton: true,
-              onPressed: () {},
+              onPressed: () => Get.to(() => const AllProducts()),
             ),
             // Popular Products
             TGridLayout(
