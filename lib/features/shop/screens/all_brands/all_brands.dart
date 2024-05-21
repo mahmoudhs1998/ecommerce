@@ -30,7 +30,7 @@ class AllBrandsScreen extends StatelessWidget {
                   mainAxisExtent: 80,
                   itemBuilder: (context, index) => TBrandCard(
                       showBorder: true,
-                      onTap: () => Get.to(() => const BrandProducts()))),
+                      onTap: () => Get.to(() => const BrandProducts()),),),
             ],
           ), // Column
         ), // Padding
