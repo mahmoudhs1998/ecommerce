@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/authentication/screens/onboarding/onboarding_screen.dart';
+import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,22 +9,18 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      themeMode: ThemeMode.system,
-      debugShowCheckedModeBanner: false,
-      theme: TAppTheme.lightTheme,
-      darkTheme: TAppTheme.darkTheme,
-      home:const OnBoardingScreen(), 
-      // const Scaffold(
-      //   body: Center(
-      //     child: Text(
-      //       'Welcome to Ecommerce!',
-      //       style: TextStyle(
-      //         fontSize: 24,
-      //         fontFamily: 'Popins',
-      //       ),
-      //     ),
-      //   ),
-      // ),
-    );
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        theme: TAppTheme.lightTheme,
+        darkTheme: TAppTheme.darkTheme,
+        home: const Scaffold(
+          backgroundColor: TColors.primaryColor,
+          body: Center(
+            child: CircularProgressIndicator(color: TColors.white),
+          ),
+        )
+        // OnBoardingScreen(),
+
+        );
   }
 }
