@@ -23,6 +23,7 @@ class SuccessScreen extends StatelessWidget {
           child: Column(children: [
             /// Image
             Image(
+              // todo : Add Lottie Animation here instead of using image
               image: AssetImage(image),
               width: THelperFunctions.screenWidth(context) * 0.6,
             ),
