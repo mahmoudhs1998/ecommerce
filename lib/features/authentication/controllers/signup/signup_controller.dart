@@ -7,9 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../utils/popups/full_screen_loader.dart';
-import '../models/user_model.dart';
-import '../screens/signup/verify_email.dart';
+import '../../../../utils/popups/full_screen_loader.dart';
+import '../../models/user_model.dart';
+import '../../screens/signup/verify_email.dart';
 
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
@@ -81,7 +81,7 @@ class SignupController extends GetxController {
           message: 'Your account has been created! Verify email to continue.');
       // Move to Verify Email Screen
 
-      Get.to(() => const VerifyEmailScreen());
+      Get.to(() =>  VerifyEmailScreen(email: email.text.trim()));
       // Register User in The Firebase Authentication & Save User Data in Firebase
       // Save Authenticated User Data in The Firebase Firestore
       // Show Success Message

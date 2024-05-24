@@ -1,4 +1,4 @@
-import 'package:ecommerce/features/authentication/controllers/signup_controller.dart';
+import 'package:ecommerce/features/authentication/controllers/signup/signup_controller.dart';
 import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
 import 'package:ecommerce/features/authentication/screens/signup/widgets/terms_conditioons_widget.dart';
 import 'package:ecommerce/utils/constants/globals.dart';
