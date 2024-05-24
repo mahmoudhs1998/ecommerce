@@ -1,3 +1,4 @@
+import 'package:ecommerce/bindings/general_bindings.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,13 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
+        initialBinding: GeneralBindings(),
         home: const Scaffold(
           backgroundColor: TColors.primaryColor,
           body: Center(
             child: CircularProgressIndicator(color: TColors.white),
           ),
-        )
+        ),
         // OnBoardingScreen(),
 
         );
