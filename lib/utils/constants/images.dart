@@ -1,10 +1,12 @@
 /// This class contains all the App Images in String formats.
 class TImages {
+
+
   TImages._();
 // -- App Logos
   static const String darkAppLogo = "assets/logos/shop.png";
   static const String lightAppLogo = "assets/logos/shop.png";
-
+  static const  String shopAnimation = 'assets/animations/shop.json';
 // -- Social Logos
   static const String google = "assets/icons/google.png";
   static const String facebook = "assets/icons/facebook.png";

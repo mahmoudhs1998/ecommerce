@@ -23,6 +23,25 @@ class TFormatter {
     return phoneNumber;
   }
 
+  static String formatEgyptPhoneNumber(String phoneNumber) {
+    // Remove any non-numeric characters
+    phoneNumber = phoneNumber.replaceAll("[^\\d+]", "");
+
+    if (phoneNumber.startsWith("+20")) {
+      return phoneNumber; // Already in +20 11 digits format
+    } else if (phoneNumber.length == 10) {
+      // Add country code and format (assuming mobile number)
+      return "+20${phoneNumber.substring(0, 2)} ${phoneNumber.substring(2, 5)} ${phoneNumber.substring(5)}";
+    } else if (phoneNumber.length == 9) {
+      // Prepend leading zero and format (assuming landline number)
+      return "0${phoneNumber.substring(0, 1)} ${phoneNumber.substring(1, 4)} ${phoneNumber.substring(4)}";
+    } else {
+      // Invalid Egyptian phone number format
+      return "Invalid Egyptian phone number";
+    }
+  }
+
+
   // Not fully tested.
   static String internationalFormatPhoneNumber(String phoneNumber) {
 // Remove any non-digit characters from the phone number
