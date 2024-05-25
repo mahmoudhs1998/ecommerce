@@ -96,7 +96,7 @@ class SignUpForm extends StatelessWidget {
         const SizedBox(
           height: TSizes.spaceBtwInputFields,
         ),
-        // Email
+        // Password
         Obx(
           ()=> TextFormField(
             controller: controller.password,
