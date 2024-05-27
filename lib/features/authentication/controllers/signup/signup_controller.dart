@@ -76,7 +76,7 @@ class SignupController extends GetxController {
 
       TFullScreenLoader.stopLoading();
       // Show Success Message
-      TLoaders.successSnackBor(
+      TLoaders.successSnackBar(
           title: 'Congratulations',
           message: 'Your account has been created! Verify email to continue.');
       // Move to Verify Email Screen

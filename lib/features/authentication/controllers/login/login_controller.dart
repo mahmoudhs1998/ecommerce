@@ -25,8 +25,8 @@ class LoginController extends GetxController
 
   @override
   void onInit() {
-    // email.text = localStorage.read('REMEMBER_ME_EMAIL');
-    // password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    email.text = localStorage.read('REMEMBER_ME_EMAIL');
+    password.text = localStorage.read('REMEMBER_ME_PASSWORD');
     super.onInit();
   }
 
@@ -54,6 +54,10 @@ class LoginController extends GetxController
       }
       // Login user using EMail & Password Authentication
       final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      // Save User Record
+
+      await userController.saveUserRecord(userCredentials);
+
 
       // remove loader
       TFullScreenLoader.stopLoading();
@@ -75,7 +79,7 @@ class LoginController extends GetxController
       TFullScreenLoader.openLoadingDialog('Logging you in...', TImages.shopAnimation);
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
-      if (isConnected) {
+      if (!isConnected) {
         TFullScreenLoader.stopLoading();
         return;
       }

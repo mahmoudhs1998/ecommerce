@@ -23,7 +23,7 @@ class VerifyEmailController extends GetxController
   sendEmailVerification()async{
     try {
       await AuthenticationRepository.instance.sendEmailVerification();
-      TLoaders.successSnackBor(title: 'Email Sent', message: 'Please Check your Inbox and Verify your Email');
+      TLoaders.successSnackBar(title: 'Email Sent', message: 'Please Check your Inbox and Verify your Email');
 
     }catch(e) {
       TLoaders.errorSnackBar(title: 'Error Snap!', message: e.toString());

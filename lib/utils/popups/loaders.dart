@@ -29,7 +29,7 @@ class TLoaders {
     );
   }
 
-  static successSnackBor({required title, message = '', duration = 3}) {
+  static successSnackBar({required title, message = '', duration = 3}) {
     Get.snackbar(
         title,
         message,
