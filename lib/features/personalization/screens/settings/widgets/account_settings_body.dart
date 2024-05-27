@@ -1,5 +1,6 @@
 import 'package:ecommerce/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/data/repositories/authentication/authentication_repository.dart';
 import 'package:ecommerce/features/personalization/screens/address/address.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,7 @@ class AccountSettingsBodyWidget extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
-              onPressed: () {}, child: const Text('Logout')),
+              onPressed: () => AuthenticationRepository.instance.logout(), child: const Text('Logout')),
         ), // SizedBox
     
         const SizedBox(height: TSizes.spaceBtwSections * 2.5),

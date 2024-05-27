@@ -104,6 +104,24 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  //// [Email Verification - Reset Password] Forget Password
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw ' something went wrong';
+    }
+  }
+
 
 
   /// [GoogleAuthentication] - GO0GLE
