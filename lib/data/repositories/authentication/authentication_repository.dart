@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/widgets/exceptions/exceptions.dart';
+import 'package:ecommerce/data/repositories/authentication/user/user_repository.dart';
 import 'package:ecommerce/features/authentication/screens/login/login_screen.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
@@ -18,6 +19,10 @@ class AuthenticationRepository extends GetxController {
 
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
+
+  // Get Authenticated User Data 
+
+  User? get currentAuthUser => _auth.currentUser;
 
   // called from main.dart on app launch
 
@@ -50,7 +55,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   /*----------------- Email & Password Sign In--------------------------------*/
-//// [Email Authentication] Sign In
+/// [Email Authentication] Sign In
   Future<UserCredential> loginWithEmailAndPassword(String email, String password)async{
    try{
         return await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -66,7 +71,7 @@ class AuthenticationRepository extends GetxController {
      throw ' something went wrong';
    }
   }
-//// [Email Authentication] Register
+/// [Email Authentication] Register
 
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {
@@ -172,4 +177,53 @@ class AuthenticationRepository extends GetxController {
       throw ' something went wrong';
     }
   }
+
+
+  /// [ReAuthenticate] - RE AUTHENTICATE USER
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+// Create a credential
+      AuthCredential credential = EmailAuthProvider.credential(
+          email: email, password: password);
+
+// ReAuthenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw  TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  /// [Delete Account] Delete User Account
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserData(_auth.currentUser!.uid);
+      await _auth.currentUser ?. delete();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        // Handle the case where the user must reauthenticate
+        // Example: Prompt the user to reauthenticate and then try again
+        throw 'User needs to reauthenticate. Please log in again.';
+      } else {
+        throw TFirebaseAuthException(e.code).message;
+      }
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (e) {
+      throw TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong';
+    }
+  }
 }
+
+
