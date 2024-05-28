@@ -1,10 +1,13 @@
 import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/features/shop/screens/cart/cart.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
+import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../personalization/controllers/user_controller.dart';
 
 class THomeAppBar extends StatelessWidget {
   const THomeAppBar({
@@ -13,6 +16,7 @@ class THomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return TAppBar(
       title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(TTexts.homeAppBarTitle,
@@ -20,11 +24,18 @@ class THomeAppBar extends StatelessWidget {
                 .textTheme
                 .labelMedium!
                 .apply(color: TColors.grey)),
-        Text(TTexts.homeAppBarTitle,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .apply(color: TColors.grey)),
+        Obx(() {
+          if (controller.profileLoading.value) {
+            // Display Shimmer Loading
+            return const TShimmerEffect(width: 80, height: 15);
+          } else {
+            return Text(controller.user.value.fullName,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineSmall!
+                    .apply(color: TColors.grey));
+          }
+        }),
       ]),
       actions: [
         // Todo : Replace with TCartCounterIcon

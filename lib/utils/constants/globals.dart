@@ -1,5 +1,8 @@
 class Global {
 
+  static final Global _instance = Global._();
+  static Global get instance => _instance;
+
 
 
 
@@ -13,5 +16,9 @@ class Global {
   static const String userName = "User Name";
   static const String done = "Done";
   static String searchBarHint = "Search In Store";
+  
+  // -- GLOBAL Firebase  Strings --------------------------------
+  static const String usersCollection = "Users";
+
 
 }
