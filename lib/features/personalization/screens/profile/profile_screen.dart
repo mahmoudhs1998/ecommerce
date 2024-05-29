@@ -2,6 +2,8 @@ import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/user_profile_pic.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
+import 'package:ecommerce/utils/constants/images.dart';
+import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,9 +32,15 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     // -- User Profile  Picture
 
-                    const UserProfilePic(height: 80, width: 80),
+                    Obx((){
+                      final netWorkImage = controller.user.value.profilePicture;
+                      final image = netWorkImage.isNotEmpty ? netWorkImage : TImages.banner4;
+                      return controller.imageUploading.value
+                          ?const  TShimmerEffect(width: 80, height: 80, radius: 80)
+                          : UserProfilePic(height: 80, width: 80, image:image, isNetworkImage:netWorkImage.isNotEmpty);
+          }),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => controller.uploadUserProfilePicture(),
                         child: const Text('Change Profile Picture')),
                   ],
                 ),

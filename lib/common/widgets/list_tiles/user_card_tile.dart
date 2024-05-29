@@ -4,6 +4,8 @@ import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../utils/constants/images.dart';
+
 class UserProfileTileCard extends StatelessWidget {
   final VoidCallback? onPressed;
   const UserProfileTileCard({
@@ -15,7 +17,7 @@ class UserProfileTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-      leading: const UserProfilePic(height: 50, width: 50),
+      leading: const UserProfilePic(height: 50, width: 50,image:  TImages.banner4,),
       title: Text(
         controller.user.value.fullName,
         style: Theme.of(context)
