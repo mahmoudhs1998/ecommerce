@@ -20,5 +20,8 @@ class Global {
   // -- GLOBAL Firebase  Strings --------------------------------
   static const String usersCollection = "Users";
 
+  static const String uploadProfileImage = 'Users/Images/Profile';
+  static const String profilePictureKey = 'ProfilePicture';
+
 
 }
