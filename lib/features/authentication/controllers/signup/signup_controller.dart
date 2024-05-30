@@ -1,12 +1,12 @@
 import 'package:ecommerce/common/network/network_connectivity.dart';
 import 'package:ecommerce/data/repositories/authentication/authentication_repository.dart';
-import 'package:ecommerce/data/repositories/authentication/user/user_repository.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/repositories/user/user_repository.dart';
 import '../../../../utils/popups/full_screen_loader.dart';
 import '../../models/user_model.dart';
 import '../../screens/signup/verify_email.dart';

@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../common/network/network_connectivity.dart';
 import '../../../data/repositories/authentication/authentication_repository.dart';
-import '../../../data/repositories/authentication/user/user_repository.dart';
+import '../../../data/repositories/user/user_repository.dart';
 import '../../../utils/constants/images.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/popups/full_screen_loader.dart';
