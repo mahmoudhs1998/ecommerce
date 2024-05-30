@@ -5,6 +5,7 @@ import 'package:ecommerce/common/widgets/appbar/tab_bar.dart';
 import 'package:ecommerce/common/widgets/cart/brand/brand_card.dart';
 import 'package:ecommerce/common/widgets/search%20bar/search_bar.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/category_conotroller.dart';
 import 'package:ecommerce/features/shop/screens/all_brands/all_brands.dart';
 import 'package:ecommerce/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
@@ -20,8 +21,9 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: TAppBar(
           title:
@@ -81,28 +83,36 @@ class StoreScreen extends StatelessWidget {
               ),
               // -- Tabs Section
 
-              bottom: const CategoryTabBar(tabs: [
-                Tab(
-                  text: "Sports",
-                ),
-                Tab(
-                  text: "Furniture",
-                ),
-                Tab(
-                  text: "Electronics",
-                ),
-                Tab(
-                  text: "Mobiles",
-                ),
-                Tab(
-                  text: "Books",
-                ),
-              ]),
+              bottom:  CategoryTabBar(
+                  tabs:categories.map((category)
+                  => Tab(child: Text(category.name)),
+                  ).toList(),
+              // [
+              //   Tab(
+              //     text: "Sports",
+              //   ),
+              //   Tab(
+              //     text: "Furniture",
+              //   ),
+              //   Tab(
+              //     text: "Electronics",
+              //   ),
+              //   Tab(
+              //     text: "Mobiles",
+              //   ),
+              //   Tab(
+              //     text: "Books",
+              //   ),
+              // ]
+              ),
             ),
           ],
-          body: TabBarView(children: [
-            for (int i = 0; i < 5; i++) const TCategoryTab(),
-          ]),
+          body: TabBarView(children:
+          // [
+          //   for (int i = 0; i < 5; i++) const TCategoryTab(),
+          // ]
+            categories.map((category) => TCategoryTab(category: category)).toList(),
+          ),
         ),
       ),
     );

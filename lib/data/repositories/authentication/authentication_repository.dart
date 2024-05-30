@@ -1,5 +1,4 @@
 import 'package:ecommerce/common/widgets/exceptions/exceptions.dart';
-import 'package:ecommerce/data/repositories/authentication/user/user_repository.dart';
 import 'package:ecommerce/features/authentication/screens/login/login_screen.dart';
 import 'package:ecommerce/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:ecommerce/features/authentication/screens/signup/verify_email.dart';
@@ -11,6 +10,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
