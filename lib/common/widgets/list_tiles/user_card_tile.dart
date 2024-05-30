@@ -2,9 +2,11 @@ import 'package:ecommerce/common/widgets/custom_shapes/containers/user_profile_p
 import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../utils/constants/images.dart';
+import '../../../utils/constants/shimmer.dart';
 
 class UserProfileTileCard extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -17,7 +19,13 @@ class UserProfileTileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = UserController.instance;
     return ListTile(
-      leading: const UserProfilePic(height: 50, width: 50,image:  TImages.banner4,),
+      leading:         Obx((){
+        final netWorkImage = controller.user.value.profilePicture;
+        final image = netWorkImage.isNotEmpty ? netWorkImage : TImages.banner4;
+        return controller.imageUploading.value
+            ?const  TShimmerEffect(width: 80, height: 80, radius: 80)
+            : UserProfilePic( image:image, isNetworkImage:netWorkImage.isNotEmpty , );
+      }),
       title: Text(
         controller.user.value.fullName,
         style: Theme.of(context)
