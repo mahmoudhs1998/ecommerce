@@ -32,7 +32,8 @@ class HomeCategories extends StatelessWidget {
           shrinkWrap: true,
           itemCount: categoryController.featuredCategories.length,
           itemBuilder: (_, index) {
-            final category = categoryController.featuredCategories[index];            return TVerticalImageText(
+            final category = categoryController.featuredCategories[index];
+            return TVerticalImageText(
               title: category.name,
               image: category.image, //TImages.category1,
               onTap: () => Get.to(() => const SubCategoriesScreen()),
