@@ -3,6 +3,7 @@ import 'package:ecommerce/common/widgets/cart/brand/brand_showcase.dart';
 import 'package:ecommerce/common/widgets/cart/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/models/category_model.dart';
+import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class TCategoryTab extends StatelessWidget {
             ),
             TGridLayout(
                 itemCount: 4,
-                itemBuilder: (_, index) => const TProductCardVertical()),
+                itemBuilder: (_, index) =>  TProductCardVertical(product: ProductModel.empty(),)),
        
           ]),
         ),
