@@ -26,7 +26,7 @@ class HomeCategories extends StatelessWidget {
                     .apply(color: Colors.white)));
       }
       return SizedBox(
-        height: 80,
+        height: 90,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,

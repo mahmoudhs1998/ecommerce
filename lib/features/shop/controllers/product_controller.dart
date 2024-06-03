@@ -12,19 +12,19 @@ class ProductController extends GetxController {
   RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
 
   @override
-  void onInit()  {
+  void onInit() {
     fetchFeaturedProducts();
     super.onInit();
   }
 
   // Fetch the featured products
- void fetchFeaturedProducts() async {
+  void fetchFeaturedProducts() async {
     // Show loader while loading the products
-      isLoading.value = true;
-      // fetch the products
-      final products = await productRepository.getFeaturedProducts();
-      // Assign the products
-      featuredProducts.assignAll(products);
+    isLoading.value = true;
+    // fetch the products
+    final products = await productRepository.getFeaturedProducts();
+    // Assign the products
+    featuredProducts.assignAll(products);
     try {
       // // Show loader while loading the products
       // isLoading.value = true;
@@ -34,8 +34,7 @@ class ProductController extends GetxController {
       // featuredProducts.assignAll(products);
     } catch (e) {
       TLoaders.errorSnackBar(title: 'oh no!!!', message: e.toString());
-    }
-    finally {
+    } finally {
       isLoading.value = false;
     }
   }
@@ -74,8 +73,8 @@ class ProductController extends GetxController {
 
   /// -- Calculate Discount Percentage
   String? calculateSalePercentage(double originalPrice, double? salePrice) {
-    if (salePrice == null || salePrice <= 0.0) return null;
-    if (originalPrice <= 0) return null;
+    if (salePrice == null || salePrice <= 0.0) return '0';
+    if (originalPrice <= 0) return '0';
 
     double percentage = ((originalPrice - salePrice) / originalPrice) * 100;
     return percentage.toStringAsFixed(0);

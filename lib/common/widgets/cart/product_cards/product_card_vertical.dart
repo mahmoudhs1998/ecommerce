@@ -30,7 +30,7 @@ class TProductCardVertical extends StatelessWidget {
         controller.calculateSalePercentage(product.price, product.salePrice);
     final isDark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(()=>ProductDetailsScreen(product: product)),
+      onTap: () => Get.to(() => ProductDetailsScreen(product: product)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -68,7 +68,7 @@ class TProductCardVertical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
-                        "${controller.calculateSalePercentage(product.salePrice, product.price)}%",
+                        "${controller.calculateSalePercentage(product.price, product.salePrice)}%",
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -110,7 +110,9 @@ class TProductCardVertical extends StatelessWidget {
                 Flexible(
                   child: Column(
                     children: [
-                      if (product.productType == ProductType.single.toString() && product.salePrice > 0)
+                      if (product.productType ==
+                              ProductType.single.toString() &&
+                          product.salePrice > 0)
                         Padding(
                           padding: const EdgeInsets.only(left: TSizes.sm),
                           child: Text(
@@ -118,12 +120,14 @@ class TProductCardVertical extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
-                                .apply(color: Colors.grey , decoration: TextDecoration.lineThrough),
+                                .apply(
+                                    color: Colors.grey,
+                                    decoration: TextDecoration.lineThrough),
                           ),
                         ),
 
                       /// Price , show sale price
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.only(left: TSizes.sm),
                         child: TProductPriceText(
                             price: controller.getProductPrice(product)),
@@ -154,16 +158,14 @@ class TProductCardVertical extends StatelessWidget {
   }
 }
 
-
 class Testt extends StatelessWidget {
   const Testt({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final isDark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-      onTap: () => Get.to(()=>const Test2()),
+      onTap: () => Get.to(() => const Test2()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -241,23 +243,21 @@ class Testt extends StatelessWidget {
                 Flexible(
                   child: Column(
                     children: [
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: TSizes.sm),
-                          child: Text(
-                            'product.pric',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelMedium!
-                                .apply(decoration: TextDecoration.lineThrough),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: TSizes.sm),
+                        child: Text(
+                          'product.pric',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelMedium!
+                              .apply(decoration: TextDecoration.lineThrough),
                         ),
+                      ),
 
                       /// Price , show sale price
                       Padding(
                         padding: const EdgeInsets.only(left: TSizes.sm),
-                        child: TProductPriceText(
-                            price: 'price 3443'),
+                        child: TProductPriceText(price: 'price 3443'),
                       ),
                     ],
                   ),
