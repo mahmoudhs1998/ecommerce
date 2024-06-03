@@ -70,19 +70,9 @@ class HomeScreen extends StatelessWidget {
             // Body --
             const Padding(
               padding: EdgeInsets.all(TSizes.defaultSpace),
-              child: TPromoSlider(
-                  // banners: [
-                  //   TImages.banner1,
-                  //   TImages.banner2,
-                  //   TImages.banner3,
-                  //   TImages.banner4,
-                  //   TImages.banner5,
-                  // ],
-                  ),
+              child: TPromoSlider(),
             ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
+            const SizedBox(height: TSizes.spaceBtwSections),
             //heading
             TCategoriesSectionHeading(
               title: "Popular Products",
@@ -95,16 +85,19 @@ class HomeScreen extends StatelessWidget {
                 return const TVerticalProductShimmer();
               }
               if (controller.featuredProducts.isEmpty) {
-                return Center(
-                    child: Text(
-                  'No Data Found !',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ));
+                return const Center(
+                    child:  CircularProgressIndicator(),
+                //     Text(
+                //   'No Data Found !',
+                //   style: Theme.of(context).textTheme.bodyMedium,
+                // )
+                );
               }
 
               return TGridLayout(
                 itemCount: controller.featuredProducts.length,
-                itemBuilder: (_, index) => TProductCardVertical(
+                itemBuilder: (context, index) => TProductCardVertical(
+
                   product: controller.featuredProducts[index],
                 ),
               );
