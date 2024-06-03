@@ -48,7 +48,7 @@ class ProductModel {
   /// json format
   toJson() {
     return {
-      // 'Id': id,
+     // 'Id': id,
       'Title': title,
       'Stock': stock,
       'Price': price,
@@ -80,7 +80,7 @@ class ProductModel {
       id: document.id,
       sku: data['SKU'],
       title: data['Title'],
-      stock: data['Stock'] ?? 0,
+      stock: data['Stock'] ?? 0.toString(),
       isFeatured: data['IsFeatured'] ?? false,
       price: double.parse((data['Price'] ?? 0.0).toString()),
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
@@ -105,7 +105,7 @@ class ProductModel {
     final data = document.data() as Map<String, dynamic>;
     return ProductModel(
       id: document.id,
-      sku: data['Sku'] ?? '',
+      sku: data['SKU'] ?? '',
       title: data['Title'] ?? '',
       stock: data['Stock'] ?? 0,
       isFeatured: data['IsFeatured'] ?? false,

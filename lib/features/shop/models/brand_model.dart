@@ -8,7 +8,13 @@ class BrandModel
   int? productsCount;
   bool? isFeatured;
 
-  BrandModel({required this.id, required this.name, required this.image , this.productsCount, this.isFeatured});
+  BrandModel({
+    required this.id,
+    required this.name,
+    required this.image ,
+    this.productsCount,
+    this.isFeatured
+  });
 
   // -- Empty Helper Method
   static BrandModel empty() => BrandModel(id: '', name: '', image: '');

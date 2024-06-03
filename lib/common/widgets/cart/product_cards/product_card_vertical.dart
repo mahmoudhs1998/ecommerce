@@ -40,6 +40,7 @@ class TProductCardVertical extends StatelessWidget {
           color: isDark ? TColors.darkGrey : TColors.light,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Thumbnail , whishlist button , Discount tag
             TRoundedContainer(
@@ -58,6 +59,7 @@ class TProductCardVertical extends StatelessWidget {
                     ),
                   ),
                   // -- Sale Tag
+
                   Positioned(
                     top: 10,
                     child: TRoundedContainer(
@@ -66,7 +68,7 @@ class TProductCardVertical extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: TSizes.sm, vertical: TSizes.xs),
                       child: Text(
-                        "$salePercentage%",
+                        "${controller.calculateSalePercentage(product.salePrice, product.price)}%",
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge!
@@ -108,13 +110,142 @@ class TProductCardVertical extends StatelessWidget {
                 Flexible(
                   child: Column(
                     children: [
-                      if (product.productType ==
-                              ProductType.single.toString() &&
-                          product.salePrice > 0)
+                      if (product.productType == ProductType.single.toString() && product.salePrice > 0)
                         Padding(
                           padding: const EdgeInsets.only(left: TSizes.sm),
                           child: Text(
                             product.price.toString(),
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelMedium!
+                                .apply(color: Colors.grey , decoration: TextDecoration.lineThrough),
+                          ),
+                        ),
+
+                      /// Price , show sale price
+                       Padding(
+                        padding: const EdgeInsets.only(left: TSizes.sm),
+                        child: TProductPriceText(
+                            price: controller.getProductPrice(product)),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                    color: TColors.dark,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(TSizes.cardRadiusMd),
+                      bottomRight: Radius.circular(TSizes.productImageRadius),
+                    ), // BorderRadius.only
+                  ), // BoxDecoration
+                  child: const SizedBox(
+                    width: TSizes.iconLg * 1.2,
+                    height: TSizes.iconLg * 1.2,
+                    child: Center(child: Icon(Icons.add, color: TColors.white)),
+                  ), // SizedBox
+                ), // Container
+              ],
+            ), // Row;
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class Testt extends StatelessWidget {
+  const Testt({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    final isDark = THelperFunctions.isDarkMode(context);
+    return GestureDetector(
+      onTap: () => Get.to(()=>const Test2()),
+      child: Container(
+        width: 180,
+        padding: const EdgeInsets.all(1),
+        decoration: BoxDecoration(
+          boxShadow: [TShadowStyle.verticalProductShadow],
+          borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+          color: isDark ? TColors.darkGrey : TColors.light,
+        ),
+        child: Column(
+          children: [
+            // Thumbnail , whishlist button , Discount tag
+            TRoundedContainer(
+              height: 180,
+              width: 180,
+              padding: const EdgeInsets.all(TSizes.sm),
+              backgroundColor: isDark ? TColors.dark : TColors.white,
+              child: Stack(
+                children: [
+                  // -- Thumbnail image
+                  Center(
+                    child: TRoundedImage(
+                      imageUrl: 'product.thumbnail,',
+                      applyImageRadius: true,
+                      isNetworkImage: true,
+                    ),
+                  ),
+                  // -- Sale Tag
+                  Positioned(
+                    top: 10,
+                    child: TRoundedContainer(
+                      radius: TSizes.sm,
+                      backgroundColor: TColors.secondaryColor.withOpacity(0.8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: TSizes.sm, vertical: TSizes.xs),
+                      child: Text(
+                        "'salePercentage'%",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(color: TColors.black),
+                      ),
+                    ),
+                  ),
+                  // -- Favorite icon button
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: TCircularIcon(
+                        icon: Iconsax.heart5,
+                        onPressed: () {},
+                        color: Colors.red),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: TSizes.spaceBtwItems / 2),
+            // -- Details
+            Padding(
+              padding: const EdgeInsets.only(left: TSizes.sm),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TProductTitleText(title: 'product.title', smallSize: true),
+                    const SizedBox(height: TSizes.spaceBtwItems / 2),
+                    TBrandTitleWithVerifiedIcon(
+                      title: 'product.brand!.name',
+                    ),
+                  ]),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// Price
+                Flexible(
+                  child: Column(
+                    children: [
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: TSizes.sm),
+                          child: Text(
+                            'product.pric',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
@@ -126,7 +257,7 @@ class TProductCardVertical extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: TSizes.sm),
                         child: TProductPriceText(
-                            price: controller.getProductPrice(product)),
+                            price: 'price 3443'),
                       ),
                     ],
                   ),
