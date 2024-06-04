@@ -48,7 +48,7 @@ class ProductModel {
   /// json format
   toJson() {
     return {
-     // 'Id': id,
+      // 'Id': id,
       'Title': title,
       'Stock': stock,
       'Price': price,
@@ -74,16 +74,17 @@ class ProductModel {
   /// Map Json oriented document snapshot from Firebase to Model
   factory ProductModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> document) {
+  
     if (document.data() == null) return ProductModel.empty();
     final data = document.data()!;
-    return ProductModel(
+    ProductModel productModel = ProductModel(
       id: document.id,
       sku: data['SKU'],
       title: data['Title'],
       stock: data['Stock'] ?? 0.toString(),
       isFeatured: data['IsFeatured'] ?? false,
-      price: double.parse((data['Price'] ?? 0.0).toString()),
-      salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
+      price: double.parse((data['Price'] ?? '0.0').toString()),
+      salePrice: double.parse((data['SalePrice'] ?? '0.0').toString()),
       thumbnail: data['Thumbnail'] ?? '',
       categoryId: data['CategoryId'] ?? '',
       description: data['Description'] ?? '',
@@ -96,7 +97,9 @@ class ProductModel {
       productVariations: (data['ProductVariations'] as List<dynamic>)
           .map((e) => ProductVariationModel.fromJson(e))
           .toList(),
-    ); // ProductModel
+    );
+    print(productModel.toJson());
+    return productModel; // ProductModel
   }
 
   /// Map Json oriented document snapshot from Firebase to Model
