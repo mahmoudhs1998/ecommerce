@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../utils/constants/enums.dart';
 import '../../models/product_model.dart';
 import 'widgets/bottom_add_to_cart_widget.dart';
 import 'widgets/product_meta_data.dart';
@@ -20,11 +21,14 @@ class ProductDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Description=========================================== ${product.description!.isEmpty}======================================================');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
           // 1 -- Product Image Slider
-          const TProductImageSlider(),
+          TProductImageSlider(
+            product: product,
+          ),
 
           // 2 -- Product Details
           Padding(
@@ -36,11 +40,11 @@ class ProductDetailsScreen extends StatelessWidget {
                 // -- Rating & Share
                 const TRatingAndShare(),
                 // -- Price , Title , Stock & Brand
-                const TProductMetaData(),
+                TProductMetaData(product: product),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Attributes
-                const TProductsAttributes(),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                if(product.productType == ProductType.variable.toString()) TProductsAttributes(product: product),
+                if(product.productType == ProductType.variable.toString())const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Checkout Button
                 SizedBox(
                   width: double.infinity,
@@ -52,8 +56,8 @@ class ProductDetailsScreen extends StatelessWidget {
                 const TCategoriesSectionHeading(
                     title: 'Description', showActionButton: false),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                const ReadMoreText(
-                  'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but i will add it later. then i will add it later.then i will add it later.then i will add it later.',
+                 ReadMoreText(
+                  product.description ?? 'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but iIIIIIIIIIIIIIIIIII',
                   trimLines: 2,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Show more',
@@ -63,6 +67,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   lessStyle:
                       TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                 ),
+
 
                 // -- Reviews
                 const Divider(),
@@ -93,78 +98,78 @@ class ProductDetailsScreen extends StatelessWidget {
 
 
 
-class Test2 extends StatelessWidget {
-  const Test2({Key? key}) : super(key: key);
+// class Test2 extends StatelessWidget {
+//   const Test2({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [
-          // 1 -- Product Image Slider
-          const TProductImageSlider(),
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: SingleChildScrollView(
+//         child: Column(children: [
+//           // 1 -- Product Image Slider
+//           const TProductImageSlider(),
 
-          // 2 -- Product Details
-          Padding(
-              padding: const EdgeInsets.only(
-                  left: TSizes.defaultSpace,
-                  right: TSizes.defaultSpace,
-                  bottom: TSizes.defaultSpace),
-              child: Column(children: [
-                // -- Rating & Share
-                const TRatingAndShare(),
-                // -- Price , Title , Stock & Brand
-                const TProductMetaData(),
-                const SizedBox(height: TSizes.spaceBtwSections),
-                // -- Attributes
-                const TProductsAttributes(),
-                const SizedBox(height: TSizes.spaceBtwSections),
-                // -- Checkout Button
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {}, child: const Text('CheckOut')),
-                ),
-                const SizedBox(height: TSizes.spaceBtwSections),
-                // -- Description
-                const TCategoriesSectionHeading(
-                    title: 'Description', showActionButton: false),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                const ReadMoreText(
-                  'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but i will add it later. then i will add it later.then i will add it later.then i will add it later.',
-                  trimLines: 2,
-                  trimMode: TrimMode.Line,
-                  trimCollapsedText: 'Show more',
-                  trimExpandedText: 'Less',
-                  moreStyle:
-                  TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                  lessStyle:
-                  TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                ),
+//           // 2 -- Product Details
+//           Padding(
+//               padding: const EdgeInsets.only(
+//                   left: TSizes.defaultSpace,
+//                   right: TSizes.defaultSpace,
+//                   bottom: TSizes.defaultSpace),
+//               child: Column(children: [
+//                 // -- Rating & Share
+//                 const TRatingAndShare(),
+//                 // -- Price , Title , Stock & Brand
+//                 const TProductMetaData(),
+//                 const SizedBox(height: TSizes.spaceBtwSections),
+//                 // -- Attributes
+//                 const TProductsAttributes(),
+//                 const SizedBox(height: TSizes.spaceBtwSections),
+//                 // -- Checkout Button
+//                 SizedBox(
+//                   width: double.infinity,
+//                   child: ElevatedButton(
+//                       onPressed: () {}, child: const Text('CheckOut')),
+//                 ),
+//                 const SizedBox(height: TSizes.spaceBtwSections),
+//                 // -- Description
+//                 const TCategoriesSectionHeading(
+//                     title: 'Description', showActionButton: false),
+//                 const SizedBox(height: TSizes.spaceBtwItems),
+//                 const ReadMoreText(
+//                   'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but i will add it later. then i will add it later.then i will add it later.then i will add it later.',
+//                   trimLines: 2,
+//                   trimMode: TrimMode.Line,
+//                   trimCollapsedText: 'Show more',
+//                   trimExpandedText: 'Less',
+//                   moreStyle:
+//                   TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+//                   lessStyle:
+//                   TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+//                 ),
 
-                // -- Reviews
-                const Divider(),
-                const SizedBox(height: TSizes.spaceBtwItems),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const TCategoriesSectionHeading(
-                        title: 'Reviews(199)', showActionButton: false),
-                    IconButton(
-                        onPressed: () =>
-                            Get.to(() => const ProductReviewsScreen()),
-                        icon: const Icon(
-                          Iconsax.arrow_right_3,
-                          size: 18,
-                        )),
-                  ],
-                ),
+//                 // -- Reviews
+//                 const Divider(),
+//                 const SizedBox(height: TSizes.spaceBtwItems),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     const TCategoriesSectionHeading(
+//                         title: 'Reviews(199)', showActionButton: false),
+//                     IconButton(
+//                         onPressed: () =>
+//                             Get.to(() => const ProductReviewsScreen()),
+//                         icon: const Icon(
+//                           Iconsax.arrow_right_3,
+//                           size: 18,
+//                         )),
+//                   ],
+//                 ),
 
-                const SizedBox(height: TSizes.spaceBtwSections),
-              ])),
-        ]),
-      ),
-      bottomNavigationBar: const TBottomAddToCart(),
-    );
-  }
-}
+//                 const SizedBox(height: TSizes.spaceBtwSections),
+//               ])),
+//         ]),
+//       ),
+//       bottomNavigationBar: const TBottomAddToCart(),
+//     );
+//   }
+// }

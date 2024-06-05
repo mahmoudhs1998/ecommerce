@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,16 +15,15 @@ class ProductRepository extends GetxController {
   /// Firestore instance for database interactions.
   final _db = FirebaseFirestore.instance;
 
-
   /// Get limited featured products
   /// Get limited featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
     final snapshot = await _db
-          .collection('Products')
-          .where('IsFeatured', isEqualTo: true)
-          .limit(4)
-          .get();
-      return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+        .collection('Products')
+        .where('IsFeatured', isEqualTo: true)
+        .limit(4)
+        .get();
+    return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     try {
       // final snapshot = await _db
       //     .collection('Products')
@@ -78,7 +76,7 @@ class ProductRepository extends GetxController {
         // Upload Variation Images
         if (product.productType == ProductType.variable.toString()) {
           for (var variation in product.productVariations!) {
-// Get image data link from local assets
+            // Get image data link from local assets
             final assetImage =
                 await storage.getImageDataFromAssets(variation.image);
 

@@ -1,9 +1,9 @@
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
-import '../../../data/repositories/product/product_repository.dart';
-import '../../../utils/constants/enums.dart';
-import '../models/product_model.dart';
+import '../../../../data/repositories/product/product_repository.dart';
+import '../../../../utils/constants/enums.dart';
+import '../../models/product_model.dart';
 
 class ProductController extends GetxController {
   static ProductController get instance => Get.find();
@@ -66,7 +66,8 @@ class ProductController extends GetxController {
         return largestPrice.toString();
       } else {
 // Otherwise, return a price range
-        return '$smallestPrice - \$$largestPrice';
+     return '$smallestPrice - \$$largestPrice';
+      //  return '$smallestPrice';
       }
     }
   }

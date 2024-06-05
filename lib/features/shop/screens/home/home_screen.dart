@@ -12,7 +12,7 @@ import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/product_controller.dart';
+import '../../controllers/product/product_controller.dart';
 import '../all_products/all_products.dart';
 
 class HomeScreen extends StatelessWidget {
