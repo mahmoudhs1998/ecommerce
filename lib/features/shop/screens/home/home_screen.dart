@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/common/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/cart/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -9,6 +10,7 @@ import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -77,7 +79,11 @@ class HomeScreen extends StatelessWidget {
             TCategoriesSectionHeading(
               title: "Popular Products",
               showActionButton: true,
-              onPressed: () => Get.to(() => const AllProducts()),
+              onPressed: () => Get.to(() =>  AllProducts(
+                title: "Popular Products",
+                //query: FirebaseFirestore.instance.collection('Products').where('IsFeatured',isEqualTo:true).limit(6),
+                futureMethod:controller.fetchAllFeaturedProducts(),
+              )),
             ),
             // Popular Products
             Obx(() {
