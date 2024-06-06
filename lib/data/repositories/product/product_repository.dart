@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../../common/widgets/exceptions/exceptions.dart';
 import '../../../features/shop/models/product_model.dart';
 import '../../../utils/constants/enums.dart';
+import '../../../utils/popups/loaders.dart';
 import '../../services/firebase/firebase_storage_services.dart';
 
 class ProductRepository extends GetxController {
@@ -39,6 +40,48 @@ class ProductRepository extends GetxController {
       throw 'Something went wrong. Please try again !!!!!!!!!';
     }
   }
+
+  /// Get All  featured products
+  Future<List<ProductModel>> getAllFeaturedProducts() async {
+    final snapshot = await _db
+        .collection('Products')
+        .where('IsFeatured', isEqualTo: true)
+        .get();
+    return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    try {
+      // final snapshot = await _db
+      //     .collection('Products')
+      //     .where('IsFeatured', isEqualTo: true)
+      //     .limit(4)
+      //     .get();
+      // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again !!!!!!!!!';
+    }
+  }
+
+
+  /// -- Fetch All Products By Query
+  Future<List<ProductModel>> fetchProductsByQuery(Query query)async {
+    try{
+      final querySnapshot = await query.get();
+      final List<ProductModel> productsList = querySnapshot.docs.map((doc) => ProductModel.fromQuerySnapshot(doc)).toList();
+      return productsList;
+    }on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    }catch (e) {
+      throw 'Something went wrong. Please try again';
+
+    }
+  }
+
+
 
   // Upload dummy data to the Cloud Firebase
   Future<void> uploadDummyData(List<ProductModel> products) async {
