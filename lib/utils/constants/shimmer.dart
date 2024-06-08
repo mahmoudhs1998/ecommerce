@@ -9,6 +9,7 @@ import '../helpers/helpers_functions.dart';
 class TShimmerEffect extends StatelessWidget {
   final double width, height, radius;
   final Color? color;
+
   const TShimmerEffect({
     super.key,
     required this.width,
@@ -35,7 +36,6 @@ class TShimmerEffect extends StatelessWidget {
   }
 }
 
-
 class TVerticalProductShimmer extends StatelessWidget {
   const TVerticalProductShimmer({
     super.key,
@@ -56,6 +56,7 @@ class TVerticalProductShimmer extends StatelessWidget {
             /// Image
             TShimmerEffect(width: 180, height: 180),
             SizedBox(height: TSizes.spaceBtwItems),
+
             /// Text
             TShimmerEffect(width: 160, height: 15),
             SizedBox(height: TSizes.spaceBtwItems / 2),
@@ -67,20 +68,61 @@ class TVerticalProductShimmer extends StatelessWidget {
   }
 }
 
-
-
 class TBrandsShimmer extends StatelessWidget {
-  const TBrandsShimmer({super.key, this.itemCount=4});
+  const TBrandsShimmer({super.key, this.itemCount = 4});
 
   final int itemCount;
 
   @override
   Widget build(BuildContext context) {
     return TGridLayout(
-    mainAxisExtent: 80,
-    itemCount: itemCount,
-    itemBuilder: (_, __ ) => const TShimmerEffect(width: 300, height: 80),
+      mainAxisExtent: 80,
+      itemCount: itemCount,
+      itemBuilder: (_, __) => const TShimmerEffect(width: 300, height: 80),
     ); // TGridLayout
+  }
+}
 
+class TListTileShimmer extends StatelessWidget {
+  const TListTileShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Row(
+          children: [
+            TShimmerEffect(width: 50, height: 50, radius: 58),
+            SizedBox(width: TSizes.spaceBtwItems),
+            Column(
+              children: [
+                TShimmerEffect(width: 100, height: 15),
+                SizedBox(height: TSizes.spaceBtwItems / 2),
+                TShimmerEffect(width: 80, height: 12),
+              ],
+            ), // Column
+          ],
+        ), // Row
+      ],
+    );
+  }
+}
+
+class TBoxesShimmer extends StatelessWidget {
+  const TBoxesShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(children: [
+      Row(
+        children: [
+          Expanded(child: TShimmerEffect(width: 150, height: 118)),
+          SizedBox(width: TSizes.spaceBtwItems),
+          Expanded(child: TShimmerEffect(width: 150, height: 110)),
+          SizedBox(width: TSizes.spaceBtwItems),
+          Expanded(child: TShimmerEffect(width: 150, height: 110)),
+        ],
+      ) // ROw
+    ]); // Column
   }
 }

@@ -96,6 +96,7 @@ class StoreScreen extends StatelessWidget {
                             itemBuilder: (_, index) {
                               final brand = brandController.featuredBrands[index];
                               return TBrandCard(
+
                                   showBorder: false ,
                                   brand: brand ,
                                   onTap:()=> Get.to(() => BrandProducts(brand: brand)),
