@@ -5,6 +5,8 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../features/shop/models/brand_model.dart';
+
 class TBrandShowCase extends StatelessWidget {
   final List<String> images;
   const TBrandShowCase({
@@ -22,7 +24,7 @@ class TBrandShowCase extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       child: Column(children: [
         // -- Brand with product count
-        const TBrandCard(showBorder: false),
+         TBrandCard(showBorder: false ,  brand: BrandModel.empty()),
         const SizedBox(height: TSizes.spaceBtwItems,),
 
         // -- Brand with top 3 products images
