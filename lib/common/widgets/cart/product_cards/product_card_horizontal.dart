@@ -11,6 +11,7 @@ import '../../../../utils/helpers/helpers_functions.dart';
 import '../../custom_shapes/containers/add_to_cart_button.dart';
 import '../../custom_shapes/containers/rounded_container.dart';
 import '../../custom_shapes/containers/rounded_image_container.dart';
+import '../../favourite_icon/favourite_icon.dart';
 import '../../icons/custom_circular_icon.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
@@ -62,11 +63,11 @@ class TProductCardHorizontal extends StatelessWidget {
                 ),
               ),
               // -- Favorite icon button
-              Positioned(
+               const Positioned(
                 top: 0,
                 right: 0,
-                child: TCircularIcon(
-                    icon: Iconsax.heart5, onPressed: () {}, color: Colors.red),
+                child: TFavouriteIcon(productId: ''),
+               // TCircularIcon(icon: Iconsax.heart5, onPressed: () {}, color: Colors.red),
               ),
             ]),
           ),

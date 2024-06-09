@@ -3,7 +3,7 @@ import 'package:ecommerce/data/repositories/product/product_repository.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
-import '../models/product_model.dart';
+import '../../models/product_model.dart';
 
 class AllProductsController extends GetxController{
   static AllProductsController get instance => Get.find();

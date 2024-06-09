@@ -10,6 +10,8 @@ class Global {
   Global._();
 // -- GLOBAL Strings --------------------------------
 
+  static const String favoritesKey = "Favorites";
+
   // -- GLOBAL Form Validation Strings --------------------------------
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
