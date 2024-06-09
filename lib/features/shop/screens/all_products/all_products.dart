@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import '../../../../common/widgets/appbar/app_bar.dart';
 import '../../../../common/widgets/products/sortable/sort_able_products.dart';
-import '../../controllers/all_product_controller.dart';
+import '../../controllers/product/all_product_controller.dart';
 import '../../models/product_model.dart';
 
 class AllProducts extends StatelessWidget {

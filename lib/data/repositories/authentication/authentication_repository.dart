@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../utils/local_storage/storage_utility.dart';
 import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController {
@@ -42,9 +43,14 @@ class AuthenticationRepository extends GetxController {
       print(deviceStorage.read('IsFirstTime'));
     }
     if (user != null) {
+      // If the user is logged in
       if (user.emailVerified) {
+        // Initialize User Specific Storage
+        await TLocalStorage.init(user.uid);
+        // If the user's email is verified, navigate to the main Navigation Menu
         Get.offAll(() => const NavigationMenu());
       } else {
+        // If the user's email is not verified, navigate to the VerifyEmailScreen
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
     } else {

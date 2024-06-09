@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../common/widgets/favourite_icon/favourite_icon.dart';
 import '../../../models/product_model.dart';
 
 class TProductImageSlider extends StatelessWidget {
@@ -85,10 +86,10 @@ class TProductImageSlider extends StatelessWidget {
             ), // SizedBox
           ),
           // -- Appbar with back arrow and heart icon
-          const TAppBar(
+           TAppBar(
             showBackArrow: true,
             actions: [
-              Icon(Iconsax.heart5, color: Colors.red),
+              TFavouriteIcon(productId: product.id), //Icon(Iconsax.heart5, color: Colors.red),
             ],
           ),
         ]),
