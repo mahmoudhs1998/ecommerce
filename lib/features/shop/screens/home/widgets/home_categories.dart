@@ -34,13 +34,19 @@ class HomeCategories extends StatelessWidget {
           itemBuilder: (_, index) {
             final category = categoryController.featuredCategories[index];
             return TVerticalImageText(
+              isNetworkImage: true,
               title: category.name,
               image: category.image, //TImages.category1,
-              onTap: () => Get.to(() => const SubCategoriesScreen()),
+              onTap: () => Get.to(() =>  SubCategoriesScreen(category: category)),
+
             );
+
           },
+
         ),
+
       );
+
     });
   }
 }

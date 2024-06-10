@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../common/layouts/grid_layout.dart';
+import '../../common/widgets/custom_shapes/containers/rounded_container.dart';
 import '../helpers/helpers_functions.dart';
 
 class TShimmerEffect extends StatelessWidget {
@@ -67,6 +68,74 @@ class TVerticalProductShimmer extends StatelessWidget {
     );
   }
 }
+
+class THorizontalProductShimmer extends StatelessWidget {
+  const THorizontalProductShimmer({super.key, this.itemCount = 4});
+
+  final int itemCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      shrinkWrap: true,
+      separatorBuilder:(_, __) =>const SizedBox(width: TSizes.spaceBtwItems ),
+      scrollDirection: Axis.horizontal,
+      itemCount: itemCount,
+      itemBuilder: (_, __) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: TSizes.sm),
+        child: Container(
+          width: 310,
+          padding: const EdgeInsets.all(1),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(TSizes.productImageRadius),
+            color: TColors.softGrey,
+          ),
+          child: const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Thumbnail shimmer
+              TRoundedContainer(
+                height: 120,
+                padding: EdgeInsets.all(TSizes.sm),
+                backgroundColor: TColors.light,
+                child: TShimmerEffect(width: 120, height: 120),
+              ),
+
+              // Details shimmer
+              SizedBox(
+                width: 172,
+                child: Padding(
+                  padding: EdgeInsets.only(left: TSizes.sm, top: TSizes.sm),
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TShimmerEffect(width: 160, height: 15),
+                          SizedBox(height: TSizes.spaceBtwItems / 2),
+                          TShimmerEffect(width: 110, height: 15),
+                        ],
+                      ),
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(child: TShimmerEffect(width: 50, height: 15)),
+                          TShimmerEffect(width: 24, height: 24),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
 class TBrandsShimmer extends StatelessWidget {
   const TBrandsShimmer({super.key, this.itemCount = 4});
