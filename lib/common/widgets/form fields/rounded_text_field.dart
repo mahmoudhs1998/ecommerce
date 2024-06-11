@@ -26,16 +26,22 @@ class CustomFormField extends StatelessWidget {
 
   final String labelText;
   final IconData prefixIcon;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
   const CustomFormField({
     super.key,
     required this.labelText,
     required this.prefixIcon,
+    this.validator,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
     return TextFormField(
+      controller:controller ,
+        validator: validator,
       decoration: InputDecoration(
         labelText: labelText,
         enabledBorder: OutlineInputBorder(
