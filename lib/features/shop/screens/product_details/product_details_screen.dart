@@ -91,7 +91,7 @@ class ProductDetailsScreen extends StatelessWidget {
               ])),
         ]),
       ),
-      bottomNavigationBar: const TBottomAddToCart(),
+      bottomNavigationBar:  TBottomAddToCart(product: product),
     );
   }
 }

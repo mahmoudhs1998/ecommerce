@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/styles/shadows.dart';
+import 'package:ecommerce/common/widgets/cart/product_cards/product_add_to_cart.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
 import 'package:ecommerce/common/widgets/icons/brand_title_verify_icon.dart';
@@ -133,20 +134,21 @@ class TProductCardVertical extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  decoration: const BoxDecoration(
-                    color: TColors.dark,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(TSizes.cardRadiusMd),
-                      bottomRight: Radius.circular(TSizes.productImageRadius),
-                    ), // BorderRadius.only
-                  ), // BoxDecoration
-                  child: const SizedBox(
-                    width: TSizes.iconLg * 1.2,
-                    height: TSizes.iconLg * 1.2,
-                    child: Center(child: Icon(Icons.add, color: TColors.white)),
-                  ), // SizedBox
-                ), // Container
+                // Container(
+                //   decoration: const BoxDecoration(
+                //     color: TColors.dark,
+                //     borderRadius: BorderRadius.only(
+                //       topLeft: Radius.circular(TSizes.cardRadiusMd),
+                //       bottomRight: Radius.circular(TSizes.productImageRadius),
+                //     ), // BorderRadius.only
+                //   ), // BoxDecoration
+                //   child: const SizedBox(
+                //     width: TSizes.iconLg * 1.2,
+                //     height: TSizes.iconLg * 1.2,
+                //     child: Center(child: Icon(Icons.add, color: TColors.white)),
+                //   ), // SizedBox
+                // ), // Container
+                ProductCardAddToCartButton(product: product),
               ],
             ), // Row;
           ],

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../common/widgets/appbar/cart_counter_icon.dart';
 import '../../../../personalization/controllers/user_controller.dart';
 
 class THomeAppBar extends StatelessWidget {
@@ -37,34 +38,36 @@ class THomeAppBar extends StatelessWidget {
           }
         }),
       ]),
-      actions: [
+      actions: const [
+        TCartCounterIcon(),
         // Todo : Replace with TCartCounterIcon
-        Stack(children: [
-          IconButton(
-            onPressed: () => Get.to(() => const CartScreen()),
-            icon: const Icon(Iconsax.shopping_bag, color: TColors.white),
-          ),
-          Positioned(
-            right: 0,
-            child: Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                color: TColors.black,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Text(
-                  '2',
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelSmall!
-                      .apply(color: TColors.white, fontSizeFactor: 0.8),
-                ),
-              ),
-            ),
-          ),
-        ]),
+
+        // Stack(children: [
+        //   IconButton(
+        //     onPressed: () => Get.to(() => const CartScreen()),
+        //     icon: const Icon(Iconsax.shopping_bag, color: TColors.white),
+        //   ),
+        //   Positioned(
+        //     right: 0,
+        //     child: Container(
+        //       width: 18,
+        //       height: 18,
+        //       decoration: BoxDecoration(
+        //         color: TColors.black,
+        //         borderRadius: BorderRadius.circular(100),
+        //       ),
+        //       child: Center(
+        //         child: Text(
+        //           '2',
+        //           style: Theme.of(context)
+        //               .textTheme
+        //               .labelSmall!
+        //               .apply(color: TColors.white, fontSizeFactor: 0.8),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ]),
       ],
     );
   }
