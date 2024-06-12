@@ -36,11 +36,8 @@ class StoreScreen extends StatelessWidget {
               .of(context)
               .textTheme
               .headlineMedium),
-          actions: [
-            TCartCounterIcon(
-              icon: Iconsax.shopping_bag,
-              onPressed: () {},
-            ),
+          actions: const [
+            TCartCounterIcon(),
           ],
         ),
         body: NestedScrollView(

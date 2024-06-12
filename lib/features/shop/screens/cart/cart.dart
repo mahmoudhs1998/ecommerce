@@ -4,6 +4,10 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../common/widgets/loaders/animation_loader.dart';
+import '../../../../utils/constants/images.dart';
+import '../../../../zBottom_navigation_bar/navigation_menu.dart';
+import '../../controllers/cart/cart_controller.dart';
 import 'widgets/cart_items.dart';
 
 class CartScreen extends StatelessWidget {
@@ -11,22 +15,50 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = CartController.instance;
+
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
+        title: Text('Cart', style: Theme
+            .of(context)
+            .textTheme
+            .headlineSmall),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(TSizes.defaultSpace),
-        // -- Cart Items
-        child: TCartItems(),
-      ),
+      body: Obx(() {
+        /// Nothing Found Widget
+        final emptyWidget = TAnimationLoaderWidget(
+        text: 'Whoops! Cart is EMPTY.',
+        animation: TImages.shopAnimation,
+        showAction: true,
+        actionText: 'Let\'s fill it',
+        onActionPressed: () => Get.off(() => const NavigationMenu()),
+        ); //
+        if (cartController.cartItems.isEmpty) {
+          return emptyWidget;
+        } else {
+          return const SingleChildScrollView(
+            child: Padding(
+            padding: EdgeInsets.all(TSizes.defaultSpace),
+            // -- Cart Items
+            child: TCartItems(),
+                    ),
+          );
+        }
+      }),
       // -- Checkout Button
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: cartController.cartItems.isEmpty
+          ? const  SizedBox()
+        :Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
             onPressed: () => Get.to(() => const CheckoutScreen()),
-            child: const Text('Checkout \$250.0')),
+            child:  Obx(
+              ()=>Text(
+                  'Checkout \$${cartController.totalCartPrice.value}'
+              ),
+            ),
+        ),
       ),
     );
   }
