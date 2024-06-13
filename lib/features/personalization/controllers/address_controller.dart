@@ -1,4 +1,9 @@
+import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/data/repositories/address/address_repository.dart';
+import 'package:ecommerce/features/personalization/screens/address/add_new_address.dart';
+import 'package:ecommerce/features/personalization/screens/address/widgets/single_address.dart';
+import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/helpers/cloud_helper_functions.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -137,5 +142,49 @@ class AddressController extends GetxController {
     state.clear();
     country.clear();
     addressFormKey.currentState?.reset();
+  }
+
+  /// show Addresses ModalBottomSheet at CheckOut
+  Future<dynamic> selectNewAddressePopUp(BuildContext context){
+    return showModalBottomSheet(
+        context: context,
+        builder: (_) => Container(
+          padding: EdgeInsets.all(TSizes.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TCategoriesSectionHeading(title: 'Select Address' , showActionButton: false),
+              FutureBuilder(
+                  future: getAllUserAddresses(),
+                  builder: (_,snapshot) {
+                    // Helpers Functions
+                    final response = CloudHelperFunctions.checkMultiRecordState(snapshot: snapshot);
+                    if(response != null)return response;
+
+                    return ListView.builder(
+                      shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (_,index)=>SingleAddressWidget(
+                            address: snapshot.data![index],
+                            onTap: ()async{
+                              await selectAddress(snapshot.data![index]);
+                              Get.back();
+                            },
+                        ),
+                    );
+                  }
+              ),
+              const SizedBox(height: TSizes.defaultSpace * 2),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: ()=> Get.to(()=> const AddNewAddressScreen()),
+                  child: const Text('Add New Address'),
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
   }
 }

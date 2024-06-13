@@ -17,6 +17,13 @@ class TPricingCalculator {
     return shippingCost.toStringAsFixed(2);
   }
 
+
+  /// -- Calculate tax
+  static String calculateTax(double subTotal, String location) {
+    double taxRate = getTaxRateForLocation(location);
+    double taxAmount = subTotal * taxRate;
+    return taxAmount.toStringAsFixed(2);
+  }
   // calculate tax rate
   static String calculateTaxRate(double productPrice, String location) {
     double taxRate = getTaxRateForLocation(location);
@@ -38,6 +45,6 @@ class TPricingCalculator {
 
   /// -- Sum all cart values and return total amount
 // static double calculateCartTotal(CartModel cart) {
-//return cart.items.map((e) => e.price).fold(0, (previousPrice, currentPrice) => previousPrice + (currentPrice ?? 0));
-//}
+// return cart.items.map((e) => e.price).fold(0, (previousPrice, currentPrice) => previousPrice + (currentPrice ?? 0));
+// }
 }

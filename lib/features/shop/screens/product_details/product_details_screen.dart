@@ -1,4 +1,5 @@
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
+import 'package:ecommerce/features/shop/controllers/checkout/order_controller.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_attributes.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/product_images_slider.dart';
 import 'package:ecommerce/features/shop/screens/product_details/widgets/rating_share_widget.dart';
@@ -10,6 +11,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../utils/constants/enums.dart';
+import '../../../../utils/helpers/pricing_calculator.dart';
+import '../../../../utils/popups/loaders.dart';
+import '../../controllers/cart/cart_controller.dart';
 import '../../models/product_model.dart';
 import 'widgets/bottom_add_to_cart_widget.dart';
 import 'widgets/product_meta_data.dart';
@@ -20,7 +24,12 @@ class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.product});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
+    final orderController = Get.put(OrderController());
+    final cartController = CartController.instance;
+
+    final subTotal = cartController.totalCartPrice.value;
+    final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, 'US');
     print('Description=========================================== ${product.description!.isEmpty}======================================================');
     return Scaffold(
       body: SingleChildScrollView(
@@ -49,7 +58,16 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text('CheckOut')),
+                      onPressed: (){
+                        if(subTotal <= 0 || subTotal == null) {
+                          return TLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items in the cart in order to proceed.');
+                        }else{
+                          orderController.processOrder(totalAmount);
+                        }
+
+
+    },                     //orderController.processOrder(totalAmount),
+                      child: const Text('CheckOut')),
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Description
