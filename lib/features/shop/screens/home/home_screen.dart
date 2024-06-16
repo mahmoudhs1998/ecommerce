@@ -14,6 +14,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../search/search_screen.dart';
 import '../../controllers/product/product_controller.dart';
 import '../all_products/all_products.dart';
 
@@ -38,6 +39,7 @@ class HomeScreen extends StatelessWidget {
 
                 // Search Bar
                 TSearchBar(
+                  onTap:()=> Get.to(()=> const SearchScreen()),
                   searchBarHint: TTexts.searchBarHint,
                 ),
                 const SizedBox(

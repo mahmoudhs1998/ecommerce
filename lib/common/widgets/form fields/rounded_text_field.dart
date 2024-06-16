@@ -26,23 +26,35 @@ class CustomFormField extends StatelessWidget {
 
   final String labelText;
   final IconData prefixIcon;
+  final IconData suffixIcon;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
   final TextEditingController? controller;
+  final FocusNode? focusNode;
+  final void Function()? suffixPressed;
   const CustomFormField({
     super.key,
     required this.labelText,
     required this.prefixIcon,
     this.validator,
     this.controller,
+    this.focusNode,
+    this.onChanged,
+    this.suffixIcon = Icons.clear,
+    this.suffixPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
     return TextFormField(
+
+      onChanged: onChanged,
+      focusNode : focusNode,
       controller:controller ,
         validator: validator,
       decoration: InputDecoration(
+        suffixIcon:IconButton(onPressed: suffixPressed, icon: Icon(suffixIcon)) ,
         labelText: labelText,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide( 
