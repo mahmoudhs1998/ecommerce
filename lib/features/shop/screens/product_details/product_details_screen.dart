@@ -24,13 +24,14 @@ class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.product});
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final orderController = Get.put(OrderController());
     final cartController = CartController.instance;
 
     final subTotal = cartController.totalCartPrice.value;
     final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, 'US');
-    print('Description=========================================== ${product.description!.isEmpty}======================================================');
+    print(
+        'Description=========================================== ${product.description!.isEmpty}======================================================');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(children: [
@@ -52,21 +53,24 @@ class ProductDetailsScreen extends StatelessWidget {
                 TProductMetaData(product: product),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Attributes
-                if(product.productType == ProductType.variable.toString()) TProductsAttributes(product: product),
-                if(product.productType == ProductType.variable.toString())const SizedBox(height: TSizes.spaceBtwSections),
+                if (product.productType == ProductType.variable.toString())
+                  TProductsAttributes(product: product),
+                if (product.productType == ProductType.variable.toString())
+                  const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Checkout Button
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: (){
-                        if(subTotal <= 0 || subTotal == null) {
-                          return TLoaders.warningSnackBar(title: 'Empty Cart', message: 'Add items in the cart in order to proceed.');
-                        }else{
+                      onPressed: () {
+                        if (subTotal <= 0 || subTotal == null) {
+                          return TLoaders.warningSnackBar(
+                              title: 'Empty Cart',
+                              message:
+                                  'Add items in the cart in order to proceed.');
+                        } else {
                           orderController.processOrder(totalAmount);
                         }
-
-
-    },                     //orderController.processOrder(totalAmount),
+                      }, //orderController.processOrder(totalAmount),
                       child: const Text('CheckOut')),
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
@@ -74,8 +78,9 @@ class ProductDetailsScreen extends StatelessWidget {
                 const TCategoriesSectionHeading(
                     title: 'Description', showActionButton: false),
                 const SizedBox(height: TSizes.spaceBtwItems),
-                 ReadMoreText(
-                  product.description ?? 'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but iIIIIIIIIIIIIIIIIII',
+                ReadMoreText(
+                  product.description ??
+                      'This is a Product description for Blue Nike Sleeve less vest. There are more things that can be added but iIIIIIIIIIIIIIIIIII',
                   trimLines: 2,
                   trimMode: TrimMode.Line,
                   trimCollapsedText: 'Show more',
@@ -85,7 +90,6 @@ class ProductDetailsScreen extends StatelessWidget {
                   lessStyle:
                       TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                 ),
-
 
                 // -- Reviews
                 const Divider(),
@@ -109,12 +113,10 @@ class ProductDetailsScreen extends StatelessWidget {
               ])),
         ]),
       ),
-      bottomNavigationBar:  TBottomAddToCart(product: product),
+      bottomNavigationBar: TBottomAddToCart(product: product),
     );
   }
 }
-
-
 
 // class Test2 extends StatelessWidget {
 //   const Test2({Key? key}) : super(key: key);

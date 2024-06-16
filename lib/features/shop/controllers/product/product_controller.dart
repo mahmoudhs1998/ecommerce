@@ -16,7 +16,17 @@ class ProductController extends GetxController {
     fetchFeaturedProducts();
     super.onInit();
   }
-
+  void searchProductsByTitle(String query)async {
+    final products = await productRepository.getFeaturedProducts();
+    if (query.isEmpty) {
+      featuredProducts.assignAll(products);
+    } else {
+      var filteredProducts = products.where((product) {
+        return product.title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+      featuredProducts.assignAll(filteredProducts);
+    }
+  }
   // Fetch the featured products
   void fetchFeaturedProducts() async {
     // Show loader while loading the products
