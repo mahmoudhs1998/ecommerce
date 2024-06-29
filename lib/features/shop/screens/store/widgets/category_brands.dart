@@ -2,7 +2,6 @@ import 'package:ecommerce/utils/helpers/cloud_helper_functions.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../common/widgets/cart/brand/brand_showcase.dart';
-import '../../../../../utils/constants/images.dart';
 import '../../../../../utils/constants/shimmer.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../controllers/Brands/brand_controller.dart';

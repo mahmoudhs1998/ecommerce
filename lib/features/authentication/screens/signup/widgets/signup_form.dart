@@ -28,7 +28,7 @@ class SignUpForm extends StatelessWidget {
                   TValidator.validateEmptyText(Global.firstName.tr, value),
               expands: false,
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.user),
+                prefixIcon: const Icon(Iconsax.user),
                 labelText: TTexts.firstName.tr,
               ),
             ),
@@ -44,7 +44,7 @@ class SignUpForm extends StatelessWidget {
                   
               expands: false,
               decoration: InputDecoration(
-                prefixIcon: Icon(Iconsax.user),
+                prefixIcon: const Icon(Iconsax.user),
                 labelText: TTexts.lastName.tr,
               ),
             ),
@@ -61,7 +61,7 @@ class SignUpForm extends StatelessWidget {
               
           expands: false,
           decoration: InputDecoration(
-            prefixIcon: Icon(Iconsax.user_edit),
+            prefixIcon: const Icon(Iconsax.user_edit),
             labelText: TTexts.username.tr,
           ),
         ),
@@ -126,7 +126,7 @@ class SignUpForm extends StatelessWidget {
     
         // Terms & Conditions
 
-        TermsAndConditionsWidget(),
+        const TermsAndConditionsWidget(),
         const SizedBox(
           height: TSizes.spaceBtwSections,
         ),

@@ -24,10 +24,8 @@
 //   }
 // }
 
-import 'package:ecommerce/features/shop/controllers/rating/rate_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 
 // class RatingBarStars extends StatelessWidget {
 //   final double rating;

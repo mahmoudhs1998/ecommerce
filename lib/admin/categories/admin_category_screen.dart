@@ -55,7 +55,7 @@ import 'package:get/get.dart';
 import 'controller/admin_category_controller.dart';
 
 class AdminCategoryScreen extends StatelessWidget {
-  AdminCategoryScreen({Key? key}) : super(key: key);
+  AdminCategoryScreen({super.key});
 
   final controller = Get.put(AdminCategoryController());
 

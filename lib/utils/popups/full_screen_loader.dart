@@ -1,7 +1,5 @@
 // Utility class for managing a full-screen loading dialog.
 import 'package:ecommerce/utils/constants/colors.dart';
-import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/device/device_utility.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

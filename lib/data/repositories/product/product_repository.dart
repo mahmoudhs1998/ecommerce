@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../common/widgets/exceptions/exceptions.dart';
 import '../../../features/shop/models/product_model.dart';
 import '../../../utils/constants/enums.dart';
-import '../../../utils/popups/loaders.dart';
 import '../../services/firebase/firebase_storage_services.dart';
 
 class ProductRepository extends GetxController {
@@ -19,13 +18,19 @@ class ProductRepository extends GetxController {
   /// Get limited featured products
   /// Get limited featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
-    final snapshot = await _db
+    // final snapshot = await _db
+    //     .collection('Products')
+    //     .where('IsFeatured', isEqualTo: true)
+    //     .limit(4)
+    //     .get();
+    // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    try {
+        final snapshot = await _db
         .collection('Products')
         .where('IsFeatured', isEqualTo: true)
         .limit(4)
         .get();
-    return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-    try {
+        return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
       // final snapshot = await _db
       //     .collection('Products')
       //     .where('IsFeatured', isEqualTo: true)
@@ -43,12 +48,17 @@ class ProductRepository extends GetxController {
 
   /// Get All  featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {
-    final snapshot = await _db
+    // final snapshot = await _db
+    //     .collection('Products')
+    //     .where('IsFeatured', isEqualTo: true)
+    //     .get();
+    // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+    try {
+       final snapshot = await _db
         .collection('Products')
         .where('IsFeatured', isEqualTo: true)
         .get();
     return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-    try {
       // final snapshot = await _db
       //     .collection('Products')
       //     .where('IsFeatured', isEqualTo: true)

@@ -1,6 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
-import 'package:ecommerce/utils/constants/images.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/colors.dart';

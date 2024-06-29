@@ -1,4 +1,3 @@
-import 'package:ecommerce/features/personalization/models/order.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +11,6 @@ import '../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../utils/helpers/helpers_functions.dart';
 import '../../../zBottom_navigation_bar/navigation_menu.dart';
 import '../../shop/controllers/checkout/order_controller.dart';
-import 'order_cart_widget.dart';
 
 class TOrdersListItems extends StatelessWidget {
   const TOrdersListItems({super.key});

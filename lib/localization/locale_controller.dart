@@ -2,7 +2,6 @@ import 'package:ecommerce/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/local_storage/storage_utility.dart';
 
 /// Global Keys for Languages :
 const String language = 'lang';

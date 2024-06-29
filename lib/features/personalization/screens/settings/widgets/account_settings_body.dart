@@ -13,6 +13,7 @@ import '../../../../../admin/banners/add_banner.dart';
 import '../../../../../admin/brand_category/add_brand_category.dart';
 import '../../../../../admin/categories/admin_category_screen.dart';
 import '../../../../../admin/products/admin_product_screen.dart';
+import '../../../../../localization/language_switch_dialoge.dart';
 import '../../../../order/order.dart';
 
 class AccountSettingsBodyWidget extends StatelessWidget {
@@ -35,39 +36,39 @@ class AccountSettingsBodyWidget extends StatelessWidget {
         TSettingsMenuTile(
           icon: Iconsax.safe_home,
           title: 'My Address'.tr,
-          subTitle: 'Set Shopping delivery address',
+          subTitle: 'Set Shopping delivery address'.tr,
           onTap: () => Get.to(() => const UserAddressScreen()),
         ),
         TSettingsMenuTile(
           icon: Iconsax.shopping_cart,
           title: 'My Cart'.tr,
-          subTitle: 'Add , remove Products and move to checkout',
+          subTitle: 'Add , remove Products and move to checkout'.tr,
         ),
         TSettingsMenuTile(
           icon: Iconsax.bag_tick,
           title: 'My Orders'.tr,
-          subTitle: 'In-Progress and completed Orders',
+          subTitle: 'In-Progress and completed Orders'.tr,
           onTap: () => Get.to(() => const OrderScreen()),
         ),
         TSettingsMenuTile(
           icon: Iconsax.bank,
           title: 'Bank Account'.tr,
-          subTitle: 'withdraw balance to registered bank account',
+          subTitle: 'withdraw balance to registered bank account'.tr,
         ),
         TSettingsMenuTile(
           icon: Iconsax.discount_shape,
           title: 'My Coupons'.tr,
-          subTitle: 'List of All the discounted Coupons',
+          subTitle: 'List of All the discounted Coupons'.tr,
         ),
         TSettingsMenuTile(
           icon: Iconsax.notification,
           title: 'Notifications'.tr,
-          subTitle: 'set any kind of notification message',
+          subTitle: 'set any kind of notification message'.tr,
         ),
         TSettingsMenuTile(
           icon: Iconsax.security_card,
           title: 'Account Privacy'.tr,
-          subTitle: 'Manage Data usage and connected accounts',
+          subTitle: 'Manage Data usage and connected accounts'.tr,
         ),
 
         // -- App Settings
@@ -87,6 +88,14 @@ class AccountSettingsBodyWidget extends StatelessWidget {
         //   subTitle: 'Upload Data to your cloud Firebase Storage',
         //   onTap: () {},
         // ),
+        TSettingsMenuTile(
+          icon: Iconsax.language_circle,
+          title: 'Change Language'.tr,
+          subTitle: 'Upload Data to your cloud Firebase Storage',
+          onTap: () {
+            Get.dialog(const LanguageSwitchDialog());
+          },
+        ),
 
         TSettingsMenuTile(
           icon: Iconsax.document_upload,
@@ -122,7 +131,7 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           icon: Iconsax.document_upload,
           title: 'Add Product',
           subTitle: 'Add new Product to your Firebase Storage',
-          onTap: () => Get.to(() => AdminPanel()),
+          onTap: () => Get.to(() => AdminPanelPage()),
         ),
 
         //AdminProductScreen

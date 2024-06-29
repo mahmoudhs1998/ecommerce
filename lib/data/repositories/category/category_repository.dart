@@ -19,7 +19,7 @@ class CategoryRepository extends GetxController{
      return list;
    } on FirebaseException catch (e) {
      throw TFirebaseException(e.code).message;
-   } on FormatException catch (e) {
+   } on FormatException catch (_) {
      throw TFormatException();
    } on PlatformException catch (e) {
      throw TPlatformException(e.code).message;
@@ -36,7 +36,7 @@ class CategoryRepository extends GetxController{
 
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
-    } on FormatException catch (e) {
+    } on FormatException catch (_) {
       throw TFormatException();
     } on PlatformException catch (e) {
       throw TPlatformException(e.code).message;
@@ -66,7 +66,7 @@ Future<void> uploadDummyData(List<CategoryModel> categories)async{
 
    } on FirebaseException catch (e) {
      throw TFirebaseException(e.code).message;
-   } on FormatException catch (e) {
+   } on FormatException catch (_) {
      throw TFormatException();
    } on PlatformException catch (e) {
      throw TPlatformException(e.code).message;

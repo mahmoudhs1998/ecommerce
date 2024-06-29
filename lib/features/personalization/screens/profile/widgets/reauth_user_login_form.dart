@@ -16,7 +16,7 @@ class ReAuthLoginForm extends StatelessWidget {
       appBar: AppBar(title: const Text('Re-Authenticate User'),),
       body: SingleChildScrollView(
         child: Padding(
-          padding : EdgeInsets.all(TSizes.defaultSpace),
+          padding : const EdgeInsets.all(TSizes.defaultSpace),
           child: Form(
             key: controller.reAuthFormKey,
               child: Column(

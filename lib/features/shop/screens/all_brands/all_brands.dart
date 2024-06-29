@@ -1,5 +1,4 @@
 import 'package:ecommerce/features/shop/controllers/Brands/brand_controller.dart';
-import 'package:ecommerce/features/shop/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

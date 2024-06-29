@@ -7,7 +7,6 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../utils/constants/images.dart';
 
 class TCartItem extends StatelessWidget {
   final CartItemModel cartItem;
@@ -54,11 +53,11 @@ class TCartItem extends StatelessWidget {
                             (e) => TextSpan(
                               children: [
                                 TextSpan(
-                                    text: '${e.key}',
+                                    text: e.key,
                                     style:
                                         Theme.of(context).textTheme.bodySmall),
                                 TextSpan(
-                                    text: '${e.value}',
+                                    text: e.value,
                                     style:
                                         Theme.of(context).textTheme.bodyLarge),
                               ],

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
 import 'package:ecommerce/features/shop/controllers/banner_controller.dart';
-import 'package:ecommerce/features/shop/controllers/home_controller.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';

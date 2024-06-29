@@ -258,7 +258,8 @@ class UserController extends GetxController {
       }
 
       // Switch the gender
-      String newGender = user.value.gender == 'Male' ? 'Female' : 'Male';
+      String newGender =
+          user.value.gender == 'Male'.tr ? 'Female'.tr : 'Male'.tr;
 
       // Create a new UserModel with updated gender
       final updatedUser = UserModel(

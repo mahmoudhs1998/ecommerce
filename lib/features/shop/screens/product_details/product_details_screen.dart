@@ -87,9 +87,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   trimCollapsedText: 'Show more',
                   trimExpandedText: 'Less',
                   moreStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   lessStyle:
-                      TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                      const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                 ),
 
                 // -- Reviews
@@ -102,7 +102,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         title: 'Reviews(199)', showActionButton: false),
                     IconButton(
                         onPressed: () =>
-                            Get.to(() => ProductReviewsScreen()),
+                            Get.to(() => const ProductReviewsScreen()),
                         icon: const Icon(
                           Iconsax.arrow_right_3,
                           size: 18,

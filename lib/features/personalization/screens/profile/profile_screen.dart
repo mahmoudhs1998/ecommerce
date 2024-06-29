@@ -103,10 +103,10 @@ class ProfileScreen extends StatelessWidget {
               //     title: 'Date of Birth', value: '10 Oct, 1994', onTap: () {}),
               Obx(
                 () => TProfileMenu(
-                  title: 'Gender',
+                  title: 'Gender'.tr,
                   icon: Iconsax.arrow_swap_horizontal,
                   value: controller.user.value.gender.isEmpty
-                      ? 'Not set'
+                      ? 'Not set'.tr
                       : controller.user.value.gender,
                   onTap: () => controller.switchGender(),
                 ),
@@ -114,11 +114,11 @@ class ProfileScreen extends StatelessWidget {
 
               Obx(
                 () => TProfileMenu(
-                  title: 'Date of Birth',
+                  title: 'Date of Birth'.tr,
                   value: controller.user.value.dateOfBirth != null
                       ? TFormatter.formatDate(
                           controller.user.value.dateOfBirth!)
-                      : 'Not set',
+                      : 'Not set'.tr,
                   onTap: () => controller.showDatePicker(),
                 ),
               ),
