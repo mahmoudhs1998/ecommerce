@@ -1,12 +1,9 @@
 import 'package:ecommerce/common/layouts/grid_layout.dart';
-import 'package:ecommerce/common/widgets/cart/brand/brand_showcase.dart';
 import 'package:ecommerce/common/widgets/cart/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/shop/controllers/category_conotroller.dart';
 import 'package:ecommerce/features/shop/models/category_model.dart';
-import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/features/shop/screens/all_products/all_products.dart';
-import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

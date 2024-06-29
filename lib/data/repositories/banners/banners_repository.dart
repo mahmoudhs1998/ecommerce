@@ -18,7 +18,7 @@ Future<List<BannerModel>> fetchBanners() async{
     return result.docs.map((documentSnapshot) => BannerModel.fromSnapshot(documentSnapshot)).toList();
   }on FirebaseException catch (e) {
     throw TFirebaseException(e.code).message;
-  } on FormatException catch (e) {
+  } on FormatException catch (_) {
     throw TFormatException();
   } on PlatformException catch (e) {
     throw TPlatformException(e.code).message;

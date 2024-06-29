@@ -14,7 +14,6 @@ import '../../../../utils/constants/images.dart';
 import '../../../../utils/constants/shimmer.dart';
 import '../../../../utils/helpers/cloud_helper_functions.dart';
 import '../../../../zBottom_navigation_bar/navigation_menu.dart';
-import '../../models/product_model.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});

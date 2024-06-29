@@ -43,7 +43,7 @@ class ChangeNameScreen extends StatelessWidget {
                     expands: false,
                     decoration: InputDecoration(
                         labelText: TTexts.firstName.tr,
-                        prefixIcon: Icon(Iconsax.user)),
+                        prefixIcon: const Icon(Iconsax.user)),
                   ), // TextFormField
                   const SizedBox(height: TSizes.spaceBtwInputFields),
                   TextFormField(
@@ -53,7 +53,7 @@ class ChangeNameScreen extends StatelessWidget {
                     expands: false,
                     decoration: InputDecoration(
                         labelText: TTexts.lastName.tr,
-                        prefixIcon: Icon(Iconsax.user)),
+                        prefixIcon: const Icon(Iconsax.user)),
                   ),
                 ] // TextFormField
 
@@ -111,7 +111,7 @@ class ChangeUserNameScreen extends StatelessWidget {
                     expands: false,
                     decoration: InputDecoration(
                         labelText: TTexts.username.tr,
-                        prefixIcon: Icon(Iconsax.user)),
+                        prefixIcon: const Icon(Iconsax.user)),
                   ), // TextFormField
                 
                 ] // TextFormField

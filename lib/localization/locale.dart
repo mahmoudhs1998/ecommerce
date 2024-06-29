@@ -149,6 +149,30 @@ class LocaleLang implements Translations {
 
           //----------
           'Reviews & Ratings':'المراجعة و التقييم',
+
+          //--------
+          'Change Language': 'تغيير اللغة',
+          'Switch Language': 'تبديل اللغة',
+          'English': 'الانجليزية',
+          'Arabic': 'العربية',
+
+          //------------
+          'Gender': 'الجنس',
+          'Male': 'ذكر',
+          'Female': 'انثى',
+
+          'Not set': 'غير محدد',
+          'Date of Birth': 'تاريخ الميلاد',
+
+          //-----------------
+          'Set Shopping delivery address': 'تعيين عنوان التسليم',
+          'Add , remove Products and move to checkout': 'أضف , حذف المنتجات والانتقال الي الدفع',
+          'In-Progress and completed Orders': 'الطلبات المقبولة والمكتملة',
+          'withdraw balance to registered bank account': 'سحب الرصيد لحساب البنك المسجل',
+          'List of All the discounted Coupons': 'قائمة جميع الكوبونات المخصومة',
+          'set any kind of notification message': 'تعيين أي نوع من رسالة الاشعار',
+          'Manage Data usage and connected accounts': 'إدارة استخدام البيانات والحسابات المرتبطة',
+
         },
         'en': {
           'home': 'Home',
@@ -292,6 +316,27 @@ class LocaleLang implements Translations {
 
           //---------
           'Reviews & Ratings':'Reviews & Ratings',
+
+          //--------
+          'Change Language': 'Change Language',
+          'Switch Language': 'Switch Language',
+          'English': 'English',
+          'Arabic': 'Arabic',
+          //------------
+          'Gender': 'Gender',
+          'Male': 'Male',
+          'Female': 'Female',
+          'Not set': 'Not set',
+          'Date of Birth': 'Date of Birth',
+
+          //-----------------
+          'Set Shopping delivery address': 'Set Shopping delivery address',
+          'Add , remove Products and move to checkout': 'Add , remove Products and move to checkout',
+          'In-Progress and completed Orders': 'In-Progress and completed Orders',
+          'withdraw balance to registered bank account': 'withdraw balance to registered bank account',
+          'List of All the discounted Coupons': 'List of All the discounted Coupons',
+          'set any kind of notification message': 'set any kind of notification message',
+          'Manage Data usage and connected accounts': 'Manage Data usage and connected accounts',
 
         }
       };

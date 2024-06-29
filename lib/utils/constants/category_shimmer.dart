@@ -1,5 +1,4 @@
 import 'package:ecommerce/utils/constants/shimmer.dart';
-import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/cupertino.dart';
 

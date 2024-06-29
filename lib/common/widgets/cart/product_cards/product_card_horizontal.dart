@@ -3,19 +3,15 @@ import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
 import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
 import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../features/shop/controllers/product/product_controller.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/enums.dart';
-import '../../../../utils/constants/images.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helpers_functions.dart';
-import '../../custom_shapes/containers/add_to_cart_button.dart';
 import '../../custom_shapes/containers/rounded_container.dart';
 import '../../custom_shapes/containers/rounded_image_container.dart';
 import '../../favourite_icon/favourite_icon.dart';
-import '../../icons/custom_circular_icon.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
   final ProductModel product;

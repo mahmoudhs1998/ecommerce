@@ -329,7 +329,7 @@ class AdminBannerController extends GetxController {
 // Assign Banners
         this.banners.assignAll(banners);
 
-        Get.to(HomeScreen());
+        Get.to(const HomeScreen());
 
         targetScreenController.clear();
         active.value = false;

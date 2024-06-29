@@ -149,11 +149,11 @@ class AddressController extends GetxController {
     return showModalBottomSheet(
         context: context,
         builder: (_) => Container(
-          padding: EdgeInsets.all(TSizes.lg),
+          padding: const EdgeInsets.all(TSizes.lg),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TCategoriesSectionHeading(title: 'Select Address' , showActionButton: false),
+              const TCategoriesSectionHeading(title: 'Select Address' , showActionButton: false),
               FutureBuilder(
                   future: getAllUserAddresses(),
                   builder: (_,snapshot) {

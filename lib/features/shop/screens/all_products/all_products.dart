@@ -29,7 +29,7 @@ class AllProducts extends StatelessWidget {
             builder: (context, snapshot) {
 
               // check the state of the futureBuilder snapshot
-              final loader =   TVerticalProductShimmer();
+              const loader =   TVerticalProductShimmer();
               final widget = CloudHelperFunctions.checkMultiRecordState(snapshot: snapshot , loader : loader);
 
               // Return appropriate widget based on snapshot state

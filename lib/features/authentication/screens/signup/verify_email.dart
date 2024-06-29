@@ -1,7 +1,4 @@
-import 'package:ecommerce/common/widgets/success_screen/success_screen.dart';
 import 'package:ecommerce/data/repositories/authentication/authentication_repository.dart';
-import 'package:ecommerce/features/authentication/screens/login/login_screen.dart';
-import 'package:ecommerce/features/authentication/screens/password_configurations/reset_password.dart';
 import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';

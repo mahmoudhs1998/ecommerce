@@ -1,10 +1,6 @@
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:ecommerce/common/widgets/success_screen/success_screen.dart';
 import 'package:ecommerce/features/shop/screens/cart/widgets/cart_items.dart';
 import 'package:ecommerce/features/shop/screens/checkout/widgets/billing_payment_section.dart';
-import 'package:ecommerce/utils/constants/images.dart';
-import 'package:ecommerce/utils/popups/loaders.dart';
-import 'package:ecommerce/zBottom_navigation_bar/navigation_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
