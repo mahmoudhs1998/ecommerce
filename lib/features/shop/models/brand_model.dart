@@ -56,7 +56,7 @@ factory BrandModel.fromJson(Map<String, dynamic> document){
       id: document.id,
       name: data['Name']??'',
       image: data['Image']?? '',
-      productsCount :data['ProductsCount']??'',
+        productsCount: data['ProductsCount'] ?? 0,
       isFeatured: data['IsFeatured']?? false,
     );
 
@@ -64,6 +64,23 @@ factory BrandModel.fromJson(Map<String, dynamic> document){
       return BrandModel.empty();
     }
   }
+
+
+  factory BrandModel.fromQuerySnapshot(DocumentSnapshot snapshot) {
+    final data = snapshot.data() as Map<String, dynamic>;
+    return BrandModel(
+      id: snapshot.id,
+      image: data['image'] ?? '',
+      name: data['name'] ?? '',
+      productsCount: data['productsCount'] ?? 0,
+      isFeatured: data['isFeatured'],
+    );
+  }
+
+   void incrementProductsCount() {
+    productsCount = (productsCount ?? 0) + 1;
+  }
+
 
 
 }
