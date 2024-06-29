@@ -122,7 +122,7 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           icon: Iconsax.document_upload,
           title: 'Add Product',
           subTitle: 'Add new Product to your Firebase Storage',
-          onTap: () => Get.to(() => AdminProductScreen()),
+          onTap: () => Get.to(() => AdminPanel()),
         ),
 
         //AdminProductScreen

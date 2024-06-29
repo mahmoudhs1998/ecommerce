@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'progress_indicator_and_rating.dart';
 
 class OverallProductRating extends StatelessWidget {
-  const OverallProductRating({
-    super.key,
-  });
+  final double rating;
+
+  const OverallProductRating({super.key, required this.rating});
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class OverallProductRating extends StatelessWidget {
       Expanded(
         flex: 3,
         child: Text(
-          '4.8',
+          rating.toStringAsFixed(1), // Display rating with one decimal place //'4.8',
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),

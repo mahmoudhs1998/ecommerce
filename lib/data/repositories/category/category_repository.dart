@@ -75,4 +75,84 @@ Future<void> uploadDummyData(List<CategoryModel> categories)async{
    }
 }
 ///   Upload  categories to the Cloud FireStore
+
+
+  // Future<void> addCategory(CategoryModel category) async {
+  //   try {
+  //     // Generate a new document reference with an auto-generated ID
+  //     final docRef = _db.collection('Categories').doc();
+      
+  //     // Create a new CategoryModel with the auto-generated ID
+  //     final newCategory = CategoryModel(
+  //       id: docRef.id,
+  //       name: category.name,
+  //       image: category.image,
+  //       isFeatured: category.isFeatured,
+  //       parentId: category.parentId,
+  //     );
+
+  //     // Set the document data with the new category
+  //     await docRef.set(newCategory.toJson());
+  //   } catch (e) {
+  //     print('Error adding category: $e');
+  //     throw e;
+  //   }
+  // }
+
+  Future<String> getNextCategoryId() async {
+    try {
+      final querySnapshot = await _db.collection('Categories')
+          .orderBy('Id', descending: true)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final lastId = int.parse(querySnapshot.docs.first['Id']);
+        return (lastId + 1).toString();
+      } else {
+        return '1';
+      }
+    } catch (e) {
+      print('Error getting next category ID: $e');
+      throw e;
+    }
+  }
+
+  Future<void> addCategory(CategoryModel category) async {
+    try {
+      final nextId = await getNextCategoryId();
+      final newCategory = CategoryModel(
+        id: nextId,
+        name: category.name,
+        image: category.image,
+        isFeatured: category.isFeatured,
+        parentId: category.parentId,
+      );
+
+      await _db.collection('Categories').doc(nextId).set(newCategory.toJson());
+    } catch (e) {
+      print('Error adding category: $e');
+      throw e;
+    }
+  }
+
+
+  Future<void> updateCategory(String id, CategoryModel category) async {
+    try {
+      await _db.collection('Categories').doc(id).update(category.toJson());
+    } catch (e) {
+      print('Error updating category: $e');
+      throw e;
+    }
+  }
+
+  Future<void> deleteCategory(String categoryId) async {
+    try {
+      await _db.collection('Categories').doc(categoryId).delete();
+    } catch (e) {
+      print('Error deleting category: $e');
+      throw e;
+    }
+  }
+
 }

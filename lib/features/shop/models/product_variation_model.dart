@@ -50,4 +50,25 @@ class ProductVariationModel {
     attributeValues: Map<String, String>. from(data[ 'AttributeValues']),
     ); // ProductVariationModel
   }
+
+
+  ProductVariationModel copyWith({
+    String? id,
+    int? stock,
+    double? price,
+    double? salePrice,
+    String? image,
+    String? description,
+    Map<String, String>? attributeValues,
+  }) {
+    return ProductVariationModel(
+      id: id ?? this.id,
+      stock: stock ?? this.stock,
+      price: price ?? this.price,
+      salePrice: salePrice ?? this.salePrice,
+      image: image ?? this.image,
+      description: description ?? this.description,
+      attributeValues: attributeValues ?? this.attributeValues,
+    );
+  }
 }
