@@ -25,7 +25,7 @@ class FavoriteScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         title: Text(
-          'WishList',
+          'WishList'.tr,
           style: Theme
               .of(context)
               .textTheme
@@ -48,10 +48,10 @@ class FavoriteScreen extends StatelessWidget {
 
                   /// Nothing Found Widget
                   final emptyWidget = TAnimationLoaderWidget(
-                    text: 'Whoops! Wishlist is Empty.',
+                    text: 'Whoops! Wishlist is Empty.'.tr,
                     animation: TImages.shopAnimation,
                     showAction: true,
-                    actionText: 'Let\'s add some',
+                    actionText: 'Let\'s add some'.tr,
                     onActionPressed: () =>
                         Get.off(() => const NavigationMenu()),
                   ); // TAnimationLoaderWidget

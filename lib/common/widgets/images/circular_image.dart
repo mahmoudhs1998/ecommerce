@@ -28,6 +28,12 @@ class TcircularImage extends StatelessWidget {
       height: height,
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
+        // image: DecorationImage(
+        //   fit: fit,
+        //   image: isNetworkImage
+        //       ? NetworkImage(image)
+        //       : AssetImage(image) as ImageProvider,
+        // ),
         color: backgroundColor ??
             (THelperFunctions.isDarkMode(context)
                 ? TColors.dark
@@ -35,6 +41,8 @@ class TcircularImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: Image(
+
+        fit: fit,
         image: isNetworkImage
             ? NetworkImage(image)
             : AssetImage(image) as ImageProvider,

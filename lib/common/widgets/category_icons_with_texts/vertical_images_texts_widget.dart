@@ -1,4 +1,3 @@
-import 'package:ecommerce/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:ecommerce/utils/constants/colors.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
@@ -33,25 +32,32 @@ class TVerticalImageText extends StatelessWidget {
             // category Circular Image
             TcircularImage(
               image: image,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover, // fit width
               padding: TSizes.sm * 1.4,
               isNetworkImage:isNetworkImage ,
               backgroundColor: backgroundColor,
-              overlayColor: THelperFunctions.isDarkMode(context)? TColors.light : TColors.dark,
+              // overlayColor: THelperFunctions.isDarkMode(context)
+              //     ? TColors.dark
+              //     : TColors.light,
+
             ),
             // Container(
             //   width: 56,
             //   height: 56,
             //   padding: const EdgeInsets.all(TSizes.sm),
             //   decoration: BoxDecoration(
-            //     color: backgroundColor ?? (isDark ? TColors.black : TColors.white),
+                
+            //     color:
+            //         backgroundColor ?? (isDark ? TColors.dark : TColors.light),
             //     borderRadius: BorderRadius.circular(100),
             //   ),
             //   child: Center(
             //     child: Image(
-            //       image: AssetImage(image),
-            //       fit: BoxFit.cover,
-            //       color:isDark ? TColors.dark : TColors.light,
+            //       width: 56,
+            //       height: 56,
+            //       image: NetworkImage(image), //AssetImage(image),
+            //       fit: BoxFit.fitWidth,
+            //       //color: isDark ? TColors.dark : TColors.light,
             //     ),
             //   ),
             // ),

@@ -20,14 +20,14 @@ class ForgetPassword extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           // Heading
           Text(
-            TTexts.forgetPasswordTitle,
+            TTexts.forgetPasswordTitle.tr,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           const SizedBox(
             height: TSizes.spaceBtwItems,
           ),
           Text(
-            TTexts.forgetPasswordSubTitle,
+            TTexts.forgetPasswordSubTitle.tr,
             style: Theme.of(context).textTheme.labelMedium,
           ),
           const SizedBox(
@@ -39,9 +39,9 @@ class ForgetPassword extends StatelessWidget {
             child: TextFormField(
               controller: controller.email,
               validator: TValidator.validateEmail,
-              decoration: const InputDecoration(
-                labelText: TTexts.email,
-                prefixIcon: Icon(Iconsax.direct_right),
+              decoration:  InputDecoration(
+                labelText: TTexts.email.tr,
+                prefixIcon:const Icon(Iconsax.direct_right),
               ),
             ),
           ),
@@ -53,7 +53,7 @@ class ForgetPassword extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: ()=> controller.sendPasswordResetEmail(),
-                child: const Text(TTexts.submit),
+                child:  Text(TTexts.submit.tr),
               ))
         ]),
       ),

@@ -20,7 +20,7 @@ class THomeAppBar extends StatelessWidget {
     final controller = Get.put(UserController());
     return TAppBar(
       title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(TTexts.homeAppBarTitle,
+        Text(TTexts.homeAppBarTitle.tr,
             style: Theme.of(context)
                 .textTheme
                 .labelMedium!

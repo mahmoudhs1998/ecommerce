@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TCategoriesSectionHeading extends StatelessWidget {
   final String title, buttonTitle;
@@ -26,7 +27,7 @@ class TCategoriesSectionHeading extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis),
         if (showActionButton)
-          TextButton(onPressed: onPressed, child: Text(buttonTitle)),
+          TextButton(onPressed: onPressed, child: Text(buttonTitle.tr)),
       ],
     );
   }

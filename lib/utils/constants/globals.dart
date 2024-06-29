@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class Global {
 
   static final Global _instance = Global._();
@@ -13,9 +15,9 @@ class Global {
   static const String favoritesKey = "Favorites";
 
   // -- GLOBAL Form Validation Strings --------------------------------
-  static const String firstName = "First Name";
-  static const String lastName = "Last Name";
-  static const String userName = "User Name";
+  static  String firstName = "First Name".tr;
+  static  String lastName = "Last Name".tr;
+  static  String userName = "User Name".tr;
   static const String done = "Done";
   static String searchBarHint = "Search In Store";
   

@@ -96,7 +96,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 onPressed: () => controller.sendEmailVerification(),
                 //     Get.to(() => const ResetPassword()
                 // ),
-                child: const Text(TTexts.resendEmail),
+                child:  Text(TTexts.resendEmail),
               ),
             ),
           ]), // Column

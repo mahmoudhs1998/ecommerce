@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/common/layouts/grid_layout.dart';
 import 'package:ecommerce/common/widgets/cart/product_cards/product_card_vertical.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/primary_header_container.dart';
@@ -9,14 +8,12 @@ import 'package:ecommerce/features/shop/screens/home/widgets/home_categories.dar
 import 'package:ecommerce/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
-import 'package:ecommerce/utils/constants/texts.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../search/search_screen.dart';
 import '../../controllers/product/product_controller.dart';
 import '../all_products/all_products.dart';
+import '../search/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +37,8 @@ class HomeScreen extends StatelessWidget {
                 // Search Bar
                 TSearchBar(
                   onTap:()=> Get.to(()=> const SearchScreen()),
-                  searchBarHint: TTexts.searchBarHint,
+                  searchBarHint:
+                      "search In Store".tr, //TTexts.searchBarHint.tr,
                 ),
                 const SizedBox(
                   height: TSizes.spaceBtwSections,
@@ -52,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       TCategoriesSectionHeading(
-                        title: "Popular Categories",
+                        title: "Popular Categories".tr,
                         showActionButton: false,
                         onPressed: () {},
                       ),
@@ -79,10 +77,10 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwSections),
             //heading
             TCategoriesSectionHeading(
-              title: "Popular Products",
+              title: "Popular Products".tr,
               showActionButton: true,
               onPressed: () => Get.to(() =>  AllProducts(
-                title: "Popular Products",
+                    title: "Popular Products".tr,
                 //query: FirebaseFirestore.instance.collection('Products').where('IsFeatured',isEqualTo:true).limit(6),
                 futureMethod:controller.fetchAllFeaturedProducts(),
               )),

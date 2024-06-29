@@ -1,10 +1,9 @@
 import 'package:ecommerce/features/authentication/controllers/login/login_controller.dart';
 import 'package:ecommerce/features/authentication/screens/password_configurations/forget_password.dart';
 import 'package:ecommerce/features/authentication/screens/signup/signup_screen.dart';
-import 'package:ecommerce/utils/validators/validation.dart';
-import 'package:ecommerce/zBottom_navigation_bar/navigation_menu.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
+import 'package:ecommerce/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -26,10 +25,12 @@ class LoginFormWidget extends StatelessWidget {
             //Email
             TextFormField(
               controller: controller.email,
-              validator: (value)=>TValidator.validateEmail(value),
-              decoration: const InputDecoration(
-                  prefixIcon: Icon(Iconsax.direct_right),
-                  labelText: TTexts.email),
+              validator: (value) => TValidator.validateEmail(value),
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Iconsax.direct_right),
+                labelText: "E-Mail".tr,
+                hintText: TTexts.email.tr,
+              ),
             ),
             const SizedBox(
               height: TSizes.spaceBtwInputFields,
@@ -38,7 +39,9 @@ class LoginFormWidget extends StatelessWidget {
             Obx(
                   ()=> TextFormField(
                 controller: controller.password,
-                validator:(value) =>  TValidator.validateEmptyText('Password',value),
+                validator: (value) =>
+                    TValidator.validateEmptyText('Password'.tr, value),
+                        
                 obscureText: controller.hidePassword.value,
                 expands: false,
                 decoration:  InputDecoration(
@@ -48,7 +51,8 @@ class LoginFormWidget extends StatelessWidget {
                     !controller.hidePassword.value,
                     icon:  Icon( controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
                   ),
-                  labelText: TTexts.password,
+                  labelText: "Password".tr,
+                  hintText: TTexts.password.tr,
                 ),
               ),
             ),
@@ -70,14 +74,14 @@ class LoginFormWidget extends StatelessWidget {
                       (value)=> controller.rememberMe.value = ! controller.rememberMe.value
                       ),
                     ),
-                    const Text(TTexts.rememberMe),
+                    Text(TTexts.rememberMe.tr),
                   ],
                 ),
                 //forget password
 
                 TextButton(
                     onPressed: () => Get.to(() => const ForgetPassword()),
-                    child: const Text(TTexts.forgetPassword)),
+                    child: Text(TTexts.forgetPassword.tr)),
               ],
             ),
             const SizedBox(
@@ -90,7 +94,7 @@ class LoginFormWidget extends StatelessWidget {
                 child: ElevatedButton(
                     onPressed: () => controller.signIn(),
                         // Get.to(() => const NavigationMenu()),
-                    child: const Text(TTexts.signIn))),
+                    child: Text(TTexts.signIn.tr))),
             const SizedBox(
               height: TSizes.spaceBtwItems,
             ),
@@ -98,7 +102,7 @@ class LoginFormWidget extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
               child: OutlinedButton(
-                child: const Text(TTexts.createAccount),
+                child: Text(TTexts.createAccount.tr),
                 onPressed: () => Get.to(
                   () => const SignUpScreen(),
                 ),
