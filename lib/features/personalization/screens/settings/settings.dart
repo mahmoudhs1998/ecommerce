@@ -24,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
               children: [
                 TAppBar(
                   title: Text(
-                    "Account",
+                    "Account".tr,
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium!

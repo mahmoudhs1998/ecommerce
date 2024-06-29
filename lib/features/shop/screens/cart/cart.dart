@@ -1,6 +1,7 @@
 import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/features/shop/screens/checkout/checkout.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
+import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +21,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text('Cart', style: Theme
+        title: Text('Cart'.tr, style: Theme
             .of(context)
             .textTheme
             .headlineSmall),
@@ -28,10 +29,10 @@ class CartScreen extends StatelessWidget {
       body: Obx(() {
         /// Nothing Found Widget
         final emptyWidget = TAnimationLoaderWidget(
-        text: 'Whoops! Cart is EMPTY.',
+        text: 'Whoops! Cart is EMPTY.'.tr,
         animation: TImages.shopAnimation,
         showAction: true,
-        actionText: 'Let\'s fill it',
+        actionText: 'Let\'s fill it'.tr,
         onActionPressed: () => Get.off(() => const NavigationMenu()),
         ); //
         if (cartController.cartItems.isEmpty) {
@@ -55,7 +56,7 @@ class CartScreen extends StatelessWidget {
             onPressed: () => Get.to(() => const CheckoutScreen()),
             child:  Obx(
               ()=>Text(
-                  'Checkout \$${cartController.totalCartPrice.value}'
+                  '${TTexts.checkout.tr} \$${cartController.totalCartPrice.value}'
               ),
             ),
         ),

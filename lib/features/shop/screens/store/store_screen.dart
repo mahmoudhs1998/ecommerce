@@ -15,9 +15,9 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../controllers/Brands/brand_controller.dart';
+import '../search/search_screen.dart';
 
 
 class StoreScreen extends StatelessWidget {
@@ -32,7 +32,8 @@ class StoreScreen extends StatelessWidget {
       child: Scaffold(
         appBar: TAppBar(
           title:
-          Text('Store', style: Theme
+          Text('Store'.tr,
+              style: Theme
               .of(context)
               .textTheme
               .headlineMedium),
@@ -61,18 +62,23 @@ class StoreScreen extends StatelessWidget {
                       const SizedBox(
                         height: TSizes.spaceBtwItems,
                       ),
-                      const TSearchBar(
-                        searchBarHint: 'Search in Store',
-                        showBorder: true,
-                        showBackGround: false,
-                        padding: EdgeInsets.zero,
+                      // TSearchBar(
+                      //   searchBarHint: 'Search in Store'.tr,
+                      //   showBorder: true,
+                      //   showBackGround: false,
+                      //   padding: EdgeInsets.zero,
+                      // ),
+                      TSearchBar(
+                        onTap: () => Get.to(() => const SearchScreen()),
+                        searchBarHint:
+                            "search In Store".tr, //TTexts.searchBarHint.tr,
                       ),
                       const SizedBox(
                         height: TSizes.spaceBtwSections,
                       ),
                       // -- Features Brands
                       TCategoriesSectionHeading(
-                        title: "Featured Brands",
+                        title: "Featured Brands".tr,
                         onPressed: () => Get.to(() => const AllBrandsScreen()),
                       ),
                       const SizedBox(

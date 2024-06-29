@@ -64,7 +64,7 @@ class TCategoryTab extends StatelessWidget {
                 return Column(
                   children: [
                     TCategoriesSectionHeading(
-                        title: "You Might Also Like",
+                        title: "You Might Also Like".tr,
                         onPressed: () => Get.to(
                           AllProducts(
                               title: category.name,

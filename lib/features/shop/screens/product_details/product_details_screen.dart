@@ -11,6 +11,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../../../utils/constants/enums.dart';
+import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/pricing_calculator.dart';
 import '../../../../utils/popups/loaders.dart';
 import '../../controllers/cart/cart_controller.dart';
@@ -71,7 +72,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           orderController.processOrder(totalAmount);
                         }
                       }, //orderController.processOrder(totalAmount),
-                      child: const Text('CheckOut')),
+                      child: Text(TTexts.checkout.tr)),
                 ),
                 const SizedBox(height: TSizes.spaceBtwSections),
                 // -- Description
@@ -101,7 +102,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         title: 'Reviews(199)', showActionButton: false),
                     IconButton(
                         onPressed: () =>
-                            Get.to(() => const ProductReviewsScreen()),
+                            Get.to(() => ProductReviewsScreen()),
                         icon: const Icon(
                           Iconsax.arrow_right_3,
                           size: 18,

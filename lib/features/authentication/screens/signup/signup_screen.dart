@@ -4,6 +4,7 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'widgets/signup_form.dart';
 
@@ -23,7 +24,7 @@ class SignUpScreen extends StatelessWidget {
             children: [
               // Title
               Text(
-                TTexts.signUpTitle,
+                TTexts.signUpTitle.tr,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               const SizedBox(
@@ -38,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
               ),
               // Divider
               FormDivider(
-                  isThemeMode: isDark, dividerText: TTexts.signUpDivider),
+                  isThemeMode: isDark, dividerText: TTexts.signUpDivider.tr),
               const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),

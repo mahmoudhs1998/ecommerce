@@ -1,4 +1,3 @@
-import 'package:ecommerce/app.dart';
 import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
@@ -27,9 +26,10 @@ class ReAuthLoginForm extends StatelessWidget {
                   TextFormField(
                     controller: controller.verifyEmail,
                     validator: TValidator.validateEmail,
-                    decoration: const InputDecoration(
-                      labelText: TTexts.email,
-                      prefixIcon: Icon(Iconsax.direct_right),
+                  decoration: InputDecoration(
+                    labelText: "E-Mail",
+                    hintText: TTexts.email,
+                    prefixIcon: const Icon(Iconsax.direct_right),
                     ),
 
                   ),

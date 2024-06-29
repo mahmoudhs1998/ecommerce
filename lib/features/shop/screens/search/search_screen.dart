@@ -36,8 +36,8 @@ class SearchScreen extends StatelessWidget {
                           return const TVerticalProductShimmer();
                         }
                         if (controller.featuredProducts.isEmpty) {
-                          return const Center(
-                            child:  CircularProgressIndicator(),
+                          return  Center(
+                            child: Text('No Data Found!' , style: Theme.of(context).textTheme.bodyMedium), // CircularProgressIndicator(),
 
                           );
                         }

@@ -17,15 +17,15 @@ class AllBrandsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final brandController = BrandController.instance;
     return Scaffold(
-      appBar: const TAppBar(title: Text('Brand'), showBackArrow: true),
+      appBar:  TAppBar(title: Text('Brand'.tr), showBackArrow: true),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
               /// Heading
-              const TCategoriesSectionHeading(
-                  title: 'Brands', showActionButton: false),
+               TCategoriesSectionHeading(
+                  title: 'Brands'.tr, showActionButton: false),
               const SizedBox(height: TSizes.spaceBtwItems),
 
               /// - Brands

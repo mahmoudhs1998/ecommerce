@@ -12,6 +12,7 @@ import '../../../../common/widgets/appbar/app_bar.dart';
 import '../../../../common/widgets/cart/coupon/coupon_widget.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/helpers_functions.dart';
 import '../../../../utils/helpers/pricing_calculator.dart';
 import '../../controllers/cart/cart_controller.dart';
@@ -32,7 +33,7 @@ class CheckoutScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
           showBackArrow: true,
-          title: Text('Order Review',
+          title: Text('Order Review'.tr,
               style: Theme.of(context).textTheme.headlineSmall)),
       body: SingleChildScrollView(
         child: Padding(
@@ -76,7 +77,7 @@ class CheckoutScreen extends StatelessWidget {
         padding: const EdgeInsets.all(TSizes.defaultSpace),
         child: ElevatedButton(
           onPressed: ()=>orderController.processOrder(totalAmount),
-          child: Text('Checkout \$$totalAmount'),
+          child: Text('${TTexts.checkout} \$$totalAmount'),
         ),
         // ElevatedButton(
         //     onPressed: () => subTotal > 0

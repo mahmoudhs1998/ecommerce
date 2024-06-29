@@ -17,7 +17,7 @@ class ChangeNameScreen extends StatelessWidget {
     return Scaffold(
       appBar: TAppBar(
         showBackArrow: true,
-        title: Text('Change Name',
+        title: Text('Change Name'.tr,
             style: Theme.of(context).textTheme.headlineSmall),
       ), // TAppBar
       body: Padding(
@@ -39,10 +39,10 @@ class ChangeNameScreen extends StatelessWidget {
                   TextFormField(
                     controller: controller.firstName,
                     validator: (value) =>
-                        TValidator.validateEmptyText('First Name', value),
+                        TValidator.validateEmptyText('First Name'.tr, value),
                     expands: false,
-                    decoration: const InputDecoration(
-                        labelText: TTexts.firstName,
+                    decoration: InputDecoration(
+                        labelText: TTexts.firstName.tr,
                         prefixIcon: Icon(Iconsax.user)),
                   ), // TextFormField
                   const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -51,8 +51,8 @@ class ChangeNameScreen extends StatelessWidget {
                     validator: (value) =>
                         TValidator.validateEmptyText('Last Name', value),
                     expands: false,
-                    decoration: const InputDecoration(
-                        labelText: TTexts.lastName,
+                    decoration: InputDecoration(
+                        labelText: TTexts.lastName.tr,
                         prefixIcon: Icon(Iconsax.user)),
                   ),
                 ] // TextFormField
@@ -65,7 +65,66 @@ class ChangeNameScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () => controller.updateUserName(),
-                  child: const Text('Save')),
+                  child:  Text('Save'.tr)),
+            ), //
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+class ChangeUserNameScreen extends StatelessWidget {
+  const ChangeUserNameScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(UpdateUserNameController());
+    return Scaffold(
+      appBar: TAppBar(
+        showBackArrow: true,
+        title: Text('Change UserName'.tr,
+            style: Theme.of(context).textTheme.headlineSmall),
+      ), // TAppBar
+      body: Padding(
+        padding: const EdgeInsets.all(TSizes.defaultSpace),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            /// Headings
+            Text(
+              'Use real name for easy verification. This name will appear on several pages.',
+              style: Theme.of(context).textTheme.labelMedium,
+            ), // Text
+            const SizedBox(height: TSizes.spaceBtwSections),
+
+            /// Text field and Button
+            Form(
+                key: controller.updateUserNameFormKey,
+                child: Column(children: [
+                  TextFormField(
+                    controller: controller.userName,
+                    validator: (value) =>
+                        TValidator.validateEmptyText(TTexts.username.tr, value),
+                    expands: false,
+                    decoration: InputDecoration(
+                        labelText: TTexts.username.tr,
+                        prefixIcon: Icon(Iconsax.user)),
+                  ), // TextFormField
+                
+                ] // TextFormField
+
+                    )), // Column, Form
+            const SizedBox(height: TSizes.spaceBtwSections),
+
+            /// Save Button
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  onPressed: () => controller.updateUserName(),
+                  child:  Text('Save'.tr)),
             ), //
           ],
         ),

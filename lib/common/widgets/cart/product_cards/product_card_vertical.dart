@@ -3,7 +3,6 @@ import 'package:ecommerce/common/widgets/cart/product_cards/product_add_to_cart.
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_image_container.dart';
 import 'package:ecommerce/common/widgets/icons/brand_title_verify_icon.dart';
-import 'package:ecommerce/common/widgets/icons/custom_circular_icon.dart';
 import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
 import 'package:ecommerce/common/widgets/texts/product_title_text.dart';
 import 'package:ecommerce/features/shop/controllers/product/product_controller.dart';
@@ -15,7 +14,6 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../favourite_icon/favourite_icon.dart';
 
@@ -97,7 +95,7 @@ class TProductCardVertical extends StatelessWidget {
                     TProductTitleText(title: product.title, smallSize: true),
                     const SizedBox(height: TSizes.spaceBtwItems / 2),
                     TBrandTitleWithVerifiedIcon(
-                      title: product.brand!.name,
+                      title: product.brand!.name.tr,
                     ),
                   ]),
             ),

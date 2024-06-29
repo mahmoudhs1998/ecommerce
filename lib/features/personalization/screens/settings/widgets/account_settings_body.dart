@@ -1,3 +1,4 @@
+import 'package:ecommerce/admin/product_category/add_product_category.dart';
 import 'package:ecommerce/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/data/repositories/authentication/authentication_repository.dart';
@@ -7,6 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../admin/Brands/admin_add_brand.dart';
+import '../../../../../admin/banners/add_banner.dart';
+import '../../../../../admin/brand_category/add_brand_category.dart';
+import '../../../../../admin/categories/admin_category_screen.dart';
+import '../../../../../admin/products/admin_product_screen.dart';
 import '../../../../order/order.dart';
 
 class AccountSettingsBodyWidget extends StatelessWidget {
@@ -19,81 +25,121 @@ class AccountSettingsBodyWidget extends StatelessWidget {
     return Column(
       children: [
         // -- Account Settings
-        const TCategoriesSectionHeading(
-          title: "Account Settings",
+        TCategoriesSectionHeading(
+          title: "Account Settings".tr,
           showActionButton: false,
         ),
         const SizedBox(
           height: TSizes.spaceBtwItems,
         ),
-         TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.safe_home,
-          title: 'My Address',
+          title: 'My Address'.tr,
           subTitle: 'Set Shopping delivery address',
           onTap: () => Get.to(() => const UserAddressScreen()),
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.shopping_cart,
-          title: 'My Cart',
+          title: 'My Cart'.tr,
           subTitle: 'Add , remove Products and move to checkout',
         ),
         TSettingsMenuTile(
           icon: Iconsax.bag_tick,
-          title: 'My Orders',
+          title: 'My Orders'.tr,
           subTitle: 'In-Progress and completed Orders',
           onTap: () => Get.to(() => const OrderScreen()),
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.bank,
-          title: 'Bank Account',
+          title: 'Bank Account'.tr,
           subTitle: 'withdraw balance to registered bank account',
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.discount_shape,
-          title: 'My Coupons',
+          title: 'My Coupons'.tr,
           subTitle: 'List of All the discounted Coupons',
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.notification,
-          title: 'Notifications',
+          title: 'Notifications'.tr,
           subTitle: 'set any kind of notification message',
         ),
-        const TSettingsMenuTile(
+        TSettingsMenuTile(
           icon: Iconsax.security_card,
-          title: 'Account Privacy',
+          title: 'Account Privacy'.tr,
           subTitle: 'Manage Data usage and connected accounts',
         ),
-    
+
         // -- App Settings
         const SizedBox(
           height: TSizes.spaceBtwSections,
         ),
-        const TCategoriesSectionHeading(
-          title: "App Settings",
+        TCategoriesSectionHeading(
+          title: "App Settings".tr,
           showActionButton: false,
         ),
         const SizedBox(
           height: TSizes.spaceBtwItems,
         ),
-        const TSettingsMenuTile(
+        //  TSettingsMenuTile(
+        //   icon: Iconsax.document_upload,
+        //   title: 'Load data',
+        //   subTitle: 'Upload Data to your cloud Firebase Storage',
+        //   onTap: () {},
+        // ),
+
+        TSettingsMenuTile(
           icon: Iconsax.document_upload,
-          title: 'Load data',
-          subTitle: 'Upload Data to your cloud Firebase Storage',
+          title: 'Add Category',
+          subTitle: 'Add new categories to your Firebase Storage',
+          onTap: () => Get.to(() => AdminCategoryScreen()),
         ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Add BrandCategory',
+          subTitle: 'Add new BrandCategory to your Firebase Storage',
+          onTap: () => Get.to(() => AddBrandCategoryPage()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Add ProductCategory',
+          subTitle: 'Add new ProductCategory to your Firebase Storage',
+          onTap: () => Get.to(() => AddProductCategoryPage()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Add Banner',
+          subTitle: 'Add new Banner to your Firebase Storage',
+          onTap: () => Get.to(() => AddBannerPage()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Add Banner',
+          subTitle: 'Add new Brand to your Firebase Storage',
+          onTap: () => Get.to(() => AdminBrandScreen()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Add Product',
+          subTitle: 'Add new Product to your Firebase Storage',
+          onTap: () => Get.to(() => AdminProductScreen()),
+        ),
+
+        //AdminProductScreen
         TSettingsMenuTile(
           icon: Iconsax.location,
           title: 'Geolocation',
           subTitle: 'Set recommendation based on location',
           trailing: Switch(value: true, onChanged: (value) {}),
         ),
-    // TSettingsMenuTile
+        // TSettingsMenuTile
         TSettingsMenuTile(
           icon: Iconsax.security_user,
           title: 'Safe Mode',
           subTitle: 'Search result is safe for all ages',
           trailing: Switch(value: false, onChanged: (value) {}),
         ),
-    // TSettingsMenuTile
+        // TSettingsMenuTile
         TSettingsMenuTile(
           icon: Iconsax.image,
           title: 'HD Image Quality',
@@ -102,13 +148,14 @@ class AccountSettingsBodyWidget extends StatelessWidget {
         ), // TSettingsMenuTile
         /// - Logout Button
         const SizedBox(height: TSizes.spaceBtwSections),
-    
+
         SizedBox(
           width: double.infinity,
           child: OutlinedButton(
-              onPressed: () => AuthenticationRepository.instance.logout(), child: const Text('Logout')),
+              onPressed: () => AuthenticationRepository.instance.logout(),
+              child: Text('Logout'.tr)),
         ), // SizedBox
-    
+
         const SizedBox(height: TSizes.spaceBtwSections * 2.5),
       ],
     );

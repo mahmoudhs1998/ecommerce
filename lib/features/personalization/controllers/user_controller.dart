@@ -190,4 +190,106 @@ class UserController extends GetxController {
       imageUploading.value = false;
     }
  }
+
+  // Method to set date of birth
+  Future<void> setDateOfBirth(DateTime dob) async {
+    try {
+      TFullScreenLoader.openLoadingDialog(
+          'Updating Date of Birth', TImages.shopAnimation);
+
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return TLoaders.errorSnackBar(
+            title: 'No Internet Connection',
+            message: 'Please check your internet connection and try again.');
+      }
+
+      // Update the user model
+      user.update((val) {
+        val?.dateOfBirth = dob;
+      });
+
+      // Prepare data for update
+      Map<String, dynamic> json = {'dateOfBirth': dob.toIso8601String()};
+
+      // Update in the database
+      await userRepository.updateSingleField(json);
+
+      TFullScreenLoader.stopLoading();
+      TLoaders.successSnackBar(
+          title: 'Success',
+          message: 'Your date of birth has been updated successfully.');
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(
+          title: 'Oh snap!',
+          message: 'Something went wrong while updating date of birth: $e');
+    }
+  }
+
+  void showDatePicker() async {
+    final currentDate = DateTime.now();
+    final selectedDate = await Get.dialog(
+      DatePickerDialog(
+        initialDate: user.value.dateOfBirth ?? DateTime(currentDate.year - 18),
+        firstDate: DateTime(1900),
+        lastDate:
+            DateTime(currentDate.year - 13, currentDate.month, currentDate.day),
+      ),
+    );
+
+    if (selectedDate != null && selectedDate is DateTime) {
+      await setDateOfBirth(selectedDate);
+    }
+  }
+
+
+
+   Future<void> switchGender() async {
+    try {
+      TFullScreenLoader.openLoadingDialog('Updating Gender', TImages.shopAnimation);
+
+      // Check Internet Connection
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return TLoaders.errorSnackBar(title: 'No Internet Connection', message: 'Please check your internet connection and try again.');
+      }
+
+      // Switch the gender
+      String newGender = user.value.gender == 'Male' ? 'Female' : 'Male';
+
+      // Create a new UserModel with updated gender
+      final updatedUser = UserModel(
+        id: user.value.id,
+        firstName: user.value.firstName,
+        lastName: user.value.lastName,
+        username: user.value.username,
+        email: user.value.email,
+        phoneNumber: user.value.phoneNumber,
+        profilePicture: user.value.profilePicture,
+        dateOfBirth: user.value.dateOfBirth,
+        gender: newGender,
+      );
+
+      // Update the user model
+      user.value = updatedUser;
+      
+      // Prepare data for update
+      Map<String, dynamic> json = {'gender': newGender};
+      
+      // Update in the database
+      await userRepository.updateSingleField(json);
+      
+      TFullScreenLoader.stopLoading();
+      TLoaders.successSnackBar(title: 'Success', message: 'Your gender has been updated successfully.');
+    } catch (e) {
+      TFullScreenLoader.stopLoading();
+      TLoaders.errorSnackBar(title: 'Oh snap!', message: 'Something went wrong while updating gender: $e');
+    }
+  }
 }
+
+
+

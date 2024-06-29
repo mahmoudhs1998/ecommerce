@@ -78,3 +78,69 @@ class UpdateNameController extends GetxController {
     }
   }
 }
+
+class UpdateUserNameController extends GetxController {
+  static UpdateUserNameController get instance => Get.find();
+
+  final userName = TextEditingController();
+  final UserController userController = UserController.instance;
+  final UserRepository userRepository = Get.put(UserRepository());
+
+  GlobalKey<FormState> updateUserNameFormKey = GlobalKey<FormState>();
+
+  /// init user data when Home Screen appears
+  @override
+  void onInit() {
+    initializeNames();
+    super.onInit();
+  }
+
+  /// Fetch user record
+  Future<void> initializeNames() async {
+    userName.text = userController.user.value.username;
+  }
+
+  Future<void> updateUserName() async {
+    try {
+      // start Loading.....
+      TFullScreenLoader.openLoadingDialog(
+          'we are Updating your information', TImages.shopAnimation);
+      // Check Internet Connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+      // Form Validation
+      if (!updateUserNameFormKey.currentState!.validate()) {
+        TFullScreenLoader.stopLoading();
+        return;
+      }
+
+// Update user's first & last name in the Firebase Firestore
+      Map<String, dynamic> username = {'userName': userName.text.trim()};
+      await userRepository.updateSingleField(username);
+
+// Update the Rx User value
+
+      userController.user.value.username = userName.text.trim();
+
+// Remove Loader
+      TFullScreenLoader.stopLoading();
+
+// Show Success Message
+      TLoaders.successSnackBar(
+          title: 'Congratulations', message: 'Your Name has been updated.');
+
+      // Move to Previous Screen
+      Get.off(() => const ProfileScreen());
+    } catch (e) {
+      // Remove Loader
+      TFullScreenLoader.stopLoading();
+
+// Show Error Message
+      TLoaders.errorSnackBar(title: 'Oh snap!', message: e.toString());
+    }
+  }
+}

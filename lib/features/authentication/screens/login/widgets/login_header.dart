@@ -2,6 +2,7 @@ import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/constants/texts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginHeaderWidget extends StatelessWidget {
   const LoginHeaderWidget({
@@ -23,7 +24,7 @@ class LoginHeaderWidget extends StatelessWidget {
           height: 150,
         ),
         Text(
-          TTexts.loginTitle,
+          TTexts.loginTitle.tr,
           style: Theme.of(context).textTheme.headlineMedium,
         ),
         const SizedBox(

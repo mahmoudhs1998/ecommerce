@@ -1,10 +1,11 @@
 import 'package:ecommerce/common/widgets/category_icons_with_texts/vertical_images_texts_widget.dart';
 import 'package:ecommerce/features/shop/controllers/category_conotroller.dart';
 import 'package:ecommerce/utils/constants/category_shimmer.dart';
-import 'package:ecommerce/utils/constants/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../utils/constants/colors.dart';
+import '../../../../../utils/helpers/helpers_functions.dart';
 import '../../../../sub_category/sub_categories.dart';
 
 class HomeCategories extends StatelessWidget {
@@ -34,6 +35,9 @@ class HomeCategories extends StatelessWidget {
           itemBuilder: (_, index) {
             final category = categoryController.featuredCategories[index];
             return TVerticalImageText(
+              backgroundColor: THelperFunctions.isDarkMode(context)
+                  ? TColors.light
+                  : TColors.dark,
               isNetworkImage: true,
               title: category.name,
               image: category.image, //TImages.category1,

@@ -7,10 +7,12 @@ class UserModel {
   final String id;
   String firstName;
   String lastName;
-  final String username;
+   String username;
   final String email;
   String phoneNumber;
   String profilePicture;
+   DateTime? dateOfBirth; // New field
+  String gender; // New field
 
   /// Constructor for UserModel.
   UserModel({
@@ -21,6 +23,8 @@ class UserModel {
     required this.email,
     required this.phoneNumber,
     required this.profilePicture,
+     this.dateOfBirth, // New parameter
+    this.gender = '', // New parameter with default value
   });
 
 // Helper Method to get the full Name
@@ -54,6 +58,8 @@ class UserModel {
         email: '',
         phoneNumber: '',
         profilePicture: '',
+        dateOfBirth: null,
+        gender: '',
       );
 
   /// Convert model to JSON structure for storing data in Firebase.
@@ -64,7 +70,9 @@ class UserModel {
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'profilePicture': profilePicture
+      'profilePicture': profilePicture,
+      'dateOfBirth': dateOfBirth?.toIso8601String(), // New field
+      'gender': gender, // New field
     };
   }
 
@@ -81,6 +89,10 @@ class UserModel {
         email: data['email'] ?? '',
         phoneNumber: data['phoneNumber'] ?? '',
         profilePicture: data['profilePicture'] ?? '',
+         dateOfBirth: data['dateOfBirth'] != null 
+            ? DateTime.parse(data['dateOfBirth']) 
+            : null, // New field
+        gender: data['gender'] ?? '', // New field
       );
     }
     return UserModel.fromSnapshot(document);
