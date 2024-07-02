@@ -16,6 +16,7 @@ class OrderModel
   final AddressModel? address;
   final DateTime? deliveryDate;
   final List<CartItemModel> items;
+  
 
   OrderModel({
   required this.id,
@@ -72,4 +73,49 @@ class OrderModel
           CartItemModel.fromJson(itemData as Map<String, dynamic>)).toList(),
     ); // OrderModel
   }
+
+   OrderModel copyWith({
+    String? id,
+    String? userId,
+    OrderStatus? status,
+    double? totalAmount,
+    DateTime? orderDate,
+    String? paymentMethod,
+    AddressModel? address,
+    DateTime? deliveryDate,
+    List<CartItemModel>? items,
+  }) {
+    return OrderModel(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      status: status ?? this.status,
+      totalAmount: totalAmount ?? this.totalAmount,
+      orderDate: orderDate ?? this.orderDate,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
+      address: address ?? this.address,
+      deliveryDate: deliveryDate ?? this.deliveryDate,
+      items: items ?? this.items,
+    );
+  }
+
+
+  factory OrderModel.fromQuerySnapshot(DocumentSnapshot snapshot) {
+  final data = snapshot.data() as Map<String, dynamic>;
+  print('Order ID from Firestore: ${data['id']}'); // Debug log
+
+  return OrderModel(
+    id: data['id'] as String,
+    userId: data['userId'] as String,
+    status: OrderStatus.values.firstWhere((e) => e.toString() == data['status']),
+    totalAmount: data['totalAmount'] as double,
+    orderDate: (data['orderDate'] as Timestamp).toDate(),
+    paymentMethod: data['paymentMethod'] as String,
+    address: AddressModel.fromMap(data['address'] as Map<String, dynamic>),
+    deliveryDate: data['deliveryDate'] == null ? null : (data['deliveryDate'] as Timestamp).toDate(),
+    items: (data['items'] as List<dynamic>).map((itemData) => CartItemModel.fromJson(itemData as Map<String, dynamic>)).toList(),
+  );
+}
+
+
+
 }
