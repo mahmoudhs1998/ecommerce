@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../admin/Brands/admin_add_brand.dart';
-import '../../../../../admin/banners/add_banner.dart';
 import '../../../../../admin/brand_category/add_brand_category.dart';
 import '../../../../../admin/categories/admin_category_screen.dart';
+import '../../../../../admin/order/admin_order.dart';
+import '../../../../../admin/order/test.dart';
 import '../../../../../admin/products/admin_product_screen.dart';
 import '../../../../../localization/language_switch_dialoge.dart';
 import '../../../../order/order.dart';
@@ -119,19 +119,28 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           icon: Iconsax.document_upload,
           title: 'Add Banner',
           subTitle: 'Add new Banner to your Firebase Storage',
-          onTap: () => Get.to(() => AddBannerPage()),
+          // onTap: () => Get.to(() => AddBannerPage()),
         ),
         TSettingsMenuTile(
           icon: Iconsax.document_upload,
           title: 'Add Banner',
           subTitle: 'Add new Brand to your Firebase Storage',
-          onTap: () => Get.to(() => AdminBrandScreen()),
+          //  onTap: () => Get.to(() => AdminBrandScreen()),
         ),
+        // Product
         TSettingsMenuTile(
           icon: Iconsax.document_upload,
           title: 'Add Product',
           subTitle: 'Add new Product to your Firebase Storage',
           onTap: () => Get.to(() => AdminPanelPage()),
+        ),
+
+        // Order
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Order',
+          subTitle: 'Manage Order from your Firebase Storage',
+          onTap: () => Get.to(() => AdminOrderPanel()),
         ),
 
         //AdminProductScreen
