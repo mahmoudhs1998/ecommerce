@@ -7,14 +7,13 @@ import '../../../features/shop/controllers/search/search_controller.dart';
 
 class CustomSearchField extends StatelessWidget {
   final bool showBackGround, showBorder;
-  const CustomSearchField({super.key, this.showBackGround = true, this.showBorder = true});
-
-
+  const CustomSearchField(
+      {super.key, this.showBackGround = true, this.showBorder = true});
 
   @override
   Widget build(BuildContext context) {
-    final  searchController = Get.put(SearchingController());
-    final controller =ProductController.instance;
+    final searchController = Get.put(SearchingController());
+    final controller = ProductController.instance;
 
     return Row(
       children: [
@@ -23,15 +22,15 @@ class CustomSearchField extends StatelessWidget {
             controller: searchController.searchController,
             focusNode: searchController.searchFocusNode,
             onChanged: (value) {
-              controller.searchProductsByTitle(value);
+              //controller.searchProductsByTitle(value);
+              //controller.searchProductsByBrand(value);
+              controller.searchProducts(value);
             },
             labelText: 'Search'.tr,
             prefixIcon: Icons.search,
             suffixPressed: searchController.clearSearch,
           ),
-
         ),
-
       ],
     );
   }

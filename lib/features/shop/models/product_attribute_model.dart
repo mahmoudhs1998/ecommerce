@@ -19,4 +19,11 @@ class ProductAttributeModel {
         name: data.containsKey('Name') ? data['Name'] : '',
         values: List<String>. from(data['Values']),); // ProductAttributeModel
   }
+
+  factory ProductAttributeModel.fromMap(Map<String, dynamic> map) {
+    return ProductAttributeModel(
+      name: map['Name'] as String,
+      values: (map['Values'] as List).map((e) => e as String).toList(),
+    );
+  }
 }

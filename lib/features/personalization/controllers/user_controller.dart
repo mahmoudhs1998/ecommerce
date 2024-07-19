@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/network/network_connectivity.dart';
 import '../../../data/repositories/authentication/authentication_repository.dart';
@@ -28,6 +29,7 @@ class UserController extends GetxController {
   @override
   onInit() {
     super.onInit();
+    _initializeUserProfilePicture();
     fetchUserRecord();
   }
 
@@ -163,33 +165,82 @@ class UserController extends GetxController {
  }
 
  // upload profile image
- uploadUserProfilePicture()async{
-    try{
+ Future<void> saveProfilePictureUrl(String imageUrl) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(Global.profilePictureKey, imageUrl);
+}
+
+Future<String?> getProfilePictureUrl() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString(Global.profilePictureKey);
+}
+ Future<void> _initializeUserProfilePicture() async {
+    final profilePictureUrl = await getProfilePictureUrl();
+    if (profilePictureUrl != null) {
+      user.value.profilePicture = profilePictureUrl;
+      user.refresh();
+    }
+  }
+
+//  uploadUserProfilePicture()async{
+//     try{
+//       final image = await ImagePicker().pickImage(
+//           source: ImageSource.gallery,
+//           imageQuality: 70,
+//           maxHeight: 512,
+//           maxWidth: 512
+//       );
+//       if(image != null){
+//         imageUploading.value = true;
+//         // Upload the image
+//         final imageUrl = await userRepository.uploadImage(Global.uploadProfileImage, image);
+
+//         // update user image record
+//         Map<String,dynamic> json = {Global.profilePictureKey: imageUrl};
+//         await userRepository.updateSingleField(json);
+
+//         user.value.profilePicture = imageUrl;
+//         user.refresh();
+//         TLoaders.successSnackBar(title: 'Congratulations' , message: 'Your Profile image has been Updated successfully');
+//       }
+//     }catch(e){
+//       TLoaders.errorSnackBar(title: 'OH snap!', message:'something went wrong $e');
+//     }finally{
+//       imageUploading.value = false;
+//     }
+//  }
+
+ Future<void> uploadUserProfilePicture() async {
+    try {
       final image = await ImagePicker().pickImage(
-          source: ImageSource.gallery,
-          imageQuality: 70,
-          maxHeight: 512,
-          maxWidth: 512
+        source: ImageSource.gallery,
+        imageQuality: 70,
+        maxHeight: 512,
+        maxWidth: 512,
       );
-      if(image != null){
+      if (image != null) {
         imageUploading.value = true;
-        // Upload the image
         final imageUrl = await userRepository.uploadImage(Global.uploadProfileImage, image);
-
-        // update user image record
-        Map<String,dynamic> json = {Global.profilePictureKey: imageUrl};
+        Map<String, dynamic> json = {Global.profilePictureKey: imageUrl};
         await userRepository.updateSingleField(json);
-
         user.value.profilePicture = imageUrl;
         user.refresh();
-        TLoaders.successSnackBar(title: 'Congratulations' , message: 'Your Profile image has been Updated successfully');
+        await saveProfilePictureUrl(imageUrl);
+        TLoaders.successSnackBar(
+          title: 'Congratulations',
+          message: 'Your Profile image has been Updated successfully',
+        );
       }
-    }catch(e){
-      TLoaders.errorSnackBar(title: 'OH snap!', message:'something went wrong $e');
-    }finally{
+    } catch (e) {
+      TLoaders.errorSnackBar(
+        title: 'OH snap!',
+        message: 'something went wrong $e',
+      );
+    } finally {
       imageUploading.value = false;
     }
- }
+  }
+
 
   // Method to set date of birth
   Future<void> setDateOfBirth(DateTime dob) async {

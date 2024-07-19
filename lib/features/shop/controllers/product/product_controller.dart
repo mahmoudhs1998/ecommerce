@@ -27,6 +27,31 @@ class ProductController extends GetxController {
       featuredProducts.assignAll(filteredProducts);
     }
   }
+
+   void searchProductsByBrand(String brandName) async {
+    final products = await productRepository.getFeaturedProducts();
+    if (brandName.isEmpty) {
+      featuredProducts.assignAll(products);
+    } else {
+      var filteredProducts = products.where((product) {
+        return product.brand!.name.toLowerCase().contains(brandName.toLowerCase());
+      }).toList();
+      featuredProducts.assignAll(filteredProducts);
+    }
+  }
+
+    void searchProducts(String query) async {
+    final products = await productRepository.getFeaturedProducts();
+    if (query.isEmpty) {
+      featuredProducts.assignAll(products);
+    } else {
+      var filteredProducts = products.where((product) {
+        return product.title.toLowerCase().contains(query.toLowerCase()) ||
+               product.brand!.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+      featuredProducts.assignAll(filteredProducts);
+    }
+  }
   // Fetch the featured products
   void fetchFeaturedProducts() async {
     // Show loader while loading the products

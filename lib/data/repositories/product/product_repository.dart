@@ -17,34 +17,70 @@ class ProductRepository extends GetxController {
 
   /// Get limited featured products
   /// Get limited featured products
+  ///
+  // final snapshot = await _db
+  //     .collection('Products')
+  //     .where('IsFeatured', isEqualTo: true)
+  //     .limit(4)
+  //     .get();
+  // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+
   Future<List<ProductModel>> getFeaturedProducts() async {
-    // final snapshot = await _db
-    //     .collection('Products')
-    //     .where('IsFeatured', isEqualTo: true)
-    //     .limit(4)
-    //     .get();
-    // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
     try {
-        final snapshot = await _db
-        .collection('Products')
-        .where('IsFeatured', isEqualTo: true)
-        .limit(4)
-        .get();
-        return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-      // final snapshot = await _db
-      //     .collection('Products')
-      //     .where('IsFeatured', isEqualTo: true)
-      //     .limit(4)
-      //     .get();
-      // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
+      final snapshot = await FirebaseFirestore.instance
+          .collection('Products')
+          .where('IsFeatured', isEqualTo: true)
+          .limit(4)
+          .get();
+
+      final products = snapshot.docs.map((doc) {
+        try {
+          return ProductModel.fromSnapshot(doc);
+        } catch (e) {
+          print('Error processing document ${doc.id}: $e');
+          print('Raw data: ${doc.data()}');
+          return ProductModel.empty();
+        }
+      }).where((product) => product.id.isNotEmpty).toList();
+
+      if (products.isEmpty) {
+        print('No valid featured products found');
+      }
+
+      return products;
     } catch (e) {
-      throw 'Something went wrong. Please try again !!!!!!!!!';
+      print('Error fetching featured products: $e');
+      return [];
     }
   }
+  // Future<List<ProductModel>> getFeaturedProducts() async {
+  //   final snapshot = await _db
+  //       .collection('Products')
+  //       .where('IsFeatured', isEqualTo: true)
+  //       .limit(4)
+  //       .get();
+  //   return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+  //   try {
+  //       final snapshot = await _db
+  //       .collection('Products')
+  //       .where('IsFeatured', isEqualTo: true)
+  //       .limit(4)
+  //       .get();
+  //       return snapshot.docs.map((e) => ProductModel.fromQuerySnapshot(e)).toList();
+  //     // final snapshot = await _db
+  //     //     .collection('Products')
+  //     //     .where('IsFeatured', isEqualTo: true)
+  //     //     .limit(4)
+  //     //     .get();
+  //     // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+  //   } on FirebaseException catch (e) {
+  //     throw TFirebaseException(e.code).message;
+  //   } on PlatformException catch (e) {
+  //     throw TPlatformException(e.code).message;
+  //   } catch (e) {
+  //     throw 'Something went wrong. Please try again !!!!!!!!!';
+  //   }
+  // }
 
   /// Get All  featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {
