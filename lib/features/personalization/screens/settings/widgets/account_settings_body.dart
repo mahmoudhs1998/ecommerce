@@ -13,6 +13,9 @@ import '../../../../../admin/categories/admin_category_screen.dart';
 import '../../../../../admin/order/admin_order.dart';
 import '../../../../../admin/order/test.dart';
 import '../../../../../admin/products/admin_product_screen.dart';
+import '../../../../../admin/products/controller/test/new.dart';
+import '../../../../../admin/products/controller/test/ui.dart';
+import '../../../../../admin/products/new_screen_test.dart';
 import '../../../../../localization/language_switch_dialoge.dart';
 import '../../../../order/order.dart';
 
@@ -132,7 +135,11 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           icon: Iconsax.document_upload,
           title: 'Add Product',
           subTitle: 'Add new Product to your Firebase Storage',
-          onTap: () => Get.to(() => AdminPanelPage()),
+          onTap: () =>
+              Get.to(()
+              =>  //AddProductForms()
+                 ProductAdditionForm()
+              ),
         ),
 
         // Order

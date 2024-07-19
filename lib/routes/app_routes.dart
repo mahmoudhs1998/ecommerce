@@ -13,7 +13,8 @@ import '../features/personalization/screens/settings/settings.dart';
 import '../features/shop/screens/cart/cart.dart';
 import '../features/shop/screens/checkout/checkout.dart';
 import '../features/shop/screens/home/home_screen.dart';
-import '../features/shop/screens/product_reviews/product_reviews_screen.dart';
+import '../features/shop/screens/product_reviews/widgets/models.dart';
+import '../features/shop/screens/product_reviews/widgets/new_test_reviews.dart';
 import '../features/shop/screens/store/store_screen.dart';
 import '../features/shop/screens/wishlist/wishlist.dart';
 
@@ -26,7 +27,9 @@ static final pages = [
   GetPage(name: TRoutes.favourites, page: () => const FavoriteScreen()),
   GetPage(name: TRoutes.settings, page: () => const SettingsScreen()),
     GetPage(
-        name: TRoutes.productReviews, page: () => const ProductReviewsScreen()),
+        name: TRoutes.productReviews,
+        page: () => NewProductReviewsScreen() //const ProductReviewsScreen()
+        ),
   GetPage(name: TRoutes.order, page: () => const OrderScreen()),
   GetPage(name: TRoutes.checkout, page: () => const CheckoutScreen()),
   GetPage(name: TRoutes.cart, page: () => const CartScreen()),

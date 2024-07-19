@@ -2,7 +2,6 @@ import 'package:ecommerce/common/widgets/appbar/app_bar.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/user_profile_pic.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
 import 'package:ecommerce/features/personalization/controllers/user_controller.dart';
-import 'package:ecommerce/utils/constants/images.dart';
 import 'package:ecommerce/utils/constants/shimmer.dart';
 import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +15,11 @@ import 'widgets/change_name_screen.dart';
 import 'widgets/profile_details_menu.dart';
 
 class ProfileScreen extends StatelessWidget {
-
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = UserController.instance;
+    final userController = UserController.instance;
     return Scaffold(
       appBar: TAppBar(showBackArrow: true, title: Text('Profile'.tr)),
       body: SingleChildScrollView(
@@ -35,15 +33,31 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     // -- User Profile  Picture
 
-                    Obx((){
-                      final netWorkImage = controller.user.value.profilePicture;
-                      final image = netWorkImage.isNotEmpty ? netWorkImage : TImages.banner4;
-                      return controller.imageUploading.value
-                          ?const  TShimmerEffect(width: 80, height: 80, radius: 80)
-                          : UserProfilePic(height: 80, width: 80, image:image, isNetworkImage:netWorkImage.isNotEmpty);
-          }),
+                    //           Obx((){
+                    //             final netWorkImage = controller.user.value.profilePicture;
+                    //             final image = netWorkImage.isNotEmpty ? netWorkImage : TImages.banner4;
+                    //             return controller.imageUploading.value
+                    //                 ?const  TShimmerEffect(width: 80, height: 80, radius: 80)
+                    //                 : UserProfilePic(height: 80, width: 80, image:image, isNetworkImage:netWorkImage.isNotEmpty);
+                    // }),
+                    Obx(() {
+                      final netWorkImage =
+                          userController.user.value.profilePicture;
+                      final image = netWorkImage.isNotEmpty
+                          ? netWorkImage
+                          : '?'; //netWorkImage; //TImages.banner4;
+                      return userController.imageUploading.value
+                          ? const TShimmerEffect(
+                              width: 80, height: 80, radius: 80)
+                          : UserProfilePic(
+                              height: 80,
+                              width: 80,
+                              image: image,
+                              isNetworkImage: netWorkImage.isNotEmpty);
+                    }),
                     TextButton(
-                        onPressed: () => controller.uploadUserProfilePicture(),
+                        onPressed: () =>
+                            userController.uploadUserProfilePicture(),
                         child: Text('Change Profile Picture'.tr)),
                   ],
                 ),
@@ -58,11 +72,11 @@ class ProfileScreen extends StatelessWidget {
 
               TProfileMenu(
                   title: 'Name'.tr,
-                  value: controller.user.value.fullName,
-                  onTap: ()=> Get.to(()=> const ChangeNameScreen())),
+                  value: userController.user.value.fullName,
+                  onTap: () => Get.to(() => const ChangeNameScreen())),
               TProfileMenu(
                   title: 'Username'.tr,
-                  value: controller.user.value.username,
+                  value: userController.user.value.username,
                   onTap: () => Get.to(() => const ChangeUserNameScreen())),
 
               const SizedBox(height: TSizes.spaceBtwItems),
@@ -77,10 +91,10 @@ class ProfileScreen extends StatelessWidget {
               TProfileMenu(
                   title: 'User ID'.tr,
                   icon: Iconsax.copy,
-                  value: controller.user.value.id,
+                  value: userController.user.value.id,
                   onTap: () {
                     Clipboard.setData(
-                            ClipboardData(text: controller.user.value.id))
+                            ClipboardData(text: userController.user.value.id))
                         .then((_) {
                       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       //     content: Text("Email address copied to clipboard"))
@@ -91,11 +105,11 @@ class ProfileScreen extends StatelessWidget {
                   }),
               TProfileMenu(
                   title: 'E-mail'.tr,
-                  value: controller.user.value.email,
+                  value: userController.user.value.email,
                   onTap: () {}),
               TProfileMenu(
                   title: 'Phone Number'.tr,
-                  value: controller.user.value.phoneNumber,
+                  value: userController.user.value.phoneNumber,
                   onTap: () {}),
               // todo : Localization and implement Date of Birth .
               // TProfileMenu(title: 'Gender', value: 'Male', onTap: () {}),
@@ -105,28 +119,28 @@ class ProfileScreen extends StatelessWidget {
                 () => TProfileMenu(
                   title: 'Gender'.tr,
                   icon: Iconsax.arrow_swap_horizontal,
-                  value: controller.user.value.gender.isEmpty
+                  value: userController.user.value.gender.isEmpty
                       ? 'Not set'.tr
-                      : controller.user.value.gender,
-                  onTap: () => controller.switchGender(),
+                      : userController.user.value.gender,
+                  onTap: () => userController.switchGender(),
                 ),
               ),
 
               Obx(
                 () => TProfileMenu(
                   title: 'Date of Birth'.tr,
-                  value: controller.user.value.dateOfBirth != null
+                  value: userController.user.value.dateOfBirth != null
                       ? TFormatter.formatDate(
-                          controller.user.value.dateOfBirth!)
+                          userController.user.value.dateOfBirth!)
                       : 'Not set'.tr,
-                  onTap: () => controller.showDatePicker(),
+                  onTap: () => userController.showDatePicker(),
                 ),
               ),
               const Divider(),
               const SizedBox(height: TSizes.spaceBtwItems),
               Center(
                 child: TextButton(
-                    onPressed: () => controller.deleteAccountWarningPopup(),
+                    onPressed: () => userController.deleteAccountWarningPopup(),
                     child: Text(
                       'Close Account'.tr,
                       style: const TextStyle(color: Colors.red),
@@ -139,5 +153,3 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
-
-

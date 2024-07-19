@@ -71,4 +71,30 @@ class ProductVariationModel {
       attributeValues: attributeValues ?? this.attributeValues,
     );
   }
+
+  factory ProductVariationModel.fromMap(Map<String, dynamic> map) {
+    final data = map;
+    if(data.isEmpty) return ProductVariationModel.empty();
+    return ProductVariationModel(
+      attributeValues: Map<String, String>.from(map['AttributeValues'] as Map),
+      stock: map['Stock'] as int,
+      sku: map['SKU'] as String,
+      price: _parseDouble(map['Price']),
+      description: map['Description'] as String,
+      salePrice: _parseDouble(map['SalePrice']),
+      image: map['Image'] as String, id:data['Id'] ?? '',
+    );
+  }
+
+  static double _parseDouble(dynamic value) {
+    if (value is String) {
+      return double.tryParse(value) ?? 0.0;
+    } else if (value is int) {
+      return value.toDouble();
+    } else if (value is double) {
+      return value;
+    } else {
+      return 0.0;
+    }
+  }
 }
