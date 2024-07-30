@@ -77,58 +77,110 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../layouts/grid_layout.dart';
 import '../../cart/product_cards/product_card_vertical.dart';
 
+
+
+// class SortableProducts extends StatelessWidget {
+//   final List<ProductModel> products;
+//
+//   const SortableProducts({
+//     Key? key,
+//     required this.products,
+//   }) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     final controller = Get.put(AllProductsController());
+//     controller.assignProducts(products);
+//
+//     final dropdownItems = [
+//       'Name'.tr,
+//       'Higher Price'.tr,
+//       'Lower Price'.tr,
+//       'Sale'.tr,
+//       'Newest'.tr,
+//       'Popularity'.tr
+//     ];
+//
+//     // Ensure that the selected sort option is within the localized dropdown items
+//     if (!dropdownItems.contains(controller.selectedSortOption.value)) {
+//       controller.selectedSortOption.value = dropdownItems.first;
+//     }
+//
+//     return Column(
+//       children: [
+//         DropdownButtonFormField<String>(
+//           value: controller.selectedSortOption.value,
+//           decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
+//           onChanged: (value) {
+//             if (value != null) {
+//               controller.sortProducts(value);
+//             }
+//           },
+//           items: dropdownItems.map((option) {
+//             return DropdownMenuItem<String>(
+//               value: option,
+//               child: Text(option),
+//             );
+//           }).toList(),
+//         ),
+//         const SizedBox(height: TSizes.spaceBtwSections),
+//         Obx(
+//               () => TGridLayout(
+//             itemCount: controller.products.length,
+//             itemBuilder: (_, index) => TProductCardVertical(product: controller.products[index]),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+
 class SortableProducts extends StatelessWidget {
   final List<ProductModel> products;
 
   const SortableProducts({
-    super.key,
+    Key? key,
     required this.products,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(AllProductsController());
     controller.assignProducts(products);
 
-    final dropdownItems = [
-      'Name'.tr,
-      'Higher Price'.tr,
-      'Lower Price'.tr,
-      'Sale'.tr,
-      'Newest'.tr,
-      'Popularity'.tr
-    ];
-
-    // Set initial value that exists in the localized dropdown items
-    controller.selectedSortOption.value = dropdownItems.first;
+    // Mapping of sort keys to localized display text
+    final sortOptions = {
+      'name': 'Name'.tr,
+      'higher_price': 'Higher Price'.tr,
+      'lower_price': 'Lower Price'.tr,
+      'sale': 'Sale'.tr,
+      'newest': 'Newest'.tr,
+      'popularity': 'Popularity'.tr,
+    };
 
     return Column(
       children: [
-        // Dropdown
         DropdownButtonFormField<String>(
           value: controller.selectedSortOption.value,
           decoration: const InputDecoration(prefixIcon: Icon(Iconsax.sort)),
           onChanged: (value) {
-            // Sort products based on the selected option
             if (value != null) {
-              controller.selectedSortOption.value = value;
               controller.sortProducts(value);
             }
           },
-          items: dropdownItems.map((option) {
+          items: sortOptions.entries.map((entry) {
             return DropdownMenuItem<String>(
-              value: option,
-              child: Text(option),
+              value: entry.key,
+              child: Text(entry.value),
             );
           }).toList(),
         ),
         const SizedBox(height: TSizes.spaceBtwSections),
-        // Products
         Obx(
-          () => TGridLayout(
+              () => TGridLayout(
             itemCount: controller.products.length,
-            itemBuilder: (_, index) =>
-                TProductCardVertical(product: controller.products[index]),
+            itemBuilder: (_, index) => TProductCardVertical(product: controller.products[index]),
           ),
         ),
       ],

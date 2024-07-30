@@ -4,6 +4,8 @@ import 'package:ecommerce/features/shop/controllers/checkout/checkout_controller
 import 'package:ecommerce/features/shop/controllers/product/variations_controller.dart';
 import 'package:get/get.dart';
 
+import '../admin/notification.dart';
+
 class GeneralBindings extends Bindings{
   @override
   void dependencies() {
@@ -11,5 +13,6 @@ class GeneralBindings extends Bindings{
     Get.put(VariationsController());
     Get.put(AddressController());
     Get.put(CheckOutController());
+    Get.put(NotificationController());
   }
 }

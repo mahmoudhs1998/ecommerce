@@ -1,3 +1,4 @@
+import 'package:ecommerce/admin/products/new_controller.dart';
 import 'package:ecommerce/common/widgets/chips/choice_chip.dart';
 import 'package:ecommerce/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:ecommerce/common/widgets/texts/product_price_text.dart';
@@ -8,6 +9,7 @@ import 'package:ecommerce/utils/constants/sizes.dart';
 import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../controllers/product/variations_controller.dart';
 import '../../../models/product_model.dart';
@@ -169,6 +171,7 @@ class TProductsAttributes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(VariationsController());
+    final controllers = Get.put(NewAdminPanelController());
 
     return Obx(
           () => Column(
@@ -187,6 +190,10 @@ class TProductsAttributes extends StatelessWidget {
                     children: [
                       const TCategoriesSectionHeading(
                         title: 'Variation',
+                        showActionButton: false,
+                      ),
+                       TCategoriesSectionHeading(
+                        title: controllers.variationDescriptionController.value.text,
                         showActionButton: false,
                       ),
                       const SizedBox(width: TSizes.spaceBtwItems),
@@ -238,13 +245,49 @@ class TProductsAttributes extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Variation Description
-                  TProductTitleText(
-                    title: controller.selectedVariation.value.description ??
-                        'No description available',
-                    smallSize: true,
-                    maxLines: 4,
-                  ),
+
+                  // // Assuming you have a Text widget for the description
+                  // Obx(() {
+                  //   final description = VariationsController.instance.getVariationDescription();
+                  //   return Text(
+                  //     description ?? 'No description available',
+                  //     style: TextStyle(fontSize: 16),
+                  //   );
+                  // }),
+
+                  Obx(() {
+                    final description = VariationsController.instance.getVariationDescription();
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ReadMoreText(
+                        description ?? 'No description available',
+                        trimLines: 2,
+                        colorClickableText: Colors.blue,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: 'Show more',
+                        trimExpandedText: 'Show less',
+                        style: TextStyle(fontSize: 16),
+                        moreStyle: TextStyle(fontSize: 14, color: Colors.blue),
+                      ),
+                    );
+                  })
+
+
+
+
+                  // //Variation Description
+                  // TProductTitleText(
+                  //   title: controller.selectedVariation.value.description ??
+                  //       'No description available',
+                  //   smallSize: true,
+                  //   maxLines: 4,
+                  // ),
+                  // TProductTitleText(
+                  //   title: controllers.variationDescriptionController.value.text,
+                  //
+                  //   smallSize: true,
+                  //   maxLines: 4,
+                  // ),
                 ],
               ),
             ),

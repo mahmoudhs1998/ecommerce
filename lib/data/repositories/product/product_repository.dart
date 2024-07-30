@@ -25,6 +25,34 @@ class ProductRepository extends GetxController {
   //     .get();
   // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
 
+  // Future<List<ProductModel>> getFeaturedProducts() async {
+  //   try {
+  //     final snapshot = await FirebaseFirestore.instance
+  //         .collection('Products')
+  //         .where('IsFeatured', isEqualTo: true)
+  //         .limit(4)
+  //         .get();
+  //
+  //     final products = snapshot.docs.map((doc) {
+  //       try {
+  //         return ProductModel.fromSnapshot(doc);
+  //       } catch (e) {
+  //         print('Error processing document ${doc.id}: $e');
+  //         print('Raw data: ${doc.data()}');
+  //         return ProductModel.empty();
+  //       }
+  //     }).where((product) => product.id.isNotEmpty).toList();
+  //
+  //     if (products.isEmpty) {
+  //       print('No valid featured products found');
+  //     }
+  //
+  //     return products;
+  //   } catch (e) {
+  //     print('Error fetching featured products: $e');
+  //     return [];
+  //   }
+  // }
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await FirebaseFirestore.instance
@@ -34,11 +62,25 @@ class ProductRepository extends GetxController {
           .get();
 
       final products = snapshot.docs.map((doc) {
-        try {
-          return ProductModel.fromSnapshot(doc);
-        } catch (e) {
-          print('Error processing document ${doc.id}: $e');
-          print('Raw data: ${doc.data()}');
+        if (doc.exists) {
+          Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+          print("Raw Firestore data: $data");
+          print("TitleTranslations from Firestore: ${data['TitleTranslations']}");
+          print("DescriptionTranslations from Firestore: ${data['DescriptionTranslations']}");
+
+          try {
+            final product = ProductModel.fromSnapshot(doc);
+            print("Parsed product: ${product.toJson()}");
+            print("Parsed TitleTranslations: ${product.titleTranslations}");
+            print("Parsed DescriptionTranslations: ${product.descriptionTranslations}");
+            return product;
+          } catch (e) {
+            print('Error processing document ${doc.id}: $e');
+            print('Raw data: ${doc.data()}');
+            return ProductModel.empty();
+          }
+        } else {
+          print("Document ${doc.id} does not exist");
           return ProductModel.empty();
         }
       }).where((product) => product.id.isNotEmpty).toList();
@@ -53,34 +95,6 @@ class ProductRepository extends GetxController {
       return [];
     }
   }
-  // Future<List<ProductModel>> getFeaturedProducts() async {
-  //   final snapshot = await _db
-  //       .collection('Products')
-  //       .where('IsFeatured', isEqualTo: true)
-  //       .limit(4)
-  //       .get();
-  //   return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-  //   try {
-  //       final snapshot = await _db
-  //       .collection('Products')
-  //       .where('IsFeatured', isEqualTo: true)
-  //       .limit(4)
-  //       .get();
-  //       return snapshot.docs.map((e) => ProductModel.fromQuerySnapshot(e)).toList();
-  //     // final snapshot = await _db
-  //     //     .collection('Products')
-  //     //     .where('IsFeatured', isEqualTo: true)
-  //     //     .limit(4)
-  //     //     .get();
-  //     // return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
-  //   } on FirebaseException catch (e) {
-  //     throw TFirebaseException(e.code).message;
-  //   } on PlatformException catch (e) {
-  //     throw TPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong. Please try again !!!!!!!!!';
-  //   }
-  // }
 
   /// Get All  featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {

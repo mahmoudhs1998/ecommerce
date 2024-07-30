@@ -97,6 +97,7 @@ class TProductCardVertical extends StatelessWidget {
                     TBrandTitleWithVerifiedIcon(
                       title: product.brand!.name.tr,
                     ),
+
                   ]),
             ),
             const Spacer(),

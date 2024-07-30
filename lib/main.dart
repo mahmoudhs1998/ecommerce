@@ -1,3 +1,4 @@
+import 'package:ecommerce/services/fcm_services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -19,14 +20,24 @@ Future<void> main() async {
   await GetStorage.init();
 // Todo: Await Native Splash
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // // Initialize FCM Service
+  // await Get.putAsync(() => FCMService().init());
 // Todo: Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((FirebaseApp value) => Get.put(AuthenticationRepository()));
 //Todo: Initialize Authentication
+  // Initialize FCM Service
+  // await Get.putAsync(() => FCMService().init());
+  // await Get.find<FCMService>().testFCM();
+  LocalNotificationService.initialize();
+
+  Get.put(FCMService());
   runApp(const App());
 }
 // mh4221058@gmail.com
 // Jon1998
 //mahmoudhs236@gmail.com
 //JON_SNOW_1998
+
+

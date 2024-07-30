@@ -28,3 +28,13 @@ class LocaleController extends GetxController {
     Get.updateLocale(currentLocale);
   }
 }
+
+
+
+class LanguageController extends GetxController {
+  var currentLanguage = 'en'.obs; // Default language
+
+  void setLanguage(String language) {
+    currentLanguage.value = language;
+  }
+}

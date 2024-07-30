@@ -1,3 +1,4 @@
+import 'package:ecommerce/admin/notification.dart';
 import 'package:ecommerce/admin/product_category/add_product_category.dart';
 import 'package:ecommerce/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:ecommerce/common/widgets/texts/section_heading.dart';
@@ -16,7 +17,10 @@ import '../../../../../admin/products/admin_product_screen.dart';
 import '../../../../../admin/products/controller/test/new.dart';
 import '../../../../../admin/products/controller/test/ui.dart';
 import '../../../../../admin/products/new_screen_test.dart';
+import '../../../../../admin/products/new_test_screen.dart';
 import '../../../../../localization/language_switch_dialoge.dart';
+import '../../../../chat/new_screens.dart';
+import '../../../../chat/screen.dart';
 import '../../../../order/order.dart';
 
 class AccountSettingsBodyWidget extends StatelessWidget {
@@ -138,7 +142,7 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           onTap: () =>
               Get.to(()
               =>  //AddProductForms()
-                 ProductAdditionForm()
+             NewProductAdditionForm()  // ProductAdditionForm()
               ),
         ),
 
@@ -149,6 +153,20 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           subTitle: 'Manage Order from your Firebase Storage',
           onTap: () => Get.to(() => AdminOrderPanel()),
         ),
+      // Test Notifications
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Notifications',
+          subTitle: 'Manage Notifications from your Firebase',
+          onTap: () => Get.to(() => NotificationHomePage()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.document_upload,
+          title: 'Chat',
+          subTitle: 'Chat with us',
+          onTap: () => Get.to(() => UserChatScreensss()),
+        ),
+
 
         //AdminProductScreen
         TSettingsMenuTile(

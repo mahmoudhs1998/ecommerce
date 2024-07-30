@@ -139,6 +139,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/features/shop/models/product_attribute_model.dart';
 import 'package:ecommerce/features/shop/models/product_variation_model.dart';
 import 'package:ecommerce/utils/constants/enums.dart';
+import 'package:get/get.dart';
 
 import '../screens/product_reviews/widgets/models.dart';
 import '../screens/product_reviews/widgets/new_test_reviews.dart';
@@ -648,6 +649,160 @@ extension ProductTypeExtension on ProductType {
   }
 }
 
+// class ProductModel {
+//   String id;
+//   int stock;
+//   String? sku;
+//   double price;
+//   String title;
+//   DateTime? date;
+//   double salePrice;
+//   String thumbnail;
+//   bool? isFeatured;
+//   NewBrandModel? brand;
+//   String? description;
+//   String? categoryId;
+//   List<String>? images;
+//   ProductType productType;
+//   List<ProductAttributeModel>? productAttributes;
+//   List<ProductVariationModel>? productVariations;
+//   List<ReviewModel>? reviews;
+//   final Map<String, String>? titleTranslations;
+//   final Map<String, String>? descriptionTranslations;
+//
+//   ProductModel({
+//     required this.id,
+//     required this.title,
+//     required this.stock,
+//     required this.price,
+//     required this.thumbnail,
+//     required this.productType,
+//     this.sku,
+//     this.date,
+//     this.salePrice = 0.0,
+//     this.isFeatured,
+//     this.brand,
+//     this.description,
+//     this.categoryId,
+//     this.images,
+//     this.productAttributes,
+//     this.productVariations,
+//     this.reviews,
+//     Map<String, String>? titleTranslations,
+//     Map<String, String>? descriptionTranslations,
+//   }):
+//         titleTranslations = RxMap<String, String>.from(titleTranslations!),
+//         descriptionTranslations = RxMap<String, String>.from(descriptionTranslations!)
+//   ;
+//
+//   static ProductModel empty() => ProductModel(
+//     id: '',
+//     title: '',
+//     stock: 0,
+//     price: 0,
+//     thumbnail: '',
+//     productType: ProductType.single,
+//   );
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'Title': title,
+//       'Stock': stock,
+//       'Price': price,
+//       'Thumbnail': thumbnail,
+//       'ProductType': productType.stringValue,
+//       'SKU': sku,
+//       'Date': date?.toIso8601String(),
+//       'SalePrice': salePrice,
+//       'IsFeatured': isFeatured,
+//       'Brand': brand?.toJson(),
+//       'Description': description,
+//       'CategoryId': categoryId,
+//       'Images': images,
+//       'ProductAttributes': productAttributes?.map((e) => e.toJson()).toList(),
+//       'ProductVariations': productVariations?.map((e) => e.toJson()).toList(),
+//       'Reviews': reviews?.map((review) => review.toJson()).toList(),
+//       'TitleTranslations': titleTranslations,
+//       'DescriptionTranslations': descriptionTranslations,
+//     };
+//   }
+//
+//   factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+//     if (!document.exists) return ProductModel.empty();
+//
+//     final data = document.data()!;
+//     try {
+//       return ProductModel(
+//         id: document.id,
+//         sku: data['SKU'],
+//         title: data['Title'] ?? '',
+//         stock: data['Stock'] ?? 0,
+//         isFeatured: data['IsFeatured'],
+//         price: (data['Price'] ?? 0.0).toDouble(),
+//         salePrice: (data['SalePrice'] ?? 0.0).toDouble(),
+//         thumbnail: data['Thumbnail'] ?? '',
+//         categoryId: data['CategoryId'],
+//         description: data['Description'],
+//         productType: ProductTypeExtension.fromString(data['ProductType']),
+//         brand: data['Brand'] != null ? NewBrandModel.fromJson(data['Brand']) : null,
+//         images: data['Images'] != null ? List<String>.from(data['Images']) : null,
+//         productAttributes: (data['ProductAttributes'] as List<dynamic>?)
+//             ?.map((e) => ProductAttributeModel.fromMap(e))
+//             .toList(),
+//         productVariations: (data['ProductVariations'] as List<dynamic>?)
+//             ?.map((e) => ProductVariationModel.fromJson(e))
+//             .toList(),
+//         reviews: (data['Reviews'] as List<dynamic>?)
+//             ?.map((e) => ReviewModel.fromJson(e))
+//             .toList(),
+//         titleTranslations: Map<String, String>.from(data['titleTranslations'] ?? {}),
+//         descriptionTranslations: Map<String, String>.from(data['descriptionTranslations'] ?? {}),
+//       );
+//     } catch (e) {
+//       print('Error creating ProductModel from document ${document.id}: $e');
+//       print('Raw data: $data');
+//       return ProductModel.empty();
+//     }
+//   }
+//
+//   factory ProductModel.fromQuerySnapshot(QueryDocumentSnapshot<Object?> document) {
+//     final data = document.data() as Map<String, dynamic>;
+//     try {
+//       return ProductModel(
+//         id: document.id,
+//         sku: data['SKU'],
+//         title: data['Title'] ?? '',
+//         stock: data['Stock'] ?? 0,
+//         isFeatured: data['IsFeatured'],
+//         price: double.parse((data['Price'] ?? 0.0).toString()),
+//         salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
+//         thumbnail: data['Thumbnail'] ?? '',
+//         categoryId: data['CategoryId'],
+//         description: data['Description'],
+//         productType: ProductTypeExtension.fromString(data['ProductType']),
+//         brand: data['Brand'] != null ? NewBrandModel.fromJson(data['Brand']) : null,
+//         images: data['Images'] != null ? List<String>.from(data['Images']) : null,
+//         productAttributes: (data['ProductAttributes'] as List<dynamic>?)
+//             ?.map((e) => ProductAttributeModel.fromJson(e))
+//             .toList(),
+//         productVariations: (data['ProductVariations'] as List<dynamic>?)
+//             ?.map((e) => ProductVariationModel.fromJson(e))
+//             .toList(),
+//         reviews: (data['Reviews'] as List<dynamic>?)
+//             ?.map((e) => ReviewModel.fromJson(e))
+//             .toList(),
+//         titleTranslations: Map<String, String>.from(data['titleTranslations'] ?? {}),
+//         descriptionTranslations: Map<String, String>.from(data['descriptionTranslations'] ?? {}),
+//       );
+//     } catch (e) {
+//       print('Error creating ProductModel from query document ${document.id}: $e');
+//       print('Raw data: $data');
+//       return ProductModel.empty();
+//     }
+//   }
+// }
+
+
 class ProductModel {
   String id;
   int stock;
@@ -666,6 +821,8 @@ class ProductModel {
   List<ProductAttributeModel>? productAttributes;
   List<ProductVariationModel>? productVariations;
   List<ReviewModel>? reviews;
+  final Map<String, String>? titleTranslations;
+  final Map<String, String>? descriptionTranslations;
 
   ProductModel({
     required this.id,
@@ -685,6 +842,8 @@ class ProductModel {
     this.productAttributes,
     this.productVariations,
     this.reviews,
+    this.titleTranslations,
+    this.descriptionTranslations,
   });
 
   static ProductModel empty() => ProductModel(
@@ -694,10 +853,13 @@ class ProductModel {
     price: 0,
     thumbnail: '',
     productType: ProductType.single,
+    titleTranslations: {},
+    descriptionTranslations: {},
   );
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'Title': title,
       'Stock': stock,
       'Price': price,
@@ -714,7 +876,44 @@ class ProductModel {
       'ProductAttributes': productAttributes?.map((e) => e.toJson()).toList(),
       'ProductVariations': productVariations?.map((e) => e.toJson()).toList(),
       'Reviews': reviews?.map((review) => review.toJson()).toList(),
+      'TitleTranslations': titleTranslations,
+      'DescriptionTranslations': descriptionTranslations,
     };
+  }
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    print("Parsing json in ProductModel: $json");
+    return ProductModel(
+      id: json['id'],
+      title: json['Title'],
+      stock: json['Stock'],
+      price: (json['Price'] ?? 0.0).toDouble(),
+      thumbnail: json['Thumbnail'],
+      productType: ProductTypeExtension.fromString(json['ProductType']),
+      sku: json['SKU'],
+      date: json['Date'] != null ? DateTime.parse(json['Date']) : null,
+      salePrice: (json['SalePrice'] ?? 0.0).toDouble(),
+      isFeatured: json['IsFeatured'],
+      brand: json['Brand'] != null ? NewBrandModel.fromJson(json['Brand']) : null,
+      description: json['Description'],
+      categoryId: json['CategoryId'],
+      images: json['Images'] != null ? List<String>.from(json['Images']) : null,
+      productAttributes: (json['ProductAttributes'] as List<dynamic>?)
+          ?.map((e) => ProductAttributeModel.fromJson(e))
+          .toList(),
+      productVariations: (json['ProductVariations'] as List<dynamic>?)
+          ?.map((e) => ProductVariationModel.fromJson(e))
+          .toList(),
+      reviews: (json['Reviews'] as List<dynamic>?)
+          ?.map((e) => ReviewModel.fromJson(e))
+          .toList(),
+      titleTranslations: (json['TitleTranslations'] as Map<String, dynamic>?)?.map(
+            (key, value) => MapEntry(key, value.toString()),
+      ),
+      descriptionTranslations: (json['DescriptionTranslations'] as Map<String, dynamic>?)?.map(
+            (key, value) => MapEntry(key, value.toString()),
+      ),
+    );
   }
 
   factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
@@ -745,6 +944,8 @@ class ProductModel {
         reviews: (data['Reviews'] as List<dynamic>?)
             ?.map((e) => ReviewModel.fromJson(e))
             .toList(),
+        titleTranslations: Map<String, String>.from(data['TitleTranslations'] ?? {}),
+        descriptionTranslations: Map<String, String>.from(data['DescriptionTranslations'] ?? {}),
       );
     } catch (e) {
       print('Error creating ProductModel from document ${document.id}: $e');
@@ -779,6 +980,8 @@ class ProductModel {
         reviews: (data['Reviews'] as List<dynamic>?)
             ?.map((e) => ReviewModel.fromJson(e))
             .toList(),
+        titleTranslations: Map<String, String>.from(data['TitleTranslations'] ?? {}),
+        descriptionTranslations: Map<String, String>.from(data['DescriptionTranslations'] ?? {}),
       );
     } catch (e) {
       print('Error creating ProductModel from query document ${document.id}: $e');

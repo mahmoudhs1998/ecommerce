@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
+import '../../../../admin/translation_test.dart';
 import '../../../../data/repositories/product/product_repository.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../models/product_model.dart';
@@ -10,6 +12,10 @@ class ProductController extends GetxController {
   final isLoading = false.obs;
   final productRepository = Get.put(ProductRepository());
   RxList<ProductModel> featuredProducts = <ProductModel>[].obs;
+  var post = Rxn<ProductModel>();
+  final RxMap<String, String> titleTranslations = <String, String>{}.obs;
+  final RxMap<String, String> descriptionTranslations = <String, String>{}.obs;
+
 
   @override
   void onInit() {
@@ -60,6 +66,7 @@ class ProductController extends GetxController {
     final products = await productRepository.getFeaturedProducts();
     // Assign the products
     featuredProducts.assignAll(products);
+
     try {
       // // Show loader while loading the products
       // isLoading.value = true;
@@ -134,5 +141,83 @@ class ProductController extends GetxController {
   /// -- Check Product Stock Status
   String getProductStockStatus(int stock) {
     return stock > 0 ? 'In Stock' : 'Out of Stock';
+  }
+
+  /// Translations
+///
+///
+//   String getTitle() {
+//     String currentLang = Get.locale?.languageCode ?? english.tr;
+//     return post.value?.titleTranslations?[currentLang] ?? post.value?.titleTranslations?[english]?.tr ?? 'No Title';
+//   }
+//
+//   String getDescription() {
+//     String currentLang = Get.locale?.languageCode ?? english.tr;
+//     return post.value?.descriptionTranslations?[currentLang] ?? post.value?.descriptionTranslations?[english]?.tr ?? 'No Description';
+//   }
+
+  void searchLocalizedProducts(String query) async {
+    final products = await productRepository.getFeaturedProducts();
+    if (query.isEmpty) {
+      featuredProducts.assignAll(products);
+    } else {
+      String locale = Get.locale?.languageCode ?? 'en';
+      var filteredProducts = products.where((product) {
+        String productName = product.title.toLowerCase();
+        String? translatedName = product.titleTranslations?[locale]?.toLowerCase();
+        String? translatedDescription = product.descriptionTranslations?[locale]?.toLowerCase();
+
+        return productName.contains(query.toLowerCase()) ||
+            (translatedName != null && translatedName.contains(query.toLowerCase())) ||
+            (translatedDescription != null && translatedDescription.contains(query.toLowerCase()));
+      }).toList();
+      featuredProducts.assignAll(filteredProducts);
+    }
+  }
+
+
+  String getLocalizedTitle(ProductModel product) {
+    String locale = Get.locale?.languageCode ?? 'en';
+    return product.titleTranslations?[locale] ?? product.titleTranslations?['en'] ?? product.title;
+  }
+
+  String getLocalizedDescription(ProductModel product) {
+    String locale = Get.locale?.languageCode ?? 'en';
+    return product.descriptionTranslations?[locale] ?? product.descriptionTranslations?['en'] ?? product.description ?? '';
+  }
+
+
+  String getTitle() {
+    String currentLang = Get.locale?.languageCode ?? 'en';
+    print("Current locale: $currentLang");
+    print("Title translations: ${post.value?.titleTranslations}");
+
+    if (post.value?.titleTranslations == null) {
+      return post.value?.title ?? 'No Title';
+    }
+
+    return post.value!.titleTranslations![currentLang] ??
+        post.value!.titleTranslations!['en'] ??
+        post.value!.title ??
+        'No Title';
+  }
+
+  String getDescription() {
+    String currentLang = Get.locale?.languageCode ?? 'en';
+    print("Current locale: $currentLang");
+    print("Description translations: ${post.value?.descriptionTranslations}");
+
+    if (post.value?.descriptionTranslations == null) {
+      return 'No Description';
+    }
+
+    return post.value!.descriptionTranslations![currentLang] ??
+        post.value!.descriptionTranslations!['en'] ??
+        'No Description';
+  }
+  // Method to load post data
+  void loadPost(Map<String, dynamic> data) {
+    post.value = ProductModel.fromJson(data);
+    update(); // Notify listeners
   }
 }
