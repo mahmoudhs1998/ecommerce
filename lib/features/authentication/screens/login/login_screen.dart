@@ -8,12 +8,15 @@ import 'package:ecommerce/utils/helpers/helpers_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../services/fcm_services.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final isThemeMode = THelperFunctions.isDarkMode(context);
+    Get.lazyPut(()=>FCMService());
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

@@ -787,7 +787,7 @@ class NewUserReviewCard extends StatelessWidget {
                     SizedBox(width: 10),
                     Text(
                       review.userFullName,
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ],
                 ),
@@ -828,7 +828,7 @@ class NewUserReviewCard extends StatelessWidget {
               trimMode: TrimMode.Line,
               trimCollapsedText: 'Read more',
               trimExpandedText: 'Read less',
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(height: 10),
             Row(
@@ -836,7 +836,7 @@ class NewUserReviewCard extends StatelessWidget {
               children: [
                 Text(
                   DateFormat('dd MMM yyyy').format(review.timestamp),
-                  style: Theme.of(context).textTheme.caption,
+                  style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],
             ),
@@ -858,12 +858,12 @@ class NewOverallProductRating extends StatelessWidget {
       children: [
         Text(
           'Overall Rating:',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(width: 10),
         Text(
           rating.toStringAsFixed(1),
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         SizedBox(width: 10),
         Row(

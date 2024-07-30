@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../features/shop/models/product_attribute_model.dart';
 import '../../features/shop/models/product_variation_model.dart';
@@ -432,25 +433,41 @@ class NewProductVariationForm extends GetView<NewAdminPanelController> {
 class VariationListTile extends StatelessWidget {
   final ProductVariationModel variation;
   final NewAdminPanelController controller = Get.put(NewAdminPanelController());
-  final ColorManagementSystem colorSystem = Get.put(ColorManagementSystem());
 
   VariationListTile({Key? key, required this.variation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text(
-          'Variation ${controller.productVariations.indexOf(variation) + 1}'),
+      title: Text('Variation ${controller.productVariations.indexOf(variation) + 1}'),
       children: [
-
-        // Display variation image
         Obx(() {
-          if (controller.variationImages.containsKey(variation.id)) {
-            return kIsWeb
-                ? Image.memory(controller.variationImages[variation.id], height: 100, width: 100, fit: BoxFit.cover)
-                : Image.file(controller.variationImages[variation.id], height: 100, width: 100, fit: BoxFit.cover);
+          final imageBytes = controller.variationImages[variation.id];
+
+          if (imageBytes != null) {
+            return Image.memory(
+              imageBytes,
+              height: 100,
+              width: 100,
+              fit: BoxFit.cover,
+            );
           } else if (variation.image != null && variation.image!.isNotEmpty) {
-            return Image.network(variation.image!, height: 100, width: 100, fit: BoxFit.cover);
+            return Stack(
+              children: [
+                Image.network(variation.image!, height: 100, width: 100, fit: BoxFit.cover),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () {
+                      controller.variationImages.remove(variation.id);
+                      controller.update(); // Ensure UI updates
+                    },
+                  ),
+                ),
+              ],
+            );
           } else {
             return const SizedBox(height: 100, width: 100, child: Icon(Icons.camera_alt));
           }
@@ -459,7 +476,6 @@ class VariationListTile extends StatelessWidget {
           onPressed: () => controller.selectVariationImage(variation.id),
           child: const Text('Select Image'),
         ),
-
         Text('Colors: ${variation.attributeValues['Color'] ?? "N/A"}'),
         Text('Size: ${variation.attributeValues['Size'] ?? "N/A"}'),
         Text('Stock: ${variation.stock}'),
@@ -475,3 +491,49 @@ class VariationListTile extends StatelessWidget {
     );
   }
 }
+// class VariationListTile extends StatelessWidget {
+//   final ProductVariationModel variation;
+//   final NewAdminPanelController controller = Get.put(NewAdminPanelController());
+//   final ColorManagementSystem colorSystem = Get.put(ColorManagementSystem());
+//
+//   VariationListTile({Key? key, required this.variation}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ExpansionTile(
+//       title: Text(
+//           'Variation ${controller.productVariations.indexOf(variation) + 1}'),
+//       children: [
+//
+//         // Display variation image
+//         Obx(() {
+//           if (controller.variationImages.containsKey(variation.id)) {
+//             return kIsWeb
+//                 ? Image.memory(controller.variationImages[variation.id], height: 100, width: 100, fit: BoxFit.cover)
+//                 : Image.file(controller.variationImages[variation.id], height: 100, width: 100, fit: BoxFit.cover);
+//           } else if (variation.image != null && variation.image!.isNotEmpty) {
+//             return Image.network(variation.image!, height: 100, width: 100, fit: BoxFit.cover);
+//           } else {
+//             return const SizedBox(height: 100, width: 100, child: Icon(Icons.camera_alt));
+//           }
+//         }),
+//         ElevatedButton(
+//           onPressed: () => controller.selectVariationImage(variation.id),
+//           child: const Text('Select Image'),
+//         ),
+//
+//         Text('Colors: ${variation.attributeValues['Color'] ?? "N/A"}'),
+//         Text('Size: ${variation.attributeValues['Size'] ?? "N/A"}'),
+//         Text('Stock: ${variation.stock}'),
+//         Text('Price: ${variation.price}'),
+//         Text('Sale Price: ${variation.salePrice}'),
+//         Text('Description: ${variation.description ?? "N/A"}'),
+//         Text('SKU: ${variation.sku ?? "N/A"}'),
+//         TextButton(
+//           onPressed: () => controller.removeVariation(variation),
+//           child: const Text('Remove Variation'),
+//         ),
+//       ],
+//     );
+//   }
+// }

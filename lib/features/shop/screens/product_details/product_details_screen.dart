@@ -9,11 +9,14 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 
+import '../../../../admin/coupon.dart';
+import '../../../../localization/locale_controller.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../../../utils/constants/texts.dart';
 import '../../../../utils/helpers/pricing_calculator.dart';
 import '../../../../utils/popups/loaders.dart';
 import '../../controllers/cart/cart_controller.dart';
+import '../../controllers/product/product_controller.dart';
 import '../../models/product_model.dart';
 import '../product_reviews/widgets/models.dart';
 import '../product_reviews/widgets/new_test_reviews.dart';
@@ -161,8 +164,15 @@ class ProductDetailsScreen extends StatelessWidget {
     final orderController = Get.put(OrderController());
     final cartController = Get.find<CartController>();
 
-    final subTotal = cartController.totalCartPrice.value;
-    final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, 'US');
+    final subTotal = cartController.totalCartPrice.value ?? 0.0;
+
+    // Assuming you have a way to retrieve the user's coupon, if any.
+    UserCouponModel? userCoupon = cartController.currentCoupon; // Replace with your coupon retrieval logic
+
+    final totalAmount = TPricingCalculator.calculateTotalPrice(subTotal, 'US', userCoupon);
+    final controller = ProductController.instance;
+    final LanguageController languageController = Get.put(LanguageController());
+
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -197,7 +207,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         const SizedBox(height: 8.0),
                         ListView.builder(
                           shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: product.productAttributes!.length,
                           itemBuilder: (context, index) {
                             final attribute = product.productAttributes![index];
@@ -217,30 +227,6 @@ class ProductDetailsScreen extends StatelessWidget {
                       ],
                     ),
 
-                  // Variations
-                  if (product.productVariations != null && product.productVariations!.isNotEmpty)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Variations', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 8.0),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: product.productVariations!.length,
-                          itemBuilder: (context, index) {
-                            final variation = product.productVariations![index];
-                            return ListTile(
-                              title: Text(variation.sku),
-                              subtitle: Text('Price: ${variation.price}'),
-                              trailing: Text('Stock: ${variation.stock}'),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 16.0),
-                      ],
-                    ),
-
                   // Product Attributes Widget
                   if (product.productType == ProductType.variable)
                     TProductsAttributes(product: product),
@@ -252,7 +238,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (subTotal <= 0 || subTotal == null) {
+                        if (subTotal <= 0) {
                           TLoaders.warningSnackBar(
                             title: 'Empty Cart',
                             message: 'Add items to the cart to proceed.',
@@ -261,7 +247,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           orderController.processOrder(totalAmount);
                         }
                       },
-                      child: Text('Checkout'),
+                      child: const Text('Checkout'),
                     ),
                   ),
 
@@ -291,6 +277,17 @@ class ProductDetailsScreen extends StatelessWidget {
 
                   const SizedBox(height: 16.0),
 
+                  Text(
+                    controller.getLocalizedTitle(product),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    controller.getLocalizedDescription(product),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+
+
                   // Reviews
                   const Divider(),
                   const SizedBox(height: 8.0),
@@ -317,7 +314,21 @@ class ProductDetailsScreen extends StatelessWidget {
       bottomNavigationBar: TBottomAddToCart(product: product),
     );
   }
+  String getTranslation(Map<String, String>? translations, String defaultValue, String currentLanguage) {
+    return translations?[currentLanguage] ?? defaultValue;
+  }
 }
+
+class TranslationUtils {
+  // Define the current language (this could be managed globally or from user preferences)
+  static String currentLanguage = 'ar'; // or 'ar'
+
+  // Function to get the translation or fallback to default value
+  static String getTranslation(Map<String, String>? translations, String defaultValue) {
+    return translations?[currentLanguage] ?? defaultValue;
+  }
+}
+
 // class Test2 extends StatelessWidget {
 //   const Test2({Key? key}) : super(key: key);
 

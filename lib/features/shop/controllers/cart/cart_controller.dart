@@ -2,6 +2,7 @@ import 'package:ecommerce/features/shop/models/product_model.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:get/get.dart';
 
+import '../../../../admin/coupon.dart';
 import '../../../../utils/constants/enums.dart';
 import '../../../../utils/local_storage/storage_utility.dart';
 import '../../models/cart/cart_item_model.dart';
@@ -16,6 +17,7 @@ class CartController extends GetxController {
   RxInt productQuantityInCart = 0.obs;
   RxList<CartItemModel> cartItems = <CartItemModel>[].obs;
   final variationController = VariationsController.instance;
+  UserCouponModel? currentCoupon;
   CartController(){
     loadCartItems();
   }

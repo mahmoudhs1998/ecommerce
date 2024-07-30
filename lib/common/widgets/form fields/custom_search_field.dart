@@ -24,7 +24,9 @@ class CustomSearchField extends StatelessWidget {
             onChanged: (value) {
               //controller.searchProductsByTitle(value);
               //controller.searchProductsByBrand(value);
-              controller.searchProducts(value);
+              //controller.searchProducts(value);
+              ProductController.instance.searchLocalizedProducts(value);
+
             },
             labelText: 'Search'.tr,
             prefixIcon: Icons.search,
