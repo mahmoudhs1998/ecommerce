@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce/utils/popups/full_screen_loader.dart';
 import 'package:ecommerce/utils/popups/loaders.dart';
 import 'package:flutter/cupertino.dart';
@@ -122,6 +123,7 @@ class LoginController extends GetxController {
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   final userController = Get.put(UserController());
   final FCMService _fcmService = Get.find<FCMService>();
+  final NotificationService _notificationService = Get.find<NotificationService>();
 
   @override
   void onInit() {
@@ -150,10 +152,13 @@ class LoginController extends GetxController {
 
       final userCredentials = await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
       await userController.saveUserRecord(userCredentials);
+      // Save FCM token to Firestore
+      await AuthenticationRepository.instance.saveTokenToFirestore();
 
       // Subscribe to FCM topic after successful sign-in
       await _fcmService.subscribeToTopic('user_notifications');
-
+      // Start listening for notifications
+      await _notificationService.listenForNotifications();
       // Display a notification
       LocalNotificationService.displayLocalNotification(
         title: "Welcome",
@@ -180,7 +185,8 @@ class LoginController extends GetxController {
 
       final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
       await userController.saveUserRecord(userCredentials);
-
+// Save FCM token to Firestore
+      await AuthenticationRepository.instance.saveTokenToFirestore();
       // Subscribe to FCM topic after successful Google sign-in
       await _fcmService.subscribeToTopic('user_notifications');
 
@@ -196,5 +202,27 @@ class LoginController extends GetxController {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
+  }
+}
+
+
+
+
+
+class NotificationService extends GetxService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> listenForNotifications() async {
+    final notificationsRef = _firestore.collection('notifications');
+    notificationsRef.snapshots().listen((snapshot) {
+      for (var doc in snapshot.docs) {
+        final notificationData = doc.data();
+        final message = notificationData['message'];
+        LocalNotificationService.displayLocalNotification(
+          title: "New Notification",
+          body: message,
+        );
+      }
+    });
   }
 }

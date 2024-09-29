@@ -22,6 +22,7 @@ import '../../../../../localization/language_switch_dialoge.dart';
 import '../../../../chat/new_screens.dart';
 import '../../../../chat/screen.dart';
 import '../../../../order/order.dart';
+import '../../call us/call_us.dart';
 
 class AccountSettingsBodyWidget extends StatelessWidget {
   const AccountSettingsBodyWidget({
@@ -164,7 +165,13 @@ class AccountSettingsBodyWidget extends StatelessWidget {
           icon: Iconsax.document_upload,
           title: 'Chat',
           subTitle: 'Chat with us',
-          onTap: () => Get.to(() => UserChatScreensss()),
+          onTap: () => Get.to(() => UserChatScreenaaa()),
+        ),
+        TSettingsMenuTile(
+          icon: Iconsax.headphone,
+          title: 'Call',
+          subTitle: 'Call US',
+          onTap: () => Get.to(() => ContactPage()),
         ),
 
 

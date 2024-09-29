@@ -349,6 +349,8 @@ class UserChatController extends GetxController {
   final TextEditingController messageController = TextEditingController();
   final AuthenticationRepository _authRepo = AuthenticationRepository.instance;
 
+  var userId = ''.obs;
+
   @override
   void onInit() {
     super.onInit();

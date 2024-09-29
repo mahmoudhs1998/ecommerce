@@ -8,6 +8,18 @@ class MessageModel {
   final bool isRead;
 
   MessageModel({required this.messageId, required this.senderId, required this.messageText, required this.timestamp, required this.isRead});
+
+  factory MessageModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return MessageModel(
+      messageId: doc.id,
+      senderId: data['senderId'] ?? '',
+      messageText: data['messageText'] ?? '',
+      timestamp: (data['timestamp'] as Timestamp).toDate(),
+      isRead: data['isRead'] ?? false,
+    );
+  }
+
 }
 
 class ChatModel {

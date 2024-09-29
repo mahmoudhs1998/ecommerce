@@ -91,12 +91,13 @@ class HomeScreen extends StatelessWidget {
                 return const TVerticalProductShimmer();
               }
               if (controller.featuredProducts.isEmpty) {
-                return const Center(
-                    child:  CircularProgressIndicator(),
-                //     Text(
-                //   'No Data Found !',
-                //   style: Theme.of(context).textTheme.bodyMedium,
-                // )
+                return  Center(
+                    child:
+                    //CircularProgressIndicator(),
+                    Text(
+                  'No Data Found !',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                )
                 );
               }
 

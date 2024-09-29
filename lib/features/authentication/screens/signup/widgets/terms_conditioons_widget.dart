@@ -100,49 +100,52 @@ class TermsAndConditionsWidget extends StatelessWidget {
 
     return Row(
       children: [
-        SizedBox(
-          width: 24,
-          height: 24,
-          child: Obx(
-            () => Checkbox(
-              value: controller.privacyPolicy.value,
-              onChanged: (value) {
-                if (value != null) {
-                  controller.privacyPolicy.value = value;
-                }
-              },
-            ),
-          ),
-        ),
-        const SizedBox(width: 8.0), // TSizes.spaceBtwItems
-        Text.rich(
-          TextSpan(
+        Obx(
+          () => Wrap(
             children: [
-              TextSpan(
-                  text: '${TTexts.isAgreeTo.tr} ',
-                  style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                text: '${TTexts.privacyPolicy.tr} ',
-                style: Theme.of(context).textTheme.bodyMedium!.apply(
-                      color: isDark ? Colors.white : Colors.blue,
-                      decoration: TextDecoration.underline,
-                      decorationColor: isDark ? Colors.white : Colors.blue,
-                    ),
-                recognizer: privacyPolicyRecognizer,
-              ),
-              TextSpan(
-                  text: '${TTexts.and.tr} ',
-                  style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                text: TTexts.termsOfUse.tr,
-                style: Theme.of(context).textTheme.bodyMedium!.apply(
-                      color: isDark ? Colors.white : Colors.blue,
-                      decoration: TextDecoration.underline,
-                      decorationColor: isDark ? Colors.white : Colors.blue,
-                    ),
-                recognizer: termsOfUseRecognizer,
+              Checkbox(
+                value: controller.privacyPolicy.value,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.privacyPolicy.value = value;
+                  }
+                },
               ),
             ],
+          ),
+        ),
+        const SizedBox(width: 4.0), // TSizes.spaceBtwItems
+        Flexible(
+          child: Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                    text: '${TTexts.isAgreeTo.tr} ',
+                    style: Theme.of(context).textTheme.labelSmall),
+                TextSpan(
+                  text: '${TTexts.privacyPolicy.tr} ',
+                  style: Theme.of(context).textTheme.labelSmall!.apply(
+                        color: isDark ? Colors.white : Colors.blue,
+                        decoration: TextDecoration.underline,
+                        decorationColor: isDark ? Colors.white : Colors.blue,
+                      ),
+                  recognizer: privacyPolicyRecognizer,
+                ),
+          
+                TextSpan(
+                    text: '${TTexts.and.tr} ',
+                    style: Theme.of(context).textTheme.labelSmall),
+                TextSpan(
+                  text: TTexts.termsOfUse.tr,
+                  style: Theme.of(context).textTheme.labelSmall!.apply(
+                        color: isDark ? Colors.white : Colors.blue,
+                        decoration: TextDecoration.underline,
+                        decorationColor: isDark ? Colors.white : Colors.blue,
+                      ),
+                  recognizer: termsOfUseRecognizer,
+                ),
+              ],
+            ),
           ),
         ),
       ],

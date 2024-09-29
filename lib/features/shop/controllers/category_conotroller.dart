@@ -50,12 +50,31 @@ class CategoryController extends GetxController {
 
 // -- Load Selected Category or Sub-Category Products  Data
 
-  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+  // Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+  //   try {
+  //         final subCategories = await _categoryRepository.getSubCategories(categoryId);
+  //         return subCategories;
+  //   }catch(e){
+  //     TLoaders.errorSnackBar(title: 'OH Snap!' , message: e.toString());
+  //     return [];
+  //   }
+  // }
+
+  // Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+  //   try {
+  //     final subCategories = await _categoryRepository.getSubCategories(categoryId);
+  //     return subCategories;
+  //   } catch (e) {
+  //     Get.snackbar('OH Snap!', e.toString());
+  //     return [];
+  //   }
+  // }
+  Future<List<CategoryModel>> getNewSubCategories(String categoryId) async {
     try {
-          final subCategories = await _categoryRepository.getSubCategories(categoryId);
-          return subCategories;
-    }catch(e){
-      TLoaders.errorSnackBar(title: 'OH Snap!' , message: e.toString());
+      final subCategories = await _categoryRepository.getNewSubCategories(categoryId);
+      return subCategories;
+    } catch (e) {
+      Get.snackbar('OH Snap!', e.toString());
       return [];
     }
   }

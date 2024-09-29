@@ -14,6 +14,47 @@ class ProductRepository extends GetxController {
 
   /// Firestore instance for database interactions.
   final _db = FirebaseFirestore.instance;
+  final String _productsPath = 'Products';
+
+  Stream<List<ProductModel>> getProductsByCategory(String categoryId) {
+    print('Fetching products for category ID: $categoryId');
+    return _db
+        .collection(_productsPath)
+        .where('CategoryId', isEqualTo: categoryId)
+        .snapshots()
+        .map((snapshot) {
+      List<ProductModel> products = snapshot.docs.map((doc) {
+        print('Product document data: ${doc.data()}');
+        return ProductModel.fromSnapshot(doc);
+      }).toList();
+      print('Fetched ${products.length} products');
+      return products;
+    });
+  }
+  // Method to get product by ID
+  Stream<ProductModel?> getProductById(String productId) {
+    return _db
+        .collection(_productsPath)
+        .doc(productId)
+        .snapshots()
+        .map((doc) {
+      if (doc.exists) {
+        return ProductModel.fromSnapshot(doc);
+      } else {
+        return null; // No product found
+      }
+    });
+  }
+  // Fetch products for a specific category ID
+  Stream<List<ProductModel>> getProductsByCategoryId(String categoryId) {
+    return _db
+        .collection(_productsPath)
+        .where('CategoryId', isEqualTo: categoryId)  // Ensure correct field name
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+    });
+  }
 
   /// Get limited featured products
   /// Get limited featured products
@@ -58,7 +99,7 @@ class ProductRepository extends GetxController {
       final snapshot = await FirebaseFirestore.instance
           .collection('Products')
           .where('IsFeatured', isEqualTo: true)
-          .limit(4)
+          .limit(10)
           .get();
 
       final products = snapshot.docs.map((doc) {

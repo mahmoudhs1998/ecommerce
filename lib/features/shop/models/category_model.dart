@@ -48,4 +48,57 @@ factory CategoryModel.fromSnapshot(DocumentSnapshot<Map<String,dynamic>> documen
   }
 
 }
+
+
+
 }
+
+
+
+// class SubCategoryModel {
+//   String id;
+//   String name;
+//   String parentId;
+//   String image;
+//   bool isFeatured;
+//
+//   SubCategoryModel({
+//     required this.id,
+//     required this.name,
+//     required this.parentId,
+//     required this.image,
+//     this.isFeatured = false,
+//   });
+//
+//   factory SubCategoryModel.fromMap(Map<String, dynamic> map) {
+//     return SubCategoryModel(
+//       id: map['Id'],
+//       name: map['Name'],
+//       parentId: map['ParentId'],
+//       image: map['Image'],
+//       isFeatured: map['IsFeatured'] ?? false,
+//     );
+//   }
+//
+//   factory SubCategoryModel.fromSnapshot(DocumentSnapshot<Map<String,dynamic>> document){
+//     if(document.data() != null){
+//       final data = document.data()!;
+//       // Map json Record to the Model
+//       return SubCategoryModel(
+//           id: document.id,
+//           name: data['Name']??'',
+//           image: data['Image']??'',
+//           parentId: data['ParentId']??'',
+//           isFeatured: data['IsFeatured']??false
+//       );
+//     }else{
+//       return SubCategoryModel.empty();
+//     }
+//
+//   }
+//
+//   /// Empty Helper Function
+//   static SubCategoryModel empty() =>
+//       SubCategoryModel(id: '', image: '', name: '', isFeatured: false, parentId: '');
+//
+// }

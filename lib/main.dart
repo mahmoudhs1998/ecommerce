@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
 import 'data/repositories/authentication/authentication_repository.dart';
+import 'features/authentication/controllers/login/login_controller.dart';
 import 'firebase_options.dart';
 
 SharedPreferences? sharedprefs;
@@ -33,6 +34,10 @@ Future<void> main() async {
   LocalNotificationService.initialize();
 
   Get.put(FCMService());
+  // Initialize and start listening for notifications
+
+  Get.put(NotificationService());
+
   runApp(const App());
 }
 // mh4221058@gmail.com

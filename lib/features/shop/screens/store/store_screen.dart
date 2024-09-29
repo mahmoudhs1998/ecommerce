@@ -91,7 +91,11 @@ class StoreScreen extends StatelessWidget {
                         if(brandController.featuredBrands.isEmpty) {
 
                           return Center(
-                              child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white)));
+                              child:
+                              Text('No Data Found!', style: Theme.of(context)
+                                  .textTheme.bodyMedium!
+                                  .apply(color: Colors.white))
+                          );
                         }
                         return TGridLayout(
                             itemCount: brandController.featuredBrands.length,

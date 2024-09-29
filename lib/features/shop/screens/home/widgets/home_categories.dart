@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/helpers/helpers_functions.dart';
+import '../../../../sub_category/new_sub_categories.dart';
 import '../../../../sub_category/sub_categories.dart';
 
 class HomeCategories extends StatelessWidget {
@@ -41,7 +42,9 @@ class HomeCategories extends StatelessWidget {
               isNetworkImage: true,
               title: category.name,
               image: category.image, //TImages.category1,
-              onTap: () => Get.to(() =>  SubCategoriesScreen(category: category)),
+              onTap: () => Get.to(() =>
+              NewSubCategoriesScreen(category:category) // SubCategoriesScreen(category: category)
+              ),
 
             );
 

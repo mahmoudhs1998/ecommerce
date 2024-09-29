@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/appbar/app_bar.dart';
 import '../../../../common/widgets/products/sortable/sort_able_products.dart';
 import '../../controllers/product/all_product_controller.dart';
+import '../../models/category_model.dart';
 import '../../models/product_model.dart';
 
 class AllProducts extends StatelessWidget {
@@ -39,6 +40,43 @@ class AllProducts extends StatelessWidget {
               final products = snapshot.data!;
               return  SortableProducts(products: products,);
             }
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+class AllSubCategories extends StatelessWidget {
+  final String title;
+  final Future<List<CategoryModel>> futureMethod;
+
+  const AllSubCategories({super.key, required this.title, required this.futureMethod});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: TAppBar(title: Text(title.tr), showBackArrow: true),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: FutureBuilder(
+              future: futureMethod,
+              builder: (context, snapshot) {
+                // Check the state of the FutureBuilder snapshot
+                const loader = TVerticalProductShimmer();
+                final widget = CloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
+
+                // Return appropriate widget based on snapshot state
+                if (widget != null) return widget;
+
+                // Subcategories Found
+                final subCategories = snapshot.data!;
+                return SortableCategories(subCategories: subCategories);
+              }
           ),
         ),
       ),
