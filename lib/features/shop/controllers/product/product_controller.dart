@@ -20,7 +20,9 @@ class ProductController extends GetxController {
   @override
   void onInit() {
     fetchFeaturedProducts();
+    loadValidCategoryIds();
     super.onInit();
+
   }
   void searchProductsByTitle(String query)async {
     final products = await productRepository.getFeaturedProducts();
@@ -33,7 +35,126 @@ class ProductController extends GetxController {
       featuredProducts.assignAll(filteredProducts);
     }
   }
+  final products = <ProductModel>[].obs;
+  // Method to fetch product details by ID
+  // Observable property for selected product
+  var selectedProduct = Rx<ProductModel?>(null);
+  // Method to fetch product details by ID
+  var errorMessage = Rx<String?>(null);
 
+  void getProductDetails(String productId) {
+    isLoading.value = true;
+    errorMessage.value = null;
+
+    productRepository.getProductById(productId).listen((productData) {
+      if (productData == null) {
+        errorMessage.value = "No products found";
+        selectedProduct.value = null;
+      } else {
+        selectedProduct.value = productData;
+      }
+      isLoading.value = false;
+    }).onError((error) {
+      errorMessage.value = "Error fetching product details";
+      isLoading.value = false;
+    });
+  }
+  // void getProductsByCategory(String categoryId) {
+  //   productRepository.getProductsByCategory(categoryId).listen((productsData) {
+  //     products.assignAll(productsData);
+  //   });
+  // }
+  var validCategoryIds = <String>{}.obs; // To store valid category IDs
+  // Fetch valid CategoryIds from Categories
+  Future<void> loadValidCategoryIds() async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('Categories')
+          .get();
+
+      validCategoryIds.value = querySnapshot.docs
+          .map((doc) => doc.id.trim()) // Ensure IDs are trimmed of whitespace
+          .toSet();
+
+      print('Loaded valid Category IDs: $validCategoryIds'); // Debug print
+    } catch (e) {
+      print('Error fetching categories: $e');
+    }
+  }
+
+  // Fetch products by CategoryId
+  Future<void> getProductsByCategory(String categoryId) async {
+    // Ensure CategoryId is valid
+    if (!validCategoryIds.contains(categoryId)) {
+      print('Invalid CategoryId: $categoryId');
+      products.clear();
+      return;
+    }
+
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('Products')
+          .where('CategoryId', isEqualTo: categoryId) // Query by CategoryId
+          .get();
+
+      print('Query Snapshot Size: ${querySnapshot.size}'); // Debug print
+      products.value = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+    } catch (e) {
+      print('Error fetching products: $e');
+      products.clear();
+    }
+  }
+  Future<void> getProducts() async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('Products')
+          .where('CategoryId', whereIn: validCategoryIds.toList())
+          .get();
+
+      print('Query Snapshot Size: ${querySnapshot.size}'); // Debug print
+      products.value = querySnapshot.docs
+          .map((doc) => ProductModel.fromSnapshot(doc))
+          .toList();
+    } catch (e) {
+      print('Error fetching products: $e');
+      products.clear();
+    }
+  }
+
+  //   try {
+  //     final querySnapshot = await FirebaseFirestore.instance
+  //         .collection('Products')
+  //         .where('CategoryId', isEqualTo: categoryId)
+  //         .get();
+  //
+  //     products.value = querySnapshot.docs
+  //         .map((doc) => ProductModel.fromQuerySnapshot(doc))
+  //         .toList();
+  //   } catch (e) {
+  //     print('Error fetching products: $e');
+  //     products.clear();
+  //   }
+  // }
+
+  // Fetch products by category ID
+  void fetchProductsByCategoryId(String categoryId) {
+    isLoading.value = false;
+    errorMessage.value = null;
+
+    productRepository.getProductsByCategoryId(categoryId).listen((productList) {
+      if (productList.isEmpty) {
+        errorMessage.value = "No products found";
+      } else {
+        products.value = productList;
+      }
+      isLoading.value = false;
+    }).onError((error) {
+      errorMessage.value = "Error fetching products";
+      isLoading.value = false;
+    });
+  }
    void searchProductsByBrand(String brandName) async {
     final products = await productRepository.getFeaturedProducts();
     if (brandName.isEmpty) {
@@ -60,12 +181,6 @@ class ProductController extends GetxController {
   }
   // Fetch the featured products
   void fetchFeaturedProducts() async {
-    // Show loader while loading the products
-    isLoading.value = true;
-    // fetch the products
-    final products = await productRepository.getFeaturedProducts();
-    // Assign the products
-    featuredProducts.assignAll(products);
 
     try {
       // // Show loader while loading the products
@@ -74,6 +189,13 @@ class ProductController extends GetxController {
       // final products = await productRepository.getFeaturedProducts();
       // // Assign the products
       // featuredProducts.assignAll(products);
+      // Show loader while loading the products
+      isLoading.value = true;
+      // fetch the products
+      final products = await productRepository.getFeaturedProducts();
+      // Assign the products
+      featuredProducts.assignAll(products);
+
     } catch (e) {
       TLoaders.errorSnackBar(title: 'oh no!!!', message: e.toString());
     } finally {

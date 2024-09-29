@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce/admin/products/controller/test/logic.dart';
 import 'package:ecommerce/data/services/firebase/firebase_storage_services.dart';
 import 'package:ecommerce/features/shop/models/category_model.dart';
 import 'package:flutter/services.dart';
@@ -28,20 +29,54 @@ class CategoryRepository extends GetxController{
    }
  }
 ///   Get Sub categories
-  Future<List<CategoryModel>> getSubCategories(String categoryId)async{
-    try{
-      final snapshot = await _db.collection("Categories").where('ParentId', isEqualTo: categoryId).get();
-      final result = snapshot.docs.map((e) => CategoryModel.fromSnapshot(e)).toList();
-      return result;
+//   Future<List<SubCategoryModel>> getSubCategories(String categoryId)async{
+//     try{
+//       final snapshot = await _db.collection("subCategories").where('ParentId', isEqualTo: categoryId).get();
+//       final result = snapshot.docs.map((e) => SubCategoryModel.fromSnapshot(e)).toList();
+//       return result;
+//
+//     } on FirebaseException catch (e) {
+//       throw TFirebaseException(e.code).message;
+//     } on FormatException catch (_) {
+//       throw TFormatException();
+//     } on PlatformException catch (e) {
+//       throw TPlatformException(e.code).message;
+//     }catch(e) {
+//       throw 'Something went wrong , please try again';
+//     }
+//   }
 
-    } on FirebaseException catch (e) {
-      throw TFirebaseException(e.code).message;
-    } on FormatException catch (_) {
-      throw TFormatException();
-    } on PlatformException catch (e) {
-      throw TPlatformException(e.code).message;
-    }catch(e) {
-      throw 'Something went wrong , please try again';
+  Future<List<CategoryModel>> getSubCategories(String categoryId) async {
+    try {
+      QuerySnapshot querySnapshot = await _db
+          .collection('subCategories')
+          .where('parentId', isEqualTo: categoryId)
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => CategoryModel.fromSnapshot(doc as DocumentSnapshot<Map<String, dynamic>>))
+          .toList();
+    } catch (e) {
+      throw Exception("Failed to load subcategories: $e");
+    }
+  }
+
+
+  Future<List<CategoryModel>> getNewSubCategories(String categoryId) async {
+   try{
+   final snapshot = await _db.collection("Categories").where("ParentId" , isEqualTo: categoryId).get();
+   final result = snapshot.docs.map((document) => CategoryModel.fromSnapshot(document)).toList();
+   return result;
+
+    }
+   on FirebaseException catch (e) {
+     throw TFirebaseException(e.code).message;
+   } on FormatException catch (_) {
+     throw TFormatException();
+   } on PlatformException catch (e) {
+     throw TPlatformException(e.code).message;
+   }catch (e) {
+      throw Exception("Failed to load subcategories: $e");
     }
   }
 // upload categories to the cloud fire store

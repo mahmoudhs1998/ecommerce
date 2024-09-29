@@ -15,27 +15,27 @@ dependencies:
     sdk: flutter
 
 
-#utility packages
+  #utility packages
 
-#icons
+  #icons
 
   cupertino_icons: ^1.0.6
   iconsax: ^0.0.8
   
 
-#state management
+  #state management
   get: ^4.6.6
   http: ^1.2.1
   intl: ^0.19.0
   logger: ^2.2.0
   url_launcher: ^6.2.6
   get_storage: ^2.1.1
-  flutter_native_splash: ^2.4.0
+  flutter_native_splash: ^2.4.1
   smooth_page_indicator: ^1.1.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   readmore: ^3.0.0
   flutter_rating_bar: ^4.0.1
-  firebase_core: ^2.31.0
+  firebase_core: ^2.32.0
   lottie: ^3.1.2
   connectivity_plus: ^5.0.1
   firebase_auth: ^4.19.6
@@ -57,11 +57,27 @@ dependencies:
   myfatoorah_flutter: ^3.0.14
   my_fatoorah: ^3.3.0
   uuid: ^3.0.7
+
+
+
+
+
+
+
   # file_picker: ^8.0.5
 
 
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
+#flutter_launcher_icons:
+#  android: "launcher_icon"
+#  ios: true
+#  image_path: "assets/logos/shop.png"
+#
+#  min_sdk_android: 21
+
+
   flutter_test:
     sdk: flutter
 
@@ -74,18 +90,19 @@ flutter:
 
   uses-material-design: true
 
-#--------------------- Local Assets ----------------------------#
+  #--------------------- Local Assets ----------------------------#
   assets:
-     - assets/images/
-     - assets/icons/
-     - assets/icons/adidas.jpg
-     #- assets/fonts/
-     - assets/logos/
-     - assets/animations/
-     - assets/images/on_boarding_images/
-     - assets/images/email_images/
-     - assets/images/banners/
-     - assets/icons/categories/
+    - assets/app_logo/
+    - assets/images/
+    - assets/icons/
+    - assets/icons/adidas.jpg
+    #- assets/fonts/
+    - assets/logos/
+    - assets/animations/
+    - assets/images/on_boarding_images/
+    - assets/images/email_images/
+    - assets/images/banners/
+    - assets/icons/categories/
   fonts:
     - family: Popins
       fonts:
@@ -94,5 +111,24 @@ flutter:
         - asset: assets\fonts\Poppins-ExtraBold.ttf
         - asset: assets\fonts\Poppins-Bold.ttf
         - asset: assets\fonts\Poppins-BoldItalic.ttf
-    
+
+
+
+funding:
+  -
+dependency_overrides:
+executables:
+topics:
+  -
+documentation:
+ignored_advisories:
+  -
+issue_tracker:
+repository:
+false_secrets:
+  -
+screenshots:
+  -
+homepage:
+platforms:
 

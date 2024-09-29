@@ -29,20 +29,6 @@ class TCategoryTab extends StatelessWidget {
           child: Column(children: [
             // -- Brands
             CategoryBrands(category: category),
-            // const TBrandShowCase(
-            //   images: [
-            //     TImages.banner3,
-            //     TImages.banner4,
-            //     TImages.banner5,
-            //   ],
-            // ),
-            // const TBrandShowCase(
-            //   images: [
-            //     TImages.banner3,
-            //     TImages.banner4,
-            //     TImages.banner5,
-            //   ],
-            // ),
             const SizedBox(
               height: TSizes.spaceBtwItems,
             ),

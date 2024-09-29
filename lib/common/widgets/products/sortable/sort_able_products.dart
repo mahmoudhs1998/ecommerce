@@ -72,6 +72,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../features/shop/controllers/product/all_product_controller.dart';
+import '../../../../features/shop/models/category_model.dart';
 import '../../../../features/shop/models/product_model.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../layouts/grid_layout.dart';
@@ -181,6 +182,78 @@ class SortableProducts extends StatelessWidget {
               () => TGridLayout(
             itemCount: controller.products.length,
             itemBuilder: (_, index) => TProductCardVertical(product: controller.products[index]),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
+
+
+
+class SortableCategories extends StatefulWidget {
+  final List<CategoryModel> subCategories;
+
+  const SortableCategories({Key? key, required this.subCategories}) : super(key: key);
+
+  @override
+  _SortableCategoriesState createState() => _SortableCategoriesState();
+}
+
+class _SortableCategoriesState extends State<SortableCategories> {
+  String _selectedSort = 'Name';
+
+  @override
+  Widget build(BuildContext context) {
+    List<CategoryModel> sortedCategories = List.from(widget.subCategories);
+
+    // Sorting logic based on selected sort option
+    if (_selectedSort == 'Name') {
+      sortedCategories.sort((a, b) => a.name.compareTo(b.name));
+    } else if (_selectedSort == 'Date') {
+      // Replace with appropriate date property
+      sortedCategories.sort((a, b) => a.parentId.compareTo(b.parentId));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: DropdownButtonFormField<String>(
+            value: _selectedSort,
+            decoration: const InputDecoration(
+              labelText: 'Sort by',
+              border: OutlineInputBorder(),
+            ),
+            onChanged: (value) {
+              if (value != null) {
+                setState(() {
+                  _selectedSort = value;
+                });
+              }
+            },
+            items: [
+              DropdownMenuItem(child: Text('Name'), value: 'Name'),
+              DropdownMenuItem(child: Text('Date'), value: 'Date'),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: sortedCategories.length,
+            itemBuilder: (context, index) {
+              final category = sortedCategories[index];
+              return ListTile(
+                title: Text(category.name),
+                leading: Image.network(category.image),
+                onTap: () {
+                  // Handle category tap, e.g., navigate to a details screen
+                },
+              );
+            },
           ),
         ),
       ],

@@ -85,6 +85,41 @@ class FCMService extends GetxService {
 }
 
 
+class FCMServices extends GetxService {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
+  Future<FCMServices> init() async {
+    // Request permission on iOS
+    // if (Platform.isIOS) {
+    //   await _firebaseMessaging.requestPermission();
+    // }
+
+    // Handle foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      // Handle the foreground message
+      print('Foreground message received: ${message.messageId}');
+    });
+
+    // Handle background messages
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      // Handle the background message
+      print('Background message received: ${message.messageId}');
+    });
+
+    // Handle app launch from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null) {
+        // Handle the message
+        print('App launched from terminated state with message: ${message.messageId}');
+      }
+    });
+
+    return this;
+  }
+}
+
+
+
 // Local
 
 

@@ -41,7 +41,7 @@ class LoginFormWidget extends StatelessWidget {
                 controller: controller.password,
                 validator: (value) =>
                     TValidator.validateEmptyText('Password'.tr, value),
-                        
+
                 obscureText: controller.hidePassword.value,
                 expands: false,
                 decoration:  InputDecoration(
@@ -64,26 +64,40 @@ class LoginFormWidget extends StatelessWidget {
             // remember me & forget password
 
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Now spaceBetween will work
               children: [
-                // remember me
                 Row(
                   children: [
                     Obx(
-                      ()=> Checkbox(value: controller.rememberMe.value, onChanged:
-                      (value)=> controller.rememberMe.value = ! controller.rememberMe.value
+                          () => Checkbox(
+                        value: controller.rememberMe.value,
+                        onChanged: (value) =>
+                        controller.rememberMe.value = !controller.rememberMe.value,
                       ),
                     ),
-                    Text(TTexts.rememberMe.tr),
+                    Text(
+                      TTexts.rememberMe.tr,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
-                //forget password
 
-                TextButton(
-                    onPressed: () => Get.to(() => const ForgetPassword()),
-                    child: Text(TTexts.forgetPassword.tr)),
+                  GestureDetector(
+                    onTap: () => Get.to(() => const ForgetPassword()),
+                    child: Text(
+
+                      style: TextStyle(
+                        fontSize: 12,
+                          color: Colors.deepPurpleAccent),
+
+                      TTexts.forgetPassword.tr,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+
               ],
             ),
+
             const SizedBox(
               height: TSizes.spaceBtwSections,
             ),

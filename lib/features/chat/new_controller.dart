@@ -7,45 +7,173 @@ import 'package:uuid/uuid.dart';
 
 import 'models.dart';
 
-class UserChatControllersss extends GetxController {
+
+
+
+
+// class UserChatControlleraaa extends GetxController {
+//   var adminIds = <String>[].obs;
+//   var selectedAdminId = ''.obs;
+//   var chats = <ChatModel>[].obs;
+//   var messages = <MessageModel>[].obs;
+//   var isLoading = true.obs;
+//   var error = ''.obs;
+//   var userId = ''.obs;
+//
+//   final TextEditingController messageController = TextEditingController();
+//
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     fetchUserId().then((_) => getAdminIds().listen((admins) {
+//       adminIds.value = admins;
+//       isLoading.value = false;
+//     }));
+//   }
+//
+//   Future<void> fetchUserId() async {
+//     try {
+//       final User? currentUser = FirebaseAuth.instance.currentUser;
+//       if (currentUser == null) {
+//         throw Exception('No user is currently signed in');
+//       }
+//       userId.value = currentUser.uid;
+//     } catch (e) {
+//       error.value = 'Failed to fetch user ID: $e';
+//       print('Error in fetchUserId: ${error.value}');
+//     }
+//   }
+//
+//   Future<void> sendMessage(String messageText) async {
+//     if (messageText.isEmpty || selectedAdminId.value.isEmpty) {
+//       print('Validation failed: messageText or selectedAdminId is empty.');
+//       return;
+//     }
+//
+//     isLoading.value = true;
+//     error.value = '';
+//
+//     try {
+//       final userChatsRef = FirebaseFirestore.instance
+//           .collection('Users')
+//           .doc(userId.value)
+//           .collection('Chats');
+//
+//       final chatSnapshot = await userChatsRef
+//           .where('adminId', isEqualTo: selectedAdminId.value)
+//           .limit(1)
+//           .get();
+//
+//       DocumentReference chatRef;
+//
+//       if (chatSnapshot.docs.isNotEmpty) {
+//         chatRef = chatSnapshot.docs.first.reference;
+//       } else {
+//         chatRef = userChatsRef.doc();
+//         await chatRef.set({
+//           'adminId': selectedAdminId.value,
+//           'lastMessage': messageText,
+//           'lastMessageTimestamp': FieldValue.serverTimestamp(),
+//         });
+//         print('New chat document created in Users -> Chats: ${chatRef.id}');
+//       }
+//
+//       final messageRef = chatRef.collection('Messages').doc();
+//
+//       await messageRef.set({
+//         'senderId': userId.value,
+//         'messageText': messageText,
+//         'timestamp': FieldValue.serverTimestamp(),
+//         'isRead': false,
+//       });
+//
+//       print('Message successfully set in Users -> Chats -> Messages.');
+//
+//       await chatRef.update({
+//         'lastMessage': messageText,
+//         'lastMessageTimestamp': FieldValue.serverTimestamp(),
+//       });
+//
+//       print('Chat document updated in Users -> Chats.');
+//
+//       messageController.clear();
+//     } catch (e) {
+//       error.value = 'Failed to send message: $e';
+//       print('Error in sendMessage: ${error.value}');
+//     } finally {
+//       isLoading.value = false;
+//     }
+//   }
+//
+//   Stream<List<String>> getAdminIds() {
+//     return FirebaseFirestore.instance.collection('Admins').snapshots().map((adminsSnapshot) {
+//       return adminsSnapshot.docs.map((doc) => doc.id).toList();
+//     }).handleError((error) {
+//       print('Error fetching admin IDs: $error');
+//       throw error;
+//     });
+//   }
+//
+//   Stream<List<ChatModel>> getChatsForAdmin(String adminId) {
+//     if (adminId.isEmpty) return Stream.value([]);
+//
+//     return FirebaseFirestore.instance
+//         .collection('Users')
+//         .doc(userId.value)
+//         .collection('Chats')
+//         .where('adminId', isEqualTo: adminId)
+//         .snapshots()
+//         .map((snapshot) {
+//       return snapshot.docs.map((doc) {
+//         return ChatModel(
+//           chatId: doc.id,
+//           lastMessage: doc['lastMessage'] ?? '',
+//           lastMessageTimestamp: doc['lastMessageTimestamp']?.toDate() ?? DateTime.now(),
+//         );
+//       }).toList();
+//     });
+//   }
+//
+//   Stream<List<MessageModel>> getMessagesForChat(String chatId) {
+//     if (chatId.isEmpty) return Stream.value([]);
+//
+//     return FirebaseFirestore.instance
+//         .collection('Users')
+//         .doc(userId.value)
+//         .collection('Chats')
+//         .doc(chatId)
+//         .collection('Messages')
+//         .orderBy('timestamp', descending: true)
+//         .snapshots()
+//         .map((snapshot) {
+//       return snapshot.docs.map((doc) => MessageModel.fromFirestore(doc)).toList();
+//     });
+//   }
+// }
+
+
+class UserChatControlleraaa extends GetxController {
+  var adminIds = <String>[].obs;
+  var selectedAdminId = ''.obs;
   var chats = <ChatModel>[].obs;
   var messages = <MessageModel>[].obs;
-  var selectedChatId = ''.obs;
   var isLoading = true.obs;
   var error = ''.obs;
   var userId = ''.obs;
 
   final TextEditingController messageController = TextEditingController();
-  final User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void onInit() {
     super.onInit();
     fetchUserId().then((_) {
-      getChats().listen((chats) {
-        this.chats.value = chats;
+      getAdminIds().listen((admins) {
+        adminIds.value = admins;
         isLoading.value = false;
       });
     });
-    fetchChats();
   }
-  void fetchChats() {
-    final userId = currentUser!.uid; // Replace with actual user ID logic
-    FirebaseFirestore.instance
-        .collection('Users')
-        .doc(userId)
-        .collection('Chats')
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return ChatModel.fromDocument(doc);
-      }).toList();
-    }).listen((chatList) {
-      chats.value = chatList;
-    }).onError((error) {
-      print('Error fetching chats: $error');
-    });
-  }
+
   Future<void> fetchUserId() async {
     try {
       final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -60,8 +188,8 @@ class UserChatControllersss extends GetxController {
   }
 
   Future<void> sendMessage(String messageText) async {
-    if (messageText.isEmpty || selectedChatId.value.isEmpty) {
-      print('Validation failed: messageText or selectedChatId is empty.');
+    if (messageText.isEmpty || selectedAdminId.value.isEmpty) {
+      print('Validation failed: messageText or selectedAdminId is empty.');
       return;
     }
 
@@ -75,7 +203,7 @@ class UserChatControllersss extends GetxController {
           .collection('Chats');
 
       final chatSnapshot = await userChatsRef
-          .where('chatId', isEqualTo: selectedChatId.value)
+          .where('adminId', isEqualTo: selectedAdminId.value)
           .limit(1)
           .get();
 
@@ -86,7 +214,7 @@ class UserChatControllersss extends GetxController {
       } else {
         chatRef = userChatsRef.doc();
         await chatRef.set({
-          'chatId': selectedChatId.value,
+          'adminId': selectedAdminId.value,
           'lastMessage': messageText,
           'lastMessageTimestamp': FieldValue.serverTimestamp(),
         });
@@ -120,35 +248,37 @@ class UserChatControllersss extends GetxController {
     }
   }
 
-  Stream<List<ChatModel>> getChats() {
+  Stream<List<String>> getAdminIds() {
+    return FirebaseFirestore.instance.collection('Admins').snapshots().map((adminsSnapshot) {
+      return adminsSnapshot.docs.map((doc) => doc.id).toList();
+    }).handleError((error) {
+      print('Error fetching admin IDs: $error');
+      throw error;
+    });
+  }
+
+  Stream<List<ChatModel>> getChatsForAdmin(String adminId) {
+    if (adminId.isEmpty) return Stream.value([]);
+
     return FirebaseFirestore.instance
         .collection('Users')
         .doc(userId.value)
         .collection('Chats')
+        .where('adminId', isEqualTo: adminId)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) {
-        final data = doc.data();
-        final chatId = data['chatId'] ?? '';
-        final lastMessage = data['lastMessage'] ?? '';
-        final lastMessageTimestamp = data['lastMessageTimestamp']?.toDate() ?? DateTime.now();
-
-        // Log and handle missing fields
-        if (chatId.isEmpty) {
-          print('Warning: Document ${doc.id} is missing chatId.');
-        }
-
         return ChatModel(
-          chatId: chatId,
-          lastMessage: lastMessage,
-          lastMessageTimestamp: lastMessageTimestamp,
+          chatId: doc.id,
+          lastMessage: doc['lastMessage'] ?? '',
+          lastMessageTimestamp: doc['lastMessageTimestamp']?.toDate() ?? DateTime.now(),
         );
       }).toList();
-    }).handleError((error) {
-      print('Error fetching chats: $error');
-      throw error;
     });
   }
+
+
+
 
   Stream<List<MessageModel>> getMessagesForChat(String chatId) {
     if (chatId.isEmpty) return Stream.value([]);
@@ -159,15 +289,14 @@ class UserChatControllersss extends GetxController {
         .collection('Chats')
         .doc(chatId)
         .collection('Messages')
-        .orderBy('timestamp', descending: true)
+        .orderBy('timestamp', descending: false)
         .snapshots()
         .map((snapshot) {
-      print('Fetched ${snapshot.docs.length} messages');
       return snapshot.docs.map((doc) {
         return MessageModel(
           messageId: doc.id,
-          senderId: doc['senderId'],
-          messageText: doc['messageText'],
+          senderId: doc['senderId'] ?? 'Unknown sender',
+          messageText: doc['messageText'] ?? 'No text',
           timestamp: doc['timestamp']?.toDate() ?? DateTime.now(),
           isRead: doc['isRead'] ?? false,
         );
@@ -177,4 +306,7 @@ class UserChatControllersss extends GetxController {
       throw error;
     });
   }
+
+
+
 }
