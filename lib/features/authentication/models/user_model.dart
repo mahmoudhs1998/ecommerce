@@ -70,7 +70,7 @@ class UserModel {
       'username': username,
       'email': email,
       'phoneNumber': phoneNumber,
-      'profilePicture': profilePicture,
+      'ProfilePicture': profilePicture,
       'dateOfBirth': dateOfBirth?.toIso8601String(), // New field
       'gender': gender, // New field
     };
@@ -88,7 +88,7 @@ class UserModel {
         username: data['username'] ?? '',
         email: data['email'] ?? '',
         phoneNumber: data['phoneNumber'] ?? '',
-        profilePicture: data['profilePicture'] ?? '',
+        profilePicture: data['ProfilePicture'] ?? '',
          dateOfBirth: data['dateOfBirth'] != null 
             ? DateTime.parse(data['dateOfBirth']) 
             : null, // New field
