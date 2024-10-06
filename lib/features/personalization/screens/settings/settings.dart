@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
 
                 // -- User Profile Card
-                 UserProfileTileCard(onPressed: () => Get.to(const ProfileScreen()),),
+                 UserProfileTileCard(onPressed: () => Get.to(  () =>  const ProfileScreen()),),
                 const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
