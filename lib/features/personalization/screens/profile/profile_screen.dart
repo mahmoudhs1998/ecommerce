@@ -50,8 +50,8 @@ class ProfileScreen extends StatelessWidget {
                           ? const TShimmerEffect(
                               width: 80, height: 80, radius: 80)
                           : UserProfilePic(
-                              height: 80,
-                              width: 80,
+                              // height: 80,
+                              // width: 80,
                               image: image,
                               isNetworkImage: netWorkImage.isNotEmpty);
                     }),
